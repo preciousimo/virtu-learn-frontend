@@ -6,6 +6,8 @@ import About from './About';
 import Footer from './Footer';
 
 import { Routes as Switch, Route } from 'react-router-dom';
+import Register from './Authenticate/Register';
+import Login from './Authenticate/Login';
 
 function Main() {
   return (
@@ -15,6 +17,8 @@ function Main() {
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
           <Route path='/detail/:course_id' element={<CourseDetail />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
         </Switch>
         <Footer />
     </div>

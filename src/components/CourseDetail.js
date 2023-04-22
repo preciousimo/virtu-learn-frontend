@@ -25,29 +25,44 @@ function CourseDetail() {
                 </div>
                 <ul className='list-group list-group-flush'>
                     <li className='list-group-item'>Video 1
-                        <button className='btn btn-sm float-end'>
-                            <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
-                        </button>
+                        <span className='float-end'>
+                            <button className='btn btn-sm'>
+                                <span className='me-3'>1 Hour 30 Minutes</span>
+                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                            </button>
+                        </span>
                     </li>
                     <li className='list-group-item'>Video 2
-                        <button className='btn btn-sm float-end'>
-                            <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
-                        </button>
+                        <span className='float-end'>
+                            <button className='btn btn-sm'>
+                                <span className='me-3'>1 Hour 30 Minutes</span>
+                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                            </button>
+                        </span>
                     </li>
                     <li className='list-group-item'>Video 3
-                        <button className='btn btn-sm float-end'>
-                            <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
-                        </button>
+                        <span className='float-end'>
+                            <button className='btn btn-sm'>
+                                <span className='me-3'>1 Hour 30 Minutes</span>
+                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                            </button>
+                        </span>
                     </li>
                     <li className='list-group-item'>Video 4
-                        <button className='btn btn-sm float-end'>
-                            <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
-                        </button>
+                        <span className='float-end'>
+                            <button className='btn btn-sm'>
+                                <span className='me-3'>1 Hour 30 Minutes</span>
+                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                            </button>
+                        </span>
                     </li>
                     <li className='list-group-item'>Video 5
-                        <button className='btn btn-sm float-end'>
-                            <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
-                        </button>
+                        <span className='float-end'>
+                            <button className='btn btn-sm'>
+                                <span className='me-3'>1 Hour 30 Minutes</span>
+                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                            </button>
+                        </span>
                     </li>
                 </ul>
             </div>
