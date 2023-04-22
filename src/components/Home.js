@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -10,11 +10,11 @@ function Home() {
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         <div class="col">
           <div class="card h-100">
-            <a href=' '>
+            <Link to='/detail/1'>
               <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
+            </Link>
             <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
+              <h5 class="card-title"><Link to='/detail/1'>Mathematics</Link></h5>
             </div>
           </div>
         </div>

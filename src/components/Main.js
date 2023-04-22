@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from './Home';
+import CourseDetail from './CourseDetail';
 import Header from './Header';
 import About from './About';
 import Footer from './Footer';
@@ -13,6 +14,7 @@ function Main() {
         <Switch>
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
+          <Route path='/detail/:course_id' element={<CourseDetail />}/>
         </Switch>
         <Footer />
     </div>
