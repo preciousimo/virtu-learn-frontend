@@ -2,24 +2,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Sidebar from './Sidebar'
 
 function Dashboard() {
   return (
     <div className='container mt-4'>
         <div className='row'>
-            <aside className='col-md-3'>
-                <div className='card'>
-                    <h5 className='card-header'>Dashboard</h5>
-                    <div className='list-group list-group-flush'>
-                        <Link to='/' className='list-group-item list-group-item-action'>My Subjects</Link>
-                        <Link to='/' className='list-group-item list-group-item-action'>Favorite Subjects</Link>
-                        <Link to='/' className='list-group-item list-group-item-action'>Recommended Subjects</Link>
-                        <Link t0='/' className='list-group-item list-group-item-action'>Profile Setting</Link>
-                        <Link t0='/' className='list-group-item list-group-item-action'>Change Password</Link>
-                        <Link t0='/' className='list-group-item list-group-item-action text-danger'>Logout</Link>
-                    </div>
-                </div>
-            </aside>
+            <Sidebar/>
             <section className='col-md-9'>
                 <div className='card'>
                     <h5 className='card-header'>My Subjects</h5>

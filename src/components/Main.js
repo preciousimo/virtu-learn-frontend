@@ -8,7 +8,9 @@ import Footer from './Footer';
 import { Routes as Switch, Route } from 'react-router-dom';
 import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
+import FavSubject from './Dashboard/FavSubject';
+import RecSubject from './Dashboard/RecSubject';
 
 function Main() {
   return (
@@ -21,6 +23,8 @@ function Main() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/dashboard' element={<Dashboard />}/>
+          <Route path='/favsub' element={<FavSubject />}/>
+          <Route path='/recsub' element={<RecSubject />}/>
         </Switch>
         <Footer />
     </div>
