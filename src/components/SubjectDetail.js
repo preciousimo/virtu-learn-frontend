@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 
-function CourseDetail() {
-    let { course_id } = useParams();
+function SubjectDetail() {
+    let { subject_id } = useParams();
     return (
         <div className='container mt-3'>
             <div className='row'>
@@ -10,9 +10,9 @@ function CourseDetail() {
                     <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                 </div>
                 <div className='col-8'>
-                    <h3>Course Title</h3>
+                    <h3>Subject Title</h3>
                     <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquam ni</p>
-                    <p className='fw-bold'>Course By: <a href=' '>Mr Precious</a></p>
+                    <p className='fw-bold'>Subject By: <Link to='/teacher-detail/1'>Mr Precious</Link></p>
                     <p className='fw-bold'>Duration: <a href=' '>3 Hours 30 Minutes</a></p>
                     <p className='fw-bold'>Total Enrolled: <a href=' '>456 Student</a></p>
                     <p className='fw-bold'>Rating: <a href=' '>4.5/5</a></p>
@@ -21,7 +21,7 @@ function CourseDetail() {
             {/* Course Videos */}
             <div className='card mt-4'>
                 <div className='card-header'>
-                    <h5>Course Videos</h5>
+                    <h5>Subject Videos</h5>
                 </div>
                 <ul className='list-group list-group-flush'>
                     <li className='list-group-item'>Video 1
@@ -72,21 +72,21 @@ function CourseDetail() {
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 <div class="col">
                     <div class="card h-100">
-                        <Link to='/detail/1'>
+                        <Link to='/subject-detail/1'>
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
                         <div class="card-body">
-                            <h5 class="card-title"><Link to='/detail/1'>Mathematics</Link></h5>
+                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <Link to='/detail/1'>
+                        <Link to='/subject-detail/1'>
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
                         <div class="card-body">
-                            <h5 class="card-title"><Link to='/detail/1'>Mathematics</Link></h5>
+                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
@@ -96,4 +96,4 @@ function CourseDetail() {
     )
 }
 
-export default CourseDetail
+export default SubjectDetail
