@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Sidebar from './Student/Sidebar'
+import Sidebar from './Sidebar'
 
 function ProfileSetting() {
   return (

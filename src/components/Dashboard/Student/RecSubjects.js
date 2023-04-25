@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Sidebar from './Student/Sidebar'
+import Sidebar from './Sidebar'
 
-function FavSubjects() {
+function RecSubjects() {
   return (
     <div className='container mt-4'>
         <div className='row'>
@@ -11,7 +11,7 @@ function FavSubjects() {
             </aside>
             <section className='col-md-9'>
                 <div className='card'>
-                    <h5 className='card-header'>Favorite Subjects</h5>
+                    <h5 className='card-header'>Recommended Subjects</h5>
                     <div className='card-body'>
                         <table className='table table-bordered'>
                             <thead>
@@ -41,4 +41,4 @@ function FavSubjects() {
   )
 }
 
-export default FavSubjects
+export default RecSubjects

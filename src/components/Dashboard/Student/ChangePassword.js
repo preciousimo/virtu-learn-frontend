@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Sidebar from './Student/Sidebar'
+import Sidebar from './Sidebar'
 
 function ChangePassword() {
   return (
@@ -11,7 +11,7 @@ function ChangePassword() {
             </aside>
             <section className='col-md-9'>
                 <div className='card'>
-                    <h5 className='card-header'>Chnage Password</h5>
+                    <h5 className='card-header'>Change Password</h5>
                     <div className='card-body'>
                         <div className="mb-3 row">
                             <label for="inputPassword" className="col-sm-2 col-form-label">New Password</label>

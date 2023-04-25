@@ -1,22 +1,30 @@
 import React from 'react'
+import { Routes as Switch, Route } from 'react-router-dom';
+
 import Home from './Home';
 import CourseDetail from './CourseDetail';
 import Header from './Header';
 import About from './About';
 import Footer from './Footer';
 
-import { Routes as Switch, Route } from 'react-router-dom';
 import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
 import TeacherLogin from './Authenticate/TeacherLogin';
 import TeacherRegister from './Authenticate/TeacherRegister';
+
 import Dashboard from './Dashboard/Student/Dashboard';
-import MySubjects from './Dashboard/MySubjects';
-import FavSubjects from './Dashboard/FavSubjects';
-import RecSubjects from './Dashboard/RecSubjects';
-import ProfileSetting from './Dashboard/ProfileSetting';
-import ChangePassword from './Dashboard/ChangePassword';
+import MySubjects from './Dashboard/Student/MySubjects';
+import FavSubjects from './Dashboard/Student/FavSubjects';
+import RecSubjects from './Dashboard/Student/RecSubjects';
+import ProfileSetting from './Dashboard/Student/ProfileSetting';
+import ChangePassword from './Dashboard/Student/ChangePassword';
+
 import TeacherDashboard from './Dashboard/Teacher/TeacherDashboard';
+import AddSubjects from './Dashboard/Teacher/AddSubjects';
+import TeacherChangePassword from './Dashboard/Teacher/TeacherChangePassword';
+import TeacherSubjects from './Dashboard/Teacher/TeacherSubjects';
+import TeacherProfileSetting from './Dashboard/Teacher/TeacherProfileSetting';
+import StudentList from './Dashboard/Teacher/StudentList';
 
 function Main() {
   return ( 
@@ -37,6 +45,13 @@ function Main() {
           <Route path='/teacher-login' element={<TeacherLogin />}/>
           <Route path='/teacher-register' element={<TeacherRegister />}/>
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
+          <Route path='/teacher-subjects' element={<TeacherSubjects />}/>
+          <Route path='/add-subjects' element={<AddSubjects />}/> 
+          <Route path='/teacher-students' element={<StudentList />}/> 
+          <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
+          <Route path='/teacher-change-password' element={<TeacherChangePassword />}/> 
+
+
         </Switch>
         <Footer />
     </div>
