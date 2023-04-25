@@ -7,7 +7,7 @@ function Header() {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <div className='container'>
-        <Link className='navbar-brand' to='/'>Meadow Hall</Link>
+        <Link className='navbar-brand' to='/'>SONIPS School</Link>
         <button className='navbar-toggler' type='button' data-bs-toggle='collapse'
         data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false'
         aria-label='Toggle navigation'>
