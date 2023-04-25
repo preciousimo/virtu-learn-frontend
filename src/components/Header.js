@@ -17,7 +17,18 @@ function Header() {
           <div className='navbar-nav ms-auto'>
             <Link className='nav-link active' aria-current='page' to='/'>Home</Link>
             <a className='nav-link' href=' '>Subjects</a>
-            <a className='nav-link' href=' '>Teachers</a>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" type="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Teacher
+              </a>
+              <ul className="dropdown-menu">
+                <li><Link className='dropdown-item' to='/teacher-login'>Login</Link></li>
+                <li><Link className='dropdown-item' to='/teacher-register'>Register</Link></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><Link className='dropdown-item' to='/teacher-dashboard'>Dashboard</Link></li>
+                <li><Link className='dropdown-item' to='/teacher-logout'>Logout</Link></li>
+              </ul>
+            </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" type="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User
@@ -27,7 +38,7 @@ function Header() {
                 <li><Link className='dropdown-item' to='/register'>Register</Link></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><Link className='dropdown-item' to='/dashboard'>Dashboard</Link></li>
-                <li><a className='dropdown-item' href='#'>Logout</a></li>
+                <li><Link className='dropdown-item' to='/logout'>Logout</Link></li>
               </ul>
             </li>
           </div>

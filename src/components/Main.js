@@ -8,15 +8,18 @@ import Footer from './Footer';
 import { Routes as Switch, Route } from 'react-router-dom';
 import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
-import Dashboard from './Dashboard/Dashboard';
+import TeacherLogin from './Authenticate/TeacherLogin';
+import TeacherRegister from './Authenticate/TeacherRegister';
+import Dashboard from './Dashboard/Student/Dashboard';
 import MySubjects from './Dashboard/MySubjects';
 import FavSubjects from './Dashboard/FavSubjects';
 import RecSubjects from './Dashboard/RecSubjects';
 import ProfileSetting from './Dashboard/ProfileSetting';
 import ChangePassword from './Dashboard/ChangePassword';
+import TeacherDashboard from './Dashboard/Teacher/TeacherDashboard';
 
 function Main() {
-  return (
+  return ( 
     <div>
         <Header />
         <Switch>
@@ -31,6 +34,9 @@ function Main() {
           <Route path='/recommended-subjects' element={<RecSubjects />}/>
           <Route path='/profile-setting' element={<ProfileSetting />}/>
           <Route path='/change-password' element={<ChangePassword />}/>
+          <Route path='/teacher-login' element={<TeacherLogin />}/>
+          <Route path='/teacher-register' element={<TeacherRegister />}/>
+          <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
         </Switch>
         <Footer />
     </div>
