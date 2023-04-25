@@ -1,8 +1,8 @@
 import React from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function SubjectDetail() {
-    let { subject_id } = useParams();
+    // let { subject_id } = useParams();
     return (
         <div className='container mt-3'>
             <div className='row'>
@@ -28,15 +28,31 @@ function SubjectDetail() {
                         <span className='float-end'>
                             <button className='btn btn-sm'>
                                 <span className='me-3'>1 Hour 30 Minutes</span>
-                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                                <i className="fa-sharp fa-solid fa-circle-play fa-2xl" data-bs-toggle="modal" data-bs-target="#videoModal1" style={{color: '#d40c0c'}}></i>
                             </button>
                         </span>
+                        {/* <!-- Video Modal --> */}
+                        <div className="modal fade" id="videoModal1" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-lg">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Video 1</h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <div class="ratio ratio-16x9">
+                                            <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li className='list-group-item'>Video 2
                         <span className='float-end'>
                             <button className='btn btn-sm'>
                                 <span className='me-3'>1 Hour 30 Minutes</span>
-                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                                <i className="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
                             </button>
                         </span>
                     </li>
@@ -44,7 +60,7 @@ function SubjectDetail() {
                         <span className='float-end'>
                             <button className='btn btn-sm'>
                                 <span className='me-3'>1 Hour 30 Minutes</span>
-                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                                <i className="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
                             </button>
                         </span>
                     </li>
@@ -52,7 +68,7 @@ function SubjectDetail() {
                         <span className='float-end'>
                             <button className='btn btn-sm'>
                                 <span className='me-3'>1 Hour 30 Minutes</span>
-                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                                <i className="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
                             </button>
                         </span>
                     </li>
@@ -60,7 +76,7 @@ function SubjectDetail() {
                         <span className='float-end'>
                             <button className='btn btn-sm'>
                                 <span className='me-3'>1 Hour 30 Minutes</span>
-                                <i class="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
+                                <i className="fa-sharp fa-solid fa-circle-play fa-2xl" style={{color: '#d40c0c'}}></i>
                             </button>
                         </span>
                     </li>
@@ -69,24 +85,24 @@ function SubjectDetail() {
 
             {/* Related Subjects */}
             <h3 className='pb-1 mb-4 mt-5'>Related Subjects</h3>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                <div class="col">
-                    <div class="card h-100">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                <div className="col">
+                    <div className="card h-100">
                         <Link to='/subject-detail/1'>
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
+                        <div className="card-body">
+                            <h5 className="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card h-100">
+                <div className="col">
+                    <div className="card h-100">
                         <Link to='/subject-detail/1'>
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
+                        <div className="card-body">
+                            <h5 className="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
