@@ -5,7 +5,7 @@ function AllSubjects() {
   return (
     <div className='container mt-3'>
         {/* Latest subjects */}
-        <h3 className='pb-1 mb-4'>Latest Subjects </h3>
+        <h3 className='pb-1 mb-4'>Current Subjects </h3>
         <div class="row mb-4">
             <div class="col-md-3 mb-4">
                 <div class="card h-100">
