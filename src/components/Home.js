@@ -5,8 +5,8 @@ function Home() {
   return (
     <div className='container mt-4'>
       <h1 className='text-center'>Welcome to SONIPS School</h1>
-      {/* Latest subjects */}
-      <h3 className='pb-1 mb-4'>Latest Subjects <a href=' ' className='float-end'>See All</a></h3>
+      {/* Top subjects */}
+      <h3 className='pb-1 mb-4 mt-5'>Top Subjects <Link to='/all-subjects' className='float-end'>See All</Link></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         <div class="col">
           <div class="card h-100">
@@ -14,83 +14,37 @@ function Home() {
               <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
             </Link>
             <div class="card-body">
-              <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
+              <h5 class="card-title"><Link to=' '>Python</Link></h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <a href=' '>
+            <Link to='/subject-detail/1'>
               <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
+            </Link>
             <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
+              <h5 class="card-title"><a href=' '>JavaScript</a></h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <a href=' '>
+            <Link to='/subject-detail/1'>
               <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
+            </Link>
             <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
+              <h5 class="card-title"><a href=' '>PHP</a></h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <a href=' '>
+            <Link to='/subject-detail/1'>
               <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
+            </Link>
             <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* End latest subjects */}
-
-      {/* Top subjects */}
-      <h3 className='pb-1 mb-4 mt-5'>Top Subjects <a href=' ' className='float-end'>See All</a></h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>Mathematics</a></h5>
+              <h5 class="card-title"><a href=' '>Java</a></h5>
             </div>
           </div>
         </div>

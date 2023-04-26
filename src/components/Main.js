@@ -2,8 +2,11 @@ import React from 'react'
 import { Routes as Switch, Route } from 'react-router-dom';
 
 import Home from './Home';
+
 import SubjectDetail from './SubjectDetail';
 import TeacherDetail from './TeacherDetail';
+import AllSubjects from './AllSubjects';
+
 import Header from './Header';
 import About from './About';
 import Footer from './Footer';
@@ -37,6 +40,7 @@ function Main() {
           <Route path='/about' element={<About />}/>
           <Route path='/subject-detail/:subject_id' element={<SubjectDetail />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
+          <Route path='/all-subjects' element={<AllSubjects />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/dashboard' element={<Dashboard />}/> 
