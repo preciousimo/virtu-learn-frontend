@@ -5,8 +5,10 @@ import Home from './Home';
 
 import SubjectDetail from './SubjectDetail';
 import TeacherDetail from './TeacherDetail';
+
 import AllSubjects from './pages/AllSubjects';
 import TopSubjects from './pages/TopSubjects';
+import CategorySubjects from './pages/CategorySubjects';
 import FeaturedTeachers from './pages/FeaturedTeachers';
 
 import Header from './Header';
@@ -44,6 +46,7 @@ function Main() {
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
           <Route path='/all-subjects' element={<AllSubjects />}/>
           <Route path='/top-subjects' element={<TopSubjects />}/>
+          <Route path='/category/:category_slug' element={<CategorySubjects />}/>
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>

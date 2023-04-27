@@ -11,8 +11,8 @@ function TeacherDetail() {
             <div className='col-8'>
                 <h3>Mr Precious</h3>
                 <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquam ni</p>
-                <p className='fw-bold'>Skills: <Link to='/teacher-detail/1'>Python</Link>, <Link to='/teacher-detail/1'>JavaScript</Link>, <Link to='/teacher-detail/1'>PHP</Link></p>
-                <p className='fw-bold'>Recent Subject: <Link to='/teacher-detail/1'>Django Course</Link></p> 
+                <p className='fw-bold'>Skills: <Link to='/category/python'>Python</Link>, <Link to='/category/java'>JavaScript</Link>, <Link to='/category/php'>PHP</Link></p>
+                <p className='fw-bold'>Recent Subject: <Link to='/category/django'>Django Course</Link></p> 
                 <p className='fw-bold'>Rating: <a href=' '>4.5/5</a></p>
             </div>
         </div>
