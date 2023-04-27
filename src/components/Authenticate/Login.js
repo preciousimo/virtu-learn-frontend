@@ -1,7 +1,10 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { Link } from "react-router-dom";
 
 function Login() {
+  useEffect(() => {
+    document.title = 'Login'
+  }, [])
   return (
     <div className="container">
       <div className="row justify-content-center mt-5">

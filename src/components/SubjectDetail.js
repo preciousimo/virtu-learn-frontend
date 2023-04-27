@@ -1,7 +1,10 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
 function SubjectDetail() {
+    useEffect(() => {
+        document.title = 'Subject Detail'
+    }, [])
     // let { subject_id } = useParams();
     return (
         <div className='container mt-3'>

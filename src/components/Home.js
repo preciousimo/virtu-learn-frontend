@@ -1,7 +1,10 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
 function Home() {
+  useEffect(() => {
+    document.title = 'LMS | Home'
+  }, [])
   return (
     <div className='container mt-4'>
       <h1 className='text-center'>Welcome to SONIPS School</h1>
