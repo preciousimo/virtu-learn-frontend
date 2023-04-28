@@ -1,7 +1,59 @@
-import {useEffect} from 'react'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
+// const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
 function TeacherRegister() {
+  const [teacherData, setTeacherData] = useState({
+    'name': '',
+    'email': '',
+    'password': '',
+    'qualification': '',
+    'mobile_no': '',
+    'skills': '',
+    'status': '',
+  });
+
+  // Change handler
+  const handleChange = (e) => {
+    setTeacherData({
+      ...teacherData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  // Submit handler
+  const submitForm = () => {
+    const teacherFormData = new FormData();
+    teacherFormData.append('name', teacherData.name);
+    teacherFormData.append('email', teacherData.email);
+    teacherFormData.append('password', teacherData.password);
+    teacherFormData.append('qualification', teacherData.qualification);
+    teacherFormData.append('mobile_no', teacherData.mobile_no);
+    teacherFormData.append('skills', teacherData.skills);
+
+    try{
+      axios.post('http://127.0.0.1:8000/api/teacher/', teacherFormData)
+      .then((res) => {
+        setTeacherData(
+          {
+            'name': '',
+            'email': '',
+            'password': '',
+            'qualification': '',
+            'mobile_no': '',
+            'skills': '',
+            'status': 'success',
+          }
+        );
+      });
+    }catch(err){
+        console.log(err);
+        setTeacherData({'status': 'error'});
+    }
+
+  };
+  
   useEffect(() => {
     document.title = 'Teacher Register'
   }, [])
@@ -9,39 +61,41 @@ function TeacherRegister() {
     <div className="container">
       <div className="row justify-content-center mt-5">
         <div className="col-md-6">
+          {teacherData.status === 'success' && <div className="alert alert-success" role="alert">Teacher Registered Successfully</div>}
+          {teacherData.status === 'error' && <div className="alert alert-danger" role="alert">Teacher Registration Failed</div>}
           <div className="card">
             <div className="card-header">
               <h4>Teacher Register</h4>
             </div>
             <div className="card-body">
-              <form>
+              {/* <form> */}
                 <div className="mb-3">
-                  <label for="email" className="form-label">Full Name</label>
-                  <input type="text" className="form-control" />
+                  <label for="exampleInputName" className="form-label">Full Name</label>
+                  <input value={teacherData.name} onClick={handleChange} name='name' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label">Email</label>
-                  <input type="email" className="form-control" />
+                  <label for="exampleInputEmail" className="form-label">Email</label>
+                  <input value={teacherData.email} onClick={handleChange} name='email' type="email" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="password" className="form-label">Password</label>
-                  <input type="password" className="form-control" id="password" placeholder="Password" />
+                  <label for="exampleInputPassword" className="form-label">Password</label>
+                  <input value={teacherData.password} onClick={handleChange} name='password' type="password" className="form-control" id="exampleInputPassword" placeholder="Password" />
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label">Qualification</label>
-                  <input type="text" className="form-control" />
+                  <label for="exampleInputQualification" className="form-label">Qualification</label>
+                  <input value={teacherData.qualification} onClick={handleChange} name='qualification' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label">Mobile Number</label>
-                  <input type="number" className="form-control" />
+                  <label for="exampleInputNumber" className="form-label">Mobile Number</label>
+                  <input value={teacherData.mobile_no} onClick={handleChange} name='mobile_no' type="number" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="email" className="form-label">Skills</label>
-                  <textarea className='form-control'></textarea>
+                  <label for="exampleInputSkills" className="form-label">Skills</label>
+                  <textarea value={teacherData.skills} onClick={handleChange} name='skills' className='form-control'></textarea>
                   <div id='emailHelp' className='form-text'>Python, JavaScript, Mathematics, etc.</div>
                 </div>
-                <button type="submit" className="btn btn-secondary">Login</button>
-              </form>
+                <button onClick={submitForm} type="submit" className="btn btn-secondary">Register</button>
+              {/* </form> */}
             </div>
           </div>
         </div>
