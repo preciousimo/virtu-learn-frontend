@@ -6,8 +6,7 @@ function Home() {
     document.title = 'LMS | Home'
   }, [])
   return (
-    <div className='container mt-4'>
-      <h1 className='text-center'>Welcome to SONIPS School</h1>
+    <div className='container mt-4'> 
       {/* Current subjects */}
       <h3 className='pb-1 mb-4 mt-5'>Current Subjects <Link to='/all-subjects' className='float-end'>See All</Link></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
