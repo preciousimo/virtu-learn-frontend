@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-// const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
+const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
 function TeacherRegister() {
   const [teacherData, setTeacherData] = useState({
     'name': '',
@@ -33,7 +33,7 @@ function TeacherRegister() {
     teacherFormData.append('skills', teacherData.skills);
 
     try{
-      axios.post('http://127.0.0.1:8000/api/teacher/', teacherFormData)
+      axios.post(baseUrl, teacherFormData)
       .then((res) => {
         setTeacherData(
           {
@@ -71,27 +71,27 @@ function TeacherRegister() {
               {/* <form> */}
                 <div className="mb-3">
                   <label for="exampleInputName" className="form-label">Full Name</label>
-                  <input value={teacherData.name} onClick={handleChange} name='name' type="text" className="form-control" />
+                  <input value={teacherData.name} onChange={handleChange} name='name' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
                   <label for="exampleInputEmail" className="form-label">Email</label>
-                  <input value={teacherData.email} onClick={handleChange} name='email' type="email" className="form-control" />
+                  <input value={teacherData.email} onChange={handleChange} name='email' type="email" className="form-control" />
                 </div>
                 <div className="mb-3">
                   <label for="exampleInputPassword" className="form-label">Password</label>
-                  <input value={teacherData.password} onClick={handleChange} name='password' type="password" className="form-control" id="exampleInputPassword" placeholder="Password" />
+                  <input value={teacherData.password} onChange={handleChange} name='password' type="password" className="form-control" id="exampleInputPassword" placeholder="Password" />
                 </div>
                 <div className="mb-3">
                   <label for="exampleInputQualification" className="form-label">Qualification</label>
-                  <input value={teacherData.qualification} onClick={handleChange} name='qualification' type="text" className="form-control" />
+                  <input value={teacherData.qualification} onChange={handleChange} name='qualification' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
                   <label for="exampleInputNumber" className="form-label">Mobile Number</label>
-                  <input value={teacherData.mobile_no} onClick={handleChange} name='mobile_no' type="number" className="form-control" />
+                  <input value={teacherData.mobile_no} onChange={handleChange} name='mobile_no' type="number" className="form-control" />
                 </div>
                 <div className="mb-3">
                   <label for="exampleInputSkills" className="form-label">Skills</label>
-                  <textarea value={teacherData.skills} onClick={handleChange} name='skills' className='form-control'></textarea>
+                  <textarea value={teacherData.skills} onChange={handleChange} name='skills' className='form-control'></textarea>
                   <div id='emailHelp' className='form-text'>Python, JavaScript, Mathematics, etc.</div>
                 </div>
                 <button onClick={submitForm} type="submit" className="btn btn-secondary">Register</button>
