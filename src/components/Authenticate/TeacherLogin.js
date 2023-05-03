@@ -1,7 +1,40 @@
-import {useEffect} from 'react'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
+const baseUrl = 'http://127.0.0.1:8000/api';
 function TeacherLogin() {
+  const [teacherLogin, setTeacherLogin] = useState({
+    email: '',
+    password: '',
+  });
+  const handleChange = (e) => {
+    setTeacherLogin({
+      ...teacherLogin, 
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    const teacherLoginData = new FormData();
+    teacherLoginData.append('email', teacherLogin.email);
+    teacherLoginData.append('password', teacherLogin.password);
+    try{
+      axios.post(`${baseUrl}/teacher/login`, teacherLoginData)
+      .then((res) => {
+        console.log(res);
+        setTeacherLogin({
+          email: '',
+          password: '',
+        });
+      });
+    }catch(err){
+        console.log(err);
+    }
+  };
+
+
   useEffect(() => {
     document.title = 'Teacher Login'
   }, [])
@@ -17,17 +50,17 @@ function TeacherLogin() {
               <form>
                 <div className="mb-3">
                   <label for="email" className="form-label">Email address</label>
-                  <input type="email" className="form-control" />
+                  <input type="email" name='email' onChange={handleChange} value={teacherLogin.email} className="form-control" />
                 </div>
                 <div className="mb-3">
                   <label for="password" className="form-label">Password</label>
-                  <input type="password" className="form-control" id="password" placeholder="Password" />
+                  <input type="password" name='password' onChange={handleChange} value={teacherLogin.password} className="form-control" id="password" placeholder="Password" />
                 </div>
-                <div className="form-check mb-3">
+                {/* <div className="form-check mb-3">
                   <input type="checkbox" className="form-check-input" id="rememberMe" />
                   <label className="form-check-label" for="rememberMe">Remember me</label>
-                </div>
-                <button type="submit" className="btn btn-secondary">Login</button>
+                </div> */}
+                <button type="submit" onClick={submitForm} className="btn btn-secondary">Login</button>
               </form>
             </div>
           </div>
