@@ -15,24 +15,29 @@ function TeacherLogin() {
     })
   }
 
-  const submitForm = (e) => {
-    e.preventDefault();
+  const submitForm = () => {
     const teacherLoginData = new FormData();
     teacherLoginData.append('email', teacherLogin.email);
     teacherLoginData.append('password', teacherLogin.password);
     try{
-      axios.post(`${baseUrl}/teacher/login`, teacherLoginData)
+      axios.post(`${baseUrl}/teacher-login/`, teacherLoginData)
       .then((res) => {
-        console.log(res);
-        setTeacherLogin({
-          email: '',
-          password: '',
-        });
+        if(res.data.bool === true){
+          localStorage.setItem('teacherLoginStatus', true);
+          window.location.href = '/teacher-dashboard';
+        }else{
+          alert('Invalid credentials');
+        }
       });
     }catch(err){
         console.log(err);
     }
-  };
+  }
+
+  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
+  if(teacherLoginStatus === 'true'){
+    window.location.href = '/teacher-dashboard';
+  }
 
 
   useEffect(() => {

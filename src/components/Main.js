@@ -17,8 +17,9 @@ import Footer from './Footer';
 
 import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
-import TeacherLogin from './Authenticate/TeacherLogin';
 import TeacherRegister from './Authenticate/TeacherRegister';
+import TeacherLogin from './Authenticate/TeacherLogin';
+import TeacherLogout from './Authenticate/TeacherLogout';
 
 import Dashboard from './Dashboard/Student/Dashboard';
 import MySubjects from './Dashboard/Student/MySubjects';
@@ -56,8 +57,9 @@ function Main() {
           <Route path='/recommended-subjects' element={<RecSubjects />}/>
           <Route path='/profile-setting' element={<ProfileSetting />}/>
           <Route path='/change-password' element={<ChangePassword />}/>
-          <Route path='/teacher-login' element={<TeacherLogin />}/>
           <Route path='/teacher-register' element={<TeacherRegister />}/>
+          <Route path='/teacher-login' element={<TeacherLogin />}/>
+          <Route path='/teacher-logout' element={<TeacherLogout />}/>
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
           <Route path='/teacher-subjects' element={<TeacherSubjects />}/>
           <Route path='/add-subjects' element={<AddSubjects />}/> 

@@ -56,7 +56,13 @@ function TeacherRegister() {
   
   useEffect(() => {
     document.title = 'Teacher Register'
-  }, [])
+  });
+
+  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
+  if(teacherLoginStatus === 'true'){
+    window.location.href = '/teacher-dashboard';
+  }
+
   return (
     <div className="container">
       <div className="row justify-content-center mt-5">
