@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
-function RecSubjects() {
+function FavCourses() {
     useEffect(() => {
-        document.title = 'Recommended Subjects'
+        document.title = 'Favorite Subjects'
     }, [])
     return (
         <div className='container mt-4'>
@@ -14,7 +14,7 @@ function RecSubjects() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Recommended Subjects</h5>
+                        <h5 className='card-header'>Favorite Subjects</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
@@ -44,4 +44,4 @@ function RecSubjects() {
     )
 }
 
-export default RecSubjects
+export default FavCourses

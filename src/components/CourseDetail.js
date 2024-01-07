@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
-function SubjectDetail() {
+function CourseDetail() {
     useEffect(() => {
         document.title = 'Subject Detail'
     }, [])
@@ -115,4 +115,4 @@ function SubjectDetail() {
     )
 }
 
-export default SubjectDetail
+export default CourseDetail

@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function CategorySubjects() {
+function AllCourses() {
     useEffect(() => {
-        document.title = 'Category Subjects'
+        document.title = 'All Subjects'
     }, [])
     return (
         <div className='container mt-3'>
             {/* Latest subjects */}
-            <h3 className='pb-1 mb-4'>Data Science Courses </h3>
+            <h3 className='pb-1 mb-4'>Current Subjects </h3>
             <div class="row mb-4">
                 <div class="col-md-3 mb-4">
                     <div class="card h-100">
@@ -16,7 +16,7 @@ function CategorySubjects() {
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
                         <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Python</Link></h5>
+                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@ function CategorySubjects() {
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title"><a href=' '>R</a></h5>
+                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@ function CategorySubjects() {
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title"><a href=' '>SPSS</a></h5>
+                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ function CategorySubjects() {
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </a>
                         <div class="card-body">
-                            <h5 class="card-title"><a href=' '>Excel</a></h5>
+                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ function CategorySubjects() {
                             <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
                         </Link>
                         <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Power BI</Link></h5>
+                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
                         </div>
                     </div>
                 </div>
@@ -106,4 +106,4 @@ function CategorySubjects() {
     )
 }
 
-export default CategorySubjects
+export default AllCourses

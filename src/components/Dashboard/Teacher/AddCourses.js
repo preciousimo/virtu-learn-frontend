@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
 
-function AddSubjects() {
+function AddCourses() {
     useEffect(() => {
         document.title = 'Add Subjects'
     }, [])
@@ -43,4 +43,4 @@ function AddSubjects() {
     )
 }
 
-export default AddSubjects
+export default AddCourses

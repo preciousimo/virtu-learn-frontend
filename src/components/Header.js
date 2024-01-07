@@ -6,7 +6,7 @@ function Header() {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <div className='container'>
-        <Link className='navbar-brand' to='/'>SONIPS School</Link>
+        <Link className='navbar-brand' to='/'>Learn Online</Link>
         <button className='navbar-toggler' type='button' data-bs-toggle='collapse'
         data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false'
         aria-label='Toggle navigation'>
@@ -15,7 +15,7 @@ function Header() {
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>
             <Link className='nav-link active' aria-current='page' to='/'>Home</Link>
-            <Link className='nav-link' to='/all-subjects'>Subjects</Link>
+            <Link className='nav-link' to='/all-courses'>Subjects</Link>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" type="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Teacher

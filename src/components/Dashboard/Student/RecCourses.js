@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 
-function MySubjects() {
+function RecCourses() {
     useEffect(() => {
-        document.title = 'My Subjects'
+        document.title = 'Recommended Subjects'
     }, [])
     return (
         <div className='container mt-4'>
@@ -14,7 +14,7 @@ function MySubjects() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>My Subjects</h5>
+                        <h5 className='card-header'>Recommended Subjects</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
@@ -44,4 +44,4 @@ function MySubjects() {
     )
 }
 
-export default MySubjects
+export default RecCourses

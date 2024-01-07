@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import TeacherSidebar from './TeacherSidebar'
+import Sidebar from './Sidebar'
 
-function TeacherSubjects() {
+function MyCourses() {
     useEffect(() => {
-        document.title = 'Teacher Subjects'
+        document.title = 'My Subjects'
     }, [])
     return (
         <div className='container mt-4'>
             <div className='row'>
                 <aside className='col-md-3'>
-                    <TeacherSidebar />
+                    <Sidebar />
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
@@ -20,14 +20,14 @@ function TeacherSubjects() {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Total Enrolled</th>
+                                        <th>Created By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>Python</td>
-                                        <td><Link to="/">43</Link></td>
+                                        <td><Link to="/">John Doe</Link></td>
                                         <td>
                                             <a href='#' className='btn btn-sm btn-primary'>View</a>
                                             <a href='#' className='btn btn-sm btn-secondary'>Edit</a>
@@ -44,4 +44,4 @@ function TeacherSubjects() {
     )
 }
 
-export default TeacherSubjects
+export default MyCourses
