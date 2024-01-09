@@ -5,60 +5,47 @@ import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
-function AddCourses() {
+function AddChapter() {
     useEffect(() => {
-        document.title = 'Add Courses';
+        document.title = 'Add Chapter';
     }, []);
 
-    const [cats, setCats] = useState([]);
-    const [courseData, setCourseData] = useState({
-        category: '',
+    const [chapterData, setChapterData] = useState({
         title: '',
         description: '',
-        f_img: '',
-        techs: '',
+        video: '',
+        remarks: '',
     });
 
-    useEffect(() => {
-        try {
-            axios.get(`${baseUrl}/category/`).then((res) => {
-                setCats(res.data);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }, []);
-
     const handleChange = (e) => {
-        setCourseData({
-            ...courseData,
+        setChapterData({
+            ...chapterData,
             [e.target.name]: e.target.value,
         });
     };
 
     const handleFileChange = (e) => {
-        setCourseData({
-            ...courseData,
+        setChapterData({
+            ...chapterData,
             [e.target.name]: e.target.files[0],
         });
     };
 
     const formSubmit = () => {
         const _formData = new FormData();
-        _formData.append('category', courseData.category);
-        _formData.append('teacher', 1);
-        _formData.append('title', courseData.title);
-        _formData.append('description', courseData.description);
-        _formData.append('featured_img', courseData.f_img, courseData.f_img.name);
-        _formData.append('techs', courseData.techs);
+        _formData.append('course', 1);
+        _formData.append('title', chapterData.title);
+        _formData.append('description', chapterData.description);
+        _formData.append('video', chapterData.video, chapterData.video.name);
+        _formData.append('remarks', chapterData.remarks);
 
         try {
-            axios.post(`${baseUrl}/course/`, _formData, {
+            axios.post(`${baseUrl}/chapter/`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
             }).then((res) => {
-                window.location.href = '/add-courses';
+                window.location.href = '/add-chapter/1';
             });
         } catch (err) {
             console.log(err);
@@ -78,19 +65,9 @@ function AddCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Add Course</h5>
+                        <h5 className='card-header'>Add Chapter</h5>
                         <div className='card-body'>
                             <form onSubmit={handleSubmit}>
-                                <div className="mb-3">
-                                    <label htmlFor="category" className="form-label">Category</label>
-                                    <select name='category' className='form-control' onChange={handleChange}>
-                                        {cats.map((category, index) => (
-                                            <option key={index} value={category.id}>
-                                                {category.title}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input
@@ -108,27 +85,27 @@ function AddCourses() {
                                         className="form-control"
                                         id="description"
                                         name="description"
-                                        value={courseData.description}
+                                        value={chapterData.description}
                                         onChange={handleChange}
                                     ></textarea>
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="f_img" className="form-label">Featured Image</label>
+                                    <label htmlFor="video" className="form-label">Video</label>
                                     <input
                                         type="file"
                                         className="form-control"
-                                        id="f_img"
-                                        name="f_img"
+                                        id="video"
+                                        name="video"
                                         onChange={handleFileChange}
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="technologies" className="form-label">Technologies</label>
+                                    <label htmlFor="remarks" className="form-label">Remarks</label>
                                     <textarea
                                         className="form-control"
-                                        id="technologies"
-                                        name="techs"
-                                        value={courseData.techs}
+                                        id="remarks"
+                                        name="remarks"
+                                        value={chapterData.techs}
                                         onChange={handleChange}
                                         rows="3"
                                     ></textarea>
@@ -143,4 +120,4 @@ function AddCourses() {
     );
 }
 
-export default AddCourses;
+export default AddChapter;

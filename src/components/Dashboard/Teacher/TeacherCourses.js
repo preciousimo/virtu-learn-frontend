@@ -11,10 +11,11 @@ function TeacherCourses() {
     }, [])
 
     const [courseData, setCourseData]=useState([]);
+    const teacherId = localStorage.getItem('teacherId');
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/teacher-courses/1`)
+            axios.get(baseUrl+'/teacher-courses/'+teacherId)
             .then((res) => {
                 setCourseData(res.data);
             });
@@ -37,6 +38,7 @@ function TeacherCourses() {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Image</th>
                                         <th>Total Enrolled</th>
                                         <th>Action</th>
                                     </tr>
@@ -45,10 +47,11 @@ function TeacherCourses() {
                                     {courseData.map((course, index) => (
                                     <tr>
                                         <td>{course.title}</td>
+                                        <td><img src={course.featured_img} width='80' className='rounded' alt={course.title}/></td>
                                         <td><Link to="/">43</Link></td>
                                         <td>
                                             <button className='btn btn-sm btn-danger'>Delete</button>
-                                            <Link href='#' className='btn btn-sm btn-success ms-2' to='/add-chapter/2'>Add Chapter</Link>
+                                            <Link href='#' className='btn btn-sm btn-success ms-2' to={`/add-chapter/${course.id}`}>Add Chapter</Link>
                                         </td>
                                     </tr>
                                     )

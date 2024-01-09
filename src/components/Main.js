@@ -30,6 +30,7 @@ import ChangePassword from './Dashboard/Student/ChangePassword';
 
 import TeacherDashboard from './Dashboard/Teacher/TeacherDashboard';
 import AddCourses from './Dashboard/Teacher/AddCourses';
+import AddChapter from './Dashboard/Teacher/AddChapter';
 import TeacherChangePassword from './Dashboard/Teacher/TeacherChangePassword';
 import TeacherCourses from './Dashboard/Teacher/TeacherCourses';
 import TeacherProfileSetting from './Dashboard/Teacher/TeacherProfileSetting';
@@ -63,6 +64,7 @@ function Main() {
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
           <Route path='/teacher-courses' element={<TeacherCourses />}/>
           <Route path='/add-courses' element={<AddCourses />}/> 
+          <Route path='/add-chapter/:chapter_id' element={<AddChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
           <Route path='/teacher-change-password' element={<TeacherChangePassword />}/> 

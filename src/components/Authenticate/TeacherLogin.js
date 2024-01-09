@@ -15,26 +15,28 @@ function TeacherLogin() {
     })
   }
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const teacherLoginData = new FormData();
     teacherLoginData.append('email', teacherLogin.email);
     teacherLoginData.append('password', teacherLogin.password);
-    try{
-      axios.post(`${baseUrl}/teacher-login/`, teacherLoginData)
-      .then((res) => {
-        if(res.data.bool === true){
-          localStorage.setItem('teacherLoginStatus', true);
-          window.location.href = '/teacher-dashboard';
-        }else{
-          alert('Invalid credentials');
+
+    try {
+        const res = await axios.post(`${baseUrl}/teacher-login/`, teacherLoginData);
+
+        if (res.data.bool === true) {
+            localStorage.setItem('teacherLoginStatus', true);
+            localStorage.setItem('teacherId', res.data.teacher_id);
+            window.location.href = '/teacher-dashboard';
+        } else {
+            alert('Invalid credentials');
         }
-      });
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
-  }
+};
 
-  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
+
+  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus');
   if(teacherLoginStatus === 'true'){
     window.location.href = '/teacher-dashboard';
   }
