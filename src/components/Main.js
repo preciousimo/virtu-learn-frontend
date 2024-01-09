@@ -31,6 +31,7 @@ import ChangePassword from './Dashboard/Student/ChangePassword';
 import TeacherDashboard from './Dashboard/Teacher/TeacherDashboard';
 import AddCourses from './Dashboard/Teacher/AddCourses';
 import AddChapter from './Dashboard/Teacher/AddChapter';
+import AllChapters from './Dashboard/Teacher/CourseChapters';
 import TeacherChangePassword from './Dashboard/Teacher/TeacherChangePassword';
 import TeacherCourses from './Dashboard/Teacher/TeacherCourses';
 import TeacherProfileSetting from './Dashboard/Teacher/TeacherProfileSetting';
@@ -47,6 +48,7 @@ function Main() {
           <Route path='/detail/:course_id' element={<CourseDetail />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
           <Route path='/all-courses' element={<AllCourses />}/>
+          <Route path='/all-chapters/:course_id' element={<AllChapters />}/>
           <Route path='/top-courses' element={<TopCourses />}/>
           <Route path='/category/:category_slug' element={<CategoryCourses />}/>
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>

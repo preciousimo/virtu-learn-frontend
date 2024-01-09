@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, Routes, Route, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 
