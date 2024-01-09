@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Routes, Route, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 
@@ -31,9 +31,11 @@ function AddChapter() {
         });
     };
 
+    const {course_id} = useParams();
+    
     const formSubmit = () => {
         const _formData = new FormData();
-        _formData.append('course', 1);
+        _formData.append('course', course_id);
         _formData.append('title', chapterData.title);
         _formData.append('description', chapterData.description);
         _formData.append('video', chapterData.video, chapterData.video.name);

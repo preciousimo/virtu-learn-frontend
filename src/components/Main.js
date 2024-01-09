@@ -44,7 +44,7 @@ function Main() {
         <Switch>
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
-          <Route path='/subject-detail/:subject_id' element={<CourseDetail />}/>
+          <Route path='/detail/:course_id' element={<CourseDetail />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
           <Route path='/all-courses' element={<AllCourses />}/>
           <Route path='/top-courses' element={<TopCourses />}/>
@@ -64,7 +64,7 @@ function Main() {
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
           <Route path='/teacher-courses' element={<TeacherCourses />}/>
           <Route path='/add-courses' element={<AddCourses />}/> 
-          <Route path='/add-chapter/:chapter_id' element={<AddChapter />}/> 
+          <Route path='/add-chapter/:course_id' element={<AddChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
           <Route path='/teacher-change-password' element={<TeacherChangePassword />}/> 
