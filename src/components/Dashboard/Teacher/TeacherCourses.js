@@ -1,11 +1,28 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
+import axios from 'axios'
+
+const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TeacherCourses() {
     useEffect(() => {
-        document.title = 'Teacher Subjects'
+        document.title = 'Teacher Courses'
     }, [])
+
+    const [courseData, setCourseData]=useState([]);
+
+    useEffect(() => {
+        try {
+            axios.get(`${baseUrl}/teacher-courses/1`)
+            .then((res) => {
+                setCourseData(res.data);
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
     return (
         <div className='container mt-4'>
             <div className='row'>
@@ -14,7 +31,7 @@ function TeacherCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>My Subjects</h5>
+                        <h5 className='card-header'>My Courses</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
@@ -25,15 +42,17 @@ function TeacherCourses() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {courseData.map((course, index) => (
                                     <tr>
-                                        <td>Python</td>
+                                        <td>{course.title}</td>
                                         <td><Link to="/">43</Link></td>
                                         <td>
-                                            <a href='#' className='btn btn-sm btn-primary'>View</a>
-                                            <a href='#' className='btn btn-sm btn-secondary'>Edit</a>
-                                            <a href='#' className='btn btn-sm btn-danger'>Delete</a>
+                                            <button className='btn btn-sm btn-danger'>Delete</button>
+                                            <Link href='#' className='btn btn-sm btn-success ms-2' to='/add-chapter/2'>Add Chapter</Link>
                                         </td>
                                     </tr>
+                                    )
+                                    )}
                                 </tbody>
                             </table>
                         </div>

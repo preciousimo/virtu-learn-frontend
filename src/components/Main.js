@@ -46,23 +46,23 @@ function Main() {
           <Route path='/subject-detail/:subject_id' element={<CourseDetail />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
           <Route path='/all-courses' element={<AllCourses />}/>
-          <Route path='/top-subjects' element={<TopCourses />}/>
+          <Route path='/top-courses' element={<TopCourses />}/>
           <Route path='/category/:category_slug' element={<CategoryCourses />}/>
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/dashboard' element={<Dashboard />}/> 
-          <Route path='/my-subjects' element={<MyCourses />}/>
-          <Route path='/favorite-subjects' element={<FavCourses />}/>
-          <Route path='/recommended-subjects' element={<RecCourses />}/>
+          <Route path='/my-courses' element={<MyCourses />}/>
+          <Route path='/favorite-courses' element={<FavCourses />}/>
+          <Route path='/recommended-courses' element={<RecCourses />}/>
           <Route path='/profile-setting' element={<ProfileSetting />}/>
           <Route path='/change-password' element={<ChangePassword />}/>
           <Route path='/teacher-register' element={<TeacherRegister />}/>
           <Route path='/teacher-login' element={<TeacherLogin />}/>
           <Route path='/teacher-logout' element={<TeacherLogout />}/>
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
-          <Route path='/teacher-subjects' element={<TeacherCourses />}/>
-          <Route path='/add-subjects' element={<AddCourses />}/> 
+          <Route path='/teacher-courses' element={<TeacherCourses />}/>
+          <Route path='/add-courses' element={<AddCourses />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
           <Route path='/teacher-change-password' element={<TeacherChangePassword />}/> 
