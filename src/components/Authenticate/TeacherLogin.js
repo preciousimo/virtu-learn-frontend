@@ -8,6 +8,9 @@ function TeacherLogin() {
     email: '',
     password: '',
   });
+
+  const [errorMsg, setErrorMsg] = useState('');
+
   const handleChange = (e) => {
     setTeacherLogin({
       ...teacherLogin, 
@@ -28,7 +31,7 @@ function TeacherLogin() {
             localStorage.setItem('teacherId', res.data.teacher_id);
             window.location.href = '/teacher-dashboard';
         } else {
-            alert('Invalid credentials');
+            setErrorMsg('Invalid credentials');
         }
     } catch (err) {
         console.log(err);
@@ -54,7 +57,7 @@ function TeacherLogin() {
               <h4>Teacher Login</h4>
             </div>
             <div className="card-body">
-              <form>
+              {errorMsg && <p className='text-danger'>{errorMsg}</p>}
                 <div className="mb-3">
                   <label for="email" className="form-label">Email address</label>
                   <input type="email" name='email' onChange={handleChange} value={teacherLogin.email} className="form-control" />
@@ -68,7 +71,6 @@ function TeacherLogin() {
                   <label className="form-check-label" for="rememberMe">Remember me</label>
                 </div> */}
                 <button type="submit" onClick={submitForm} className="btn btn-secondary">Login</button>
-              </form>
             </div>
           </div>
         </div>
