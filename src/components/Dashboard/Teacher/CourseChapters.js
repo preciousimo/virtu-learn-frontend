@@ -30,14 +30,14 @@ function CourseChapters() {
 
     // Delete Data
     const Swal = require('sweetalert2')
-    const handleDeleteClick = () =>{
+    const handleDeleteClick = () => {
         Swal.fire({
             title: 'Confirm!',
             text: 'Are you sure you want to delete?',
             icon: 'info',
             confirmButtonText: 'Continue',
             showCancelButton: true
-          })
+        })
     }
 
     return (
@@ -61,8 +61,8 @@ function CourseChapters() {
                                 </thead>
                                 <tbody>
                                     {chapterData.map((chapter, index) => (
-                                        <tr>
-                                            <td><Link to={'/edit-chapter/'+chapter.id}>{chapter.title}</Link></td>
+                                        <tr key={chapter.id}>
+                                            <td><Link to={'/edit-chapter/' + chapter.id}>{chapter.title}</Link></td>
                                             <td>
                                                 <video width="100" height="100" controls>
                                                     <source src={chapter.video.url} type="video/mp4" />
@@ -71,12 +71,12 @@ function CourseChapters() {
                                             </td>
                                             <td><Link to="/">{chapter.remarks}</Link></td>
                                             <td>
-                                                <Link to={'/edit-chapter/'+chapter.id} className='btn btn-sm btn-info'><i class="bi bi-pencil-square"></i></Link>
-                                                <button onClick={handleDeleteClick} to={'/delete-chapter/'+chapter.id} className='btn btn-sm btn-danger ms-1'><i class="bi bi-trash"></i></button>
+                                                <Link to={'/edit-chapter/' + chapter.id} className='btn btn-sm btn-info'><i className="bi bi-pencil-square"></i></Link>
+                                                <button onClick={handleDeleteClick} to={'/delete-chapter/' + chapter.id} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
                                             </td>
                                         </tr>
-                                    )
-                                    )}
+                                    ))}
+
                                 </tbody>
                             </table>
                         </div>
