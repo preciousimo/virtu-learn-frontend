@@ -8,13 +8,12 @@ const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CourseChapters() {
     useEffect(() => {
-        document.title = 'Course Chapters'
-    }, [])
+        document.title = 'Course Chapters';
+    }, []);
 
     const [chapterData, setChapterData] = useState([]);
     const [totalResult, setTotalResult] = useState(0);
     const { course_id } = useParams();
-
 
     useEffect(() => {
         try {
@@ -24,21 +23,34 @@ function CourseChapters() {
                     setChapterData(res.data);
                 });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
-    }, []);
+    }, [course_id]);
 
-    // Delete Data
-    const Swal = require('sweetalert2')
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (chapter_id) => {
         Swal.fire({
             title: 'Confirm!',
             text: 'Are you sure you want to delete?',
             icon: 'info',
             confirmButtonText: 'Continue',
             showCancelButton: true
-        })
-    }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    axios.delete(baseUrl + '/chapter/' + chapter_id)
+                        .then((res) => {
+                            setTotalResult(res.data.length);
+                            setChapterData(res.data);
+                        });
+                    Swal.fire('success', 'Data has been deleted.');
+                } catch (error) {
+                    Swal.fire('error', 'Data has not been deleted!!');
+                }
+            } else {
+                Swal.fire('error', 'Data has not been deleted!!');
+            }
+        });
+    };
 
     return (
         <div className='container mt-4'>
@@ -60,24 +72,24 @@ function CourseChapters() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {chapterData.map((chapter, index) => (
+                                    {Array.isArray(chapterData) && chapterData.map((chapter, index) => (
                                         <tr key={chapter.id}>
                                             <td><Link to={'/edit-chapter/' + chapter.id}>{chapter.title}</Link></td>
                                             <td>
-                                                <video width="100" height="100" controls>
-                                                    <source src={chapter.video.url} type="video/mp4" />
-                                                    Your browser does not support the video element.
+                                                <video width="200" height="100" controls>
+                                                    <source src={chapter.video} type="video/mp4" />
+                                                    <source src={chapter.video} type="video/mov" />
                                                 </video>
                                             </td>
                                             <td><Link to="/">{chapter.remarks}</Link></td>
                                             <td>
                                                 <Link to={'/edit-chapter/' + chapter.id} className='btn btn-sm btn-info'><i className="bi bi-pencil-square"></i></Link>
-                                                <button onClick={handleDeleteClick} to={'/delete-chapter/' + chapter.id} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
+                                                <button onClick={() => handleDeleteClick(chapter.id)} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
                                             </td>
                                         </tr>
                                     ))}
-
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

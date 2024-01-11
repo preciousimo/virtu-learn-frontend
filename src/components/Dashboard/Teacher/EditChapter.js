@@ -42,10 +42,10 @@ function EditChapter() {
         _formData.append('course', chapterData.course);
         _formData.append('title', chapterData.title);
         _formData.append('description', chapterData.description);
-        if(chapterData.video!=''){
+        if (chapterData.video != '') {
             _formData.append('video', chapterData.video, chapterData.video.name);
         }
-        
+
         _formData.append('remarks', chapterData.remarks);
 
         try {
@@ -54,7 +54,7 @@ function EditChapter() {
                     'content-type': 'multipart/form-data',
                 },
             }).then((res) => {
-                if(res.status == 200){
+                if (res.status == 200) {
                     Swal.fire({
                         title: 'Data has been updated',
                         icon: 'success',
@@ -81,14 +81,14 @@ function EditChapter() {
                         description: res.data.description,
                         prev_video: res.data.video,
                         remarks: res.data.remarks,
-                        video:''
+                        video: ''
                     });
                 });
         } catch (err) {
             console.log(err);
         }
     }, [chapter_id]);
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         formSubmit();
@@ -136,12 +136,15 @@ function EditChapter() {
                                         name="video"
                                         onChange={handleFileChange}
                                     />
-                                    <video width="100%" height='300' className='mt-2' controls>
-                                        <source src={chapterData.prev_video} type="video/ogg" />
-                                        <source src={chapterData.prev_video} type="video/mp4" />
-                                        <source src={chapterData.prev_video} type="video/webm" />
-                                        <source src={chapterData.prev_video} type="video/mov" />
-                                     </video>
+                                    <video width='780' height='300' className='mt-2' controls>
+                                        {chapterData.prev_video && (
+                                            <>
+                                                <source src={chapterData.prev_video} type="video/mp4" />
+                                                <source src={chapterData.prev_video} type="video/mov" />
+                                            </>
+                                        )}
+                                    </video>
+
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="remarks" className="form-label">Remarks</label>
