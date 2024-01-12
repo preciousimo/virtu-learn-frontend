@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
-function AddCourses() {
+function EditCourse() {
     useEffect(() => {
-        document.title = 'Add Courses';
+        document.title = 'Edit Course';
     }, []);
 
     const [cats, setCats] = useState([]);
@@ -15,15 +16,35 @@ function AddCourses() {
         category: '',
         title: '',
         description: '',
+        prev_img: '',
         f_img: '',
         techs: '',
     });
+
+    const { course_id } = useParams();
 
     useEffect(() => {
         try {
             axios.get(`${baseUrl}/category/`).then((res) => {
                 setCats(res.data);
             });
+        } catch (err) {
+            console.log(err);
+        }
+
+        // Fetch current data
+        try {
+            axios.get(`${baseUrl}/teacher-course-detail/${course_id}`)
+                .then((res) => {
+                    setCourseData({
+                        category: res.data.category,
+                        title: res.data.title,
+                        description: res.data.description,
+                        prev_img: res.data.featured_img,
+                        f_img:'',
+                        techs: res.data.techs,
+                    });
+                });
         } catch (err) {
             console.log(err);
         }
@@ -49,16 +70,28 @@ function AddCourses() {
         _formData.append('teacher', 1);
         _formData.append('title', courseData.title);
         _formData.append('description', courseData.description);
-        _formData.append('featured_img', courseData.f_img, courseData.f_img.name);
+        if(courseData.f_img!=''){
+            _formData.append('featured_img', courseData.f_img, courseData.f_img.name);
+        }
         _formData.append('techs', courseData.techs);
 
         try {
-            axios.post(`${baseUrl}/course/`, _formData, {
+            axios.put(`${baseUrl}/teacher-course-detail/${course_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
             }).then((res) => {
-                window.location.href = '/add-courses';
+                if (res.status == 200) {
+                    Swal.fire({
+                        title: 'Data has been updated',
+                        icon: 'success',
+                        toast: true,
+                        timer: 3000,
+                        position: 'top-right',
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                }
             });
         } catch (err) {
             console.log(err);
@@ -78,12 +111,12 @@ function AddCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Add Course</h5>
+                        <h5 className='card-header'>Edit Course</h5>
                         <div className='card-body'>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="category" className="form-label">Category</label>
-                                    <select name='category' className='form-control' onChange={handleChange}>
+                                    <select name='category' value={courseData.category} className='form-control' onChange={handleChange}>
                                         {cats.map((category, index) => (
                                             <option key={index} value={category.id}>
                                                 {category.title}
@@ -95,6 +128,7 @@ function AddCourses() {
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input
                                         type='text'
+                                        value={courseData.title}
                                         className="form-control"
                                         id="title"
                                         name="title"
@@ -105,6 +139,7 @@ function AddCourses() {
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
                                     <textarea
+                                        value={courseData.description}
                                         className="form-control"
                                         id="description"
                                         name="description"
@@ -120,6 +155,9 @@ function AddCourses() {
                                         name="f_img"
                                         onChange={handleFileChange}
                                     />
+                                    {courseData.prev_img &&
+                                        <img src={courseData.prev_img} height='200' width='200'/>
+                                    }
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="technologies" className="form-label">Technologies</label>
@@ -127,12 +165,13 @@ function AddCourses() {
                                         className="form-control"
                                         id="technologies"
                                         name="techs"
+                                        value={courseData.techs}
                                         placeholder='Python, JavaScript,...'
                                         onChange={handleChange}
                                         rows="3"
                                     ></textarea>
                                 </div>
-                                <button type='submit' className='btn btn-secondary'>Submit</button>
+                                <button type='submit' className='btn btn-secondary'>Edit</button>
                             </form>
                         </div>
                     </div>
@@ -142,4 +181,4 @@ function AddCourses() {
     );
 }
 
-export default AddCourses;
+export default EditCourse;
