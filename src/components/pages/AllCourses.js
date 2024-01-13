@@ -1,95 +1,45 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+
+const baseUrl = 'http://127.0.0.1:8000/api';
+
 
 function AllCourses() {
     useEffect(() => {
-        document.title = 'All Subjects'
+        document.title = 'All Courses'
     }, [])
+
+    const [courseData, setCourseData] = useState([]);
+
+    useEffect(() => {
+        try {
+            axios.get(`${baseUrl}/course/`)
+                .then((res) => {
+                    setCourseData(res.data);
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
     return (
         <div className='container mt-3'>
-            {/* Latest subjects */}
-            <h3 className='pb-1 mb-4'>Current Subjects </h3>
+            {/* Latest courses */}
+            <h3 className='pb-1 mb-4'>Latest Courses </h3>
             <div class="row mb-4">
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
+                {courseData && courseData.map((course, index) =>
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <Link to={`/detail/${course.id}`}>
+                                <img src={course.featured_img} className='card-img-top' alt={course.title} />
+                            </Link>
+                            <div class="card-body">
+                                <h5 class="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <a href=' '>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <a href=' '>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <a href=' '>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title"><a href=' '>Mathematics</a></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div class="card-body">
-                            <h5 class="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
-                        </div>
-                    </div>
-                </div>
+                )}
             </div>
             {/* End latest subjects */}
             {/* Pagination */}
