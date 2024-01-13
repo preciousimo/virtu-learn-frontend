@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios'
 
+const siteUrl = 'https://myfundz.s3.amazonaws.com';
 const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CourseDetail() {
@@ -12,6 +13,7 @@ function CourseDetail() {
     const [courseData, setCourseData] = useState([]);
     const [chapterData, setChapterData] = useState([]);
     const [teacherData, setTeacherData] = useState([]);
+    const [relatedCourseData, setRelatedCourseData] = useState([]);
     let { course_id } = useParams();
 
     useEffect(() => {
@@ -21,6 +23,7 @@ function CourseDetail() {
                     setCourseData(res.data);
                     setChapterData(res.data.course_chapters);
                     setTeacherData(res.data.teacher);
+                    setRelatedCourseData(JSON.parse(res.data.related_videos));
                 });
         } catch (err) {
             console.error(err);
@@ -46,7 +49,7 @@ function CourseDetail() {
             {/* Course Videos */}
             <div className='card mt-4'>
                 <div className='card-header'>
-                    <h5>Subject Videos</h5>
+                    <h5>In this course</h5>
                 </div>
                 <ul className='list-group list-group-flush'>
                 {Array.isArray(chapterData) && chapterData.map((chapter, index) => (
@@ -67,7 +70,7 @@ function CourseDetail() {
                                     </div>
                                     <div className="modal-body">
                                         <div class="ratio ratio-16x9">
-                                            <iframe src={chapter.video} title={chapter.title} allowfullscreen></iframe>
+                                            {/* <iframe src={chapter.video} title={chapter.title} allowfullscreen></iframe> */}
                                         </div>
                                     </div>
                                 </div>
@@ -81,26 +84,18 @@ function CourseDetail() {
             {/* Related Subjects */}
             <h3 className='pb-1 mb-4 mt-5'>Related Courses</h3>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            {Array.isArray(relatedCourseData) && relatedCourseData.map((rcourse, index) => (
                 <div className="col">
                     <div className="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
+                        <Link target='__blank' to={`/detail/${rcourse.pk}`}>
+                            <img src={`${siteUrl}/${rcourse.fields.featured_img}`} className='card-img-top' alt={rcourse.fields.title} />
                         </Link>
                         <div className="card-body">
-                            <h5 className="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
+                            <h5 className="card-title"><Link to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>
                         </div>
                     </div>
                 </div>
-                <div className="col">
-                    <div className="card h-100">
-                        <Link to='/subject-detail/1'>
-                            <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-                        </Link>
-                        <div className="card-body">
-                            <h5 className="card-title"><Link to='/subject-detail/1'>Mathematics</Link></h5>
-                        </div>
-                    </div>
-                </div>
+            ))}
             </div>
 
         </div>
