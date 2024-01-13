@@ -11,6 +11,7 @@ function CourseDetail() {
 
     const [courseData, setCourseData] = useState([]);
     const [chapterData, setChapterData] = useState([]);
+    const [teacherData, setTeacherData] = useState([]);
     let { course_id } = useParams();
 
     useEffect(() => {
@@ -18,6 +19,8 @@ function CourseDetail() {
             axios.get(`${baseUrl}/course/${course_id}`)
                 .then((res) => {
                     setCourseData(res.data);
+                    setChapterData(res.data.course_chapters);
+                    setTeacherData(res.data.teacher);
                 });
         } catch (err) {
             console.error(err);
@@ -34,6 +37,7 @@ function CourseDetail() {
                     <h3>{courseData.title}</h3>
                     <p>{courseData.description}</p>
                     <p className='fw-bold'>Subject By: {courseData.teacher ? <Link to={`/teacher-detail/${courseData.teacher.id}`}>{courseData.teacher.name}</Link> : 'Unknown Teacher'}</p>
+                    {/* <p className='fw-bold'>Subject By: <Link to=''>{teacherData.name}</Link></p> */}
                     <p className='fw-bold'>Duration: <a href=' '>3 Hours 30 Minutes</a></p>
                     <p className='fw-bold'>Total Enrolled: <a href=' '>456 Student</a></p>
                     <p className='fw-bold'>Rating: <a href=' '>4.5/5</a></p>
