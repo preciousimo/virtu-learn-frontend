@@ -57,7 +57,7 @@ function Register() {
 
   const studenLoginStatus = localStorage.getItem('studenLoginStatus')
   if(studenLoginStatus === 'true'){
-    window.location.href = '/';
+    window.location.href = '/student-dashboard';
   }
 
   return (

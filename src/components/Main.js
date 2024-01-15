@@ -17,6 +17,7 @@ import Footer from './Footer';
 
 import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
+import Logout from './Authenticate/Logout';
 import TeacherRegister from './Authenticate/TeacherRegister';
 import TeacherLogin from './Authenticate/TeacherLogin';
 import TeacherLogout from './Authenticate/TeacherLogout';
@@ -57,6 +58,7 @@ function Main() {
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/logout' element={<Logout />}/>
           <Route path='/dashboard' element={<Dashboard />}/> 
           <Route path='/my-courses' element={<MyCourses />}/>
           <Route path='/favorite-courses' element={<FavCourses />}/>
