@@ -11,6 +11,7 @@ function TeacherDetail() {
 
     const [teacherData, setTeacherData] = useState([]);
     const [courseData, setCourseData] = useState([]);
+    const [skillList, setSkillList] = useState([]);
     let { teacher_id } = useParams();
 
     useEffect(() => {
@@ -19,6 +20,7 @@ function TeacherDetail() {
                 .then((res) => {
                     setTeacherData(res.data);
                     setCourseData(res.data.teacher_courses);
+                    setSkillList(res.data.skill_list);
                 });
         } catch (err) {
             console.error(err);
@@ -34,7 +36,11 @@ function TeacherDetail() {
                 <div className='col-8'>
                     <h3>{teacherData.name}</h3>
                     <p>{teacherData.detail}</p>
-                    <p className='fw-bold'>Skills: <Link to='/category/python'>Python</Link>, <Link to='/category/java'>JavaScript</Link>, <Link to='/category/php'>PHP</Link></p>
+                    <p className='fw-bold'>Skills:&nbsp;
+                        {Array.isArray(skillList) && skillList.map((skill, index) => (
+                            <Link to={`/teacher-skill-courses/${skill.trim()}/${teacherData.id}`} className='badge badge-pill text-dark bg-warning ml-1'>{skill}</Link>
+                        ))}
+                    </p>
                     <p className='fw-bold'>Recent Subject: <Link to='/category/django'>Django Course</Link></p>
                     <p className='fw-bold'>Rating: <a href=' '>4.5/5</a></p>
                 </div>
