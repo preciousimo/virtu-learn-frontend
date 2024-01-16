@@ -37,6 +37,7 @@ import AllChapters from './Dashboard/Teacher/CourseChapters';
 import EditChapter from './Dashboard/Teacher/EditChapter';
 import TeacherChangePassword from './Dashboard/Teacher/TeacherChangePassword';
 import TeacherCourses from './Dashboard/Teacher/TeacherCourses';
+import EnrolledStudents from './Dashboard/Teacher/EnrolledStudents';
 import TeacherProfileSetting from './Dashboard/Teacher/TeacherProfileSetting';
 import StudentList from './Dashboard/Teacher/StudentList';
 import TeacherSkillCourses from './Dashboard/Teacher/TeacherSkillCourses';
@@ -70,6 +71,7 @@ function Main() {
           <Route path='/teacher-logout' element={<TeacherLogout />}/>
           <Route path='/teacher-dashboard' element={<TeacherDashboard />}/> 
           <Route path='/teacher-courses' element={<TeacherCourses />}/>
+          <Route path='/enrolled-students/:course_id' element={<EnrolledStudents />}/>
           <Route path='/teacher-skill-courses/:skill_name/:teacher_id' element={<TeacherSkillCourses />}/>
           <Route path='/add-courses' element={<AddCourses />}/> 
           <Route path='/edit-course/:course_id' element={<EditCourse />}/> 
