@@ -33,6 +33,7 @@ function AddChapter() {
     };
 
     const { course_id } = useParams();
+    const [videoDuration, setVideoDuration]=useState();
 
     const formSubmit = () => {
         const _formData = new FormData();
@@ -40,7 +41,7 @@ function AddChapter() {
         _formData.append('title', chapterData.title);
         _formData.append('description', chapterData.description);
         _formData.append('video', chapterData.video, chapterData.video.name);
-        // _formData.append('video_duration', videoDuration);
+        _formData.append('video_duration', videoDuration);
         _formData.append('remarks', chapterData.remarks);
 
         try {
