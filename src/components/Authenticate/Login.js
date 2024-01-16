@@ -33,7 +33,7 @@ function Login() {
       if (res.data.bool === true) {
         localStorage.setItem('studentLoginStatus', true);
         localStorage.setItem('studentId', res.data.student_id);
-        window.location.href = '/student-dashboard';
+        window.location.href = '/';
       } else {
         setErrorMsg('Invalid credentials');
       }
@@ -45,7 +45,7 @@ function Login() {
 
   const studentLoginStatus = localStorage.getItem('studentLoginStatus');
   if (studentLoginStatus === 'true') {
-    window.location.href = '/student-dashboard';
+    window.location.href = '/';
   }
   return (
     <div className="container">
