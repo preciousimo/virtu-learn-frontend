@@ -23,8 +23,6 @@ function CourseDetail() {
     const [avgRating, setAdvRating] = useState(0);
     let { course_id } = useParams();
     const studentId = localStorage.getItem('studentId');
-    console.log('Student ID:', studentId);
-    console.log('Course ID:', course_id);
 
     useEffect(() => {
         // Fetch Courses
