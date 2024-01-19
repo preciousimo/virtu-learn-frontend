@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 
 function RecCourses() {
     useEffect(() => {
-        document.title = 'Recommended Subjects'
+        document.title = 'Recommended Courses'
     }, [])
     return (
         <div className='container mt-4'>
@@ -14,7 +14,7 @@ function RecCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Recommended Subjects</h5>
+                        <h5 className='card-header'>Recommended Courses</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>

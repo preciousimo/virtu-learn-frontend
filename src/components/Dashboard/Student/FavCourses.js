@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 
 function FavCourses() {
     useEffect(() => {
-        document.title = 'Favorite Subjects'
+        document.title = 'Favorite Courses'
     }, [])
     return (
         <div className='container mt-4'>
@@ -14,7 +14,7 @@ function FavCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Favorite Subjects</h5>
+                        <h5 className='card-header'>Favorite Courses</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
