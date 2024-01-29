@@ -1,11 +1,30 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
-function RecCourses() {
+const baseUrl = 'http://127.0.0.1:8000/api';
+
+function RecommendedCourses() {
     useEffect(() => {
-        document.title = 'Recommended Courses'
+        document.title = 'My Courses'
     }, [])
+
+    const [courseData, setCourseData] = useState([]);
+    const studentId = localStorage.getItem('studentId');
+
+    useEffect(() => {
+        try {
+            axios.get(`${baseUrl}/fetch-recommended-courses/${studentId}`)
+                .then((res) => {
+                    setCourseData(res.data);
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
     return (
         <div className='container mt-4'>
             <div className='row'>
@@ -14,26 +33,23 @@ function RecCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Recommended Courses</h5>
+                        <h5 className='card-header'>My Courses</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>Created By</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Python</td>
-                                        <td><Link to="/">John Doe</Link></td>
-                                        <td>
-                                            <a href='#' className='btn btn-sm btn-primary'>View</a>
-                                            <a href='#' className='btn btn-sm btn-secondary'>Edit</a>
-                                            <a href='#' className='btn btn-sm btn-danger'>Delete</a>
-                                        </td>
-                                    </tr>
+                                    {courseData.map((row, index) => (
+                                        <tr>
+                                            <td><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></td>
+                                            <td>{row.course.techs}</td>
+                                        </tr>
+                                    )
+                                    )}
                                 </tbody>
                             </table>
                         </div>
@@ -44,4 +60,4 @@ function RecCourses() {
     )
 }
 
-export default RecCourses
+export default RecommendedCourses
