@@ -40,6 +40,7 @@ import TeacherCourses from './Dashboard/Teacher/TeacherCourses';
 import EnrolledStudents from './Dashboard/Teacher/EnrolledStudents';
 import TeacherProfileSetting from './Dashboard/Teacher/TeacherProfileSetting';
 import StudentList from './Dashboard/Teacher/StudentList';
+import AddAssignment from './Dashboard/Teacher/AddAssignment';
 import TeacherSkillCourses from './Dashboard/Teacher/TeacherSkillCourses';
 
 
@@ -76,6 +77,7 @@ function Main() {
           <Route path='/add-courses' element={<AddCourses />}/> 
           <Route path='/edit-course/:course_id' element={<EditCourse />}/> 
           <Route path='/add-chapter/:course_id' element={<AddChapter />}/> 
+          <Route path='/add-assignment/:teacher_id/:student_id' element={<AddAssignment />}/> 
           <Route path='/edit-chapter/:chapter_id' element={<EditChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 

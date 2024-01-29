@@ -41,6 +41,7 @@ function StudentList() {
                                         <th>Email</th>
                                         <th>Username</th>
                                         <th>Interested Categories</th>
+                                        <th>Assignment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,6 +51,10 @@ function StudentList() {
                                         <td>{row.student.email}</td>
                                         <td>{row.student.username}</td>
                                         <td>{row.student.interested_categories}</td>
+                                        <td>
+                                            <Link to='#' className='btn btn-sm btn-warning'>Assignments</Link>
+                                            <Link to={`/add-assignment/${teacherId}/${row.student.id}`} className='btn btn-sm btn-success ms-1'>Add Assignment</Link>
+                                        </td>
                                     </tr>
                                     )
                                     )}
