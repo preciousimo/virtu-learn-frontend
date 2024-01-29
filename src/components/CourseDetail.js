@@ -20,6 +20,7 @@ function CourseDetail() {
     const [studentLoginStatus, setStudentLoginStatus] = useState([]);
     const [enrollStatus, setEnrollStatus] = useState([]);
     const [ratingStatus, setRatingStatus] = useState([]);
+    const [favouriteStatus, setFavouriteStatus] = useState([]);
     const [avgRating, setAdvRating] = useState(0);
     let { course_id } = useParams();
     const studentId = localStorage.getItem('studentId');
@@ -34,7 +35,7 @@ function CourseDetail() {
                     setTeacherData(res.data.teacher);
                     setRelatedCourseData(JSON.parse(res.data.related_videos));
                     setTechListData(res.data.tech_list);
-                    if(res.data.course_rating!='' && res.data.course_rating!=null){
+                    if (res.data.course_rating != '' && res.data.course_rating != null) {
                         setAdvRating(res.data.course_rating)
                     }
                 });
@@ -60,6 +61,20 @@ function CourseDetail() {
                 .then((res) => {
                     if (res.data.bool == true) {
                         setRatingStatus('success');
+                    }
+                });
+        } catch (err) {
+            console.error(err);
+        }
+
+        // Fetch favourite status
+        try {
+            axios.get(`${baseUrl}/fetch-favourite-status/${studentId}/${course_id}`)
+                .then((res) => {
+                    if (res.data.bool == true) {
+                        setFavouriteStatus('success');
+                    } else{
+                        setFavouriteStatus('');
                     }
                 });
         } catch (err) {
@@ -95,6 +110,68 @@ function CourseDetail() {
                         showConfirmButton: false
                     });
                     setEnrollStatus('success');
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    // Mark as favourite course
+    const markAsFavourite = () => {
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', studentId);
+        _formData.append('status', true);
+
+        try {
+            axios.post(`${baseUrl}/student-add-favourite-course/`, _formData, {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                },
+            }).then((res) => {
+                if (res.status === 200 || res.status === 201) {
+                    Swal.fire({
+                        title: 'This course has been added in your wish list',
+                        icon: 'success',
+                        toast: true,
+                        timer: 5000,
+                        position: 'top-right',
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                    setFavouriteStatus('success');
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    // Remove from favourite course
+    const removeFavourite = () => {
+        const _formData = new FormData();
+        _formData.append('course', course_id);
+        _formData.append('student', studentId);
+        _formData.append('status', true);
+
+        try {
+            axios.post(`${baseUrl}/student-remove-favourite-course/${course_id}/${studentId}`, {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                },
+            }).then((res) => {
+                if (res.status === 200 || res.status === 201) {
+                    Swal.fire({
+                        title: 'This course has been removed from your wish list',
+                        icon: 'success',
+                        toast: true,
+                        timer: 5000,
+                        position: 'top-right',
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                    setFavouriteStatus('');
                 }
             });
         } catch (err) {
@@ -217,6 +294,16 @@ function CourseDetail() {
                     {
                         studentLoginStatus === 'success' && enrollStatus !== 'success' &&
                         <p><button onClick={enrollCourse} type='button' className='btn btn-success'>Enroll in this course</button></p>
+
+                    }
+                    {
+                        studentLoginStatus === 'success' && favouriteStatus !== 'success' &&
+                        <p><button onClick={markAsFavourite} title='Add in your favourite course list' type='button' className='btn btn-outline-danger'><i className='fas fa-heart'></i></button></p>
+
+                    }
+                    {
+                        studentLoginStatus === 'success' && favouriteStatus === 'success' &&
+                        <p><button onClick={removeFavourite} title='Remove from your favourite course list' type='button' className='btn btn-danger'><i className='fas fa-heart'></i></button></p>
 
                     }
                     {
