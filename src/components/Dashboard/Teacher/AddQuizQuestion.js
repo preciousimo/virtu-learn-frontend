@@ -6,55 +6,42 @@ import Swal from 'sweetalert2'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
-function AddChapter() {
+function AddQuizQuestion() {
     useEffect(() => {
-        document.title = 'Add Chapter';
+        document.title = 'Add Quiz Question';
     }, []);
 
-    const [chapterData, setChapterData] = useState({
-        title: '',
-        description: '',
-        video: '',
-        remarks: '',
+    const [questionData, setQuestionData] = useState({
+        quiz: '',
+        question: '',
+        ans1: '',
+        ans2: '',
+        ans3: '',
+        ans4: '',
+        right_ans: '',
     });
 
     const handleChange = (e) => {
-        setChapterData({
-            ...chapterData,
+        setQuestionData({
+            ...questionData,
             [e.target.name]: e.target.value,
         });
     };
 
-    const handleFileChange = (e) => {
-        window.URL = window.URL || window.webkitURL;
-        var video = document.createElement('video');
-        video.preload = 'metadata';
-        video.onloadedmetadata = function () {
-            window.URL.revokeObjectURL(video.src);
-            setVideoDuration(video.duration);
-        }
-        video.src = URL.createObjectURL(e.target.files[0]);
-        
-        setChapterData({
-            ...chapterData,
-            [e.target.name]: e.target.files[0],
-        });
-    };
-
-    const { course_id } = useParams();
-    const [videoDuration, setVideoDuration]=useState();
+    const { quiz_id } = useParams();
 
     const formSubmit = () => {
         const _formData = new FormData();
-        _formData.append('course', course_id);
-        _formData.append('title', chapterData.title);
-        _formData.append('description', chapterData.description);
-        _formData.append('video', chapterData.video, chapterData.video.name);
-        _formData.append('video_duration', videoDuration);
-        _formData.append('remarks', chapterData.remarks);
+        _formData.append('quiz', quiz_id);
+        _formData.append('question', questionData.question);
+        _formData.append('ans1', questionData.ans1);
+        _formData.append('ans2', questionData.ans2);
+        _formData.append('ans3', questionData.ans3);
+        _formData.append('ans4', questionData.ans4);
+        _formData.append('right_ans', questionData.right_ans);
 
         try {
-            axios.post(`${baseUrl}/course-chapters/${course_id}`, _formData, {
+            axios.post(`${baseUrl}/quiz-questions/${quiz_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -90,7 +77,7 @@ function AddChapter() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>Add Chapter</h5>
+                        <h5 className='card-header'>Add Quiz</h5>
                         <div className='card-body'>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
@@ -105,35 +92,59 @@ function AddChapter() {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="description" className="form-label">Description</label>
-                                    <textarea
-                                        className="form-control"
-                                        id="description"
-                                        name="description"
-                                        value={chapterData.description}
-                                        onChange={handleChange}
-                                    ></textarea>
-                                </div>
-                                <div className="mb-3">
-                                    <label htmlFor="video" className="form-label">Video</label>
+                                    <label htmlFor="title" className="form-label">Ans 1</label>
                                     <input
-                                        type="file"
+                                        type='text'
                                         className="form-control"
-                                        id="video"
-                                        name="video"
-                                        onChange={handleFileChange}
+                                        id="ans1"
+                                        name="ans1"
+                                        onChange={handleChange}
+                                        rows="3"
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="remarks" className="form-label">Remarks</label>
-                                    <textarea
+                                    <label htmlFor="title" className="form-label">Ans 2</label>
+                                    <input
+                                        type='text'
                                         className="form-control"
-                                        id="remarks"
-                                        name="remarks"
-                                        value={chapterData.remarks}
+                                        id="ans2"
+                                        name="ans2"
                                         onChange={handleChange}
                                         rows="3"
-                                    ></textarea>
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="title" className="form-label">Ans 3</label>
+                                    <input
+                                        type='text'
+                                        className="form-control"
+                                        id="ans3"
+                                        name="ans3"
+                                        onChange={handleChange}
+                                        rows="3"
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="title" className="form-label">Ans 4</label>
+                                    <input
+                                        type='text'
+                                        className="form-control"
+                                        id="ans4"
+                                        name="ans4"
+                                        onChange={handleChange}
+                                        rows="3"
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="title" className="form-label">Right Answer</label>
+                                    <input
+                                        type='text'
+                                        className="form-control"
+                                        id="right_ans"
+                                        name="right_ans"
+                                        onChange={handleChange}
+                                        rows="3"
+                                    />
                                 </div>
                                 <button type='submit' className='btn btn-secondary'>Submit</button>
                             </form>
@@ -145,4 +156,4 @@ function AddChapter() {
     );
 }
 
-export default AddChapter;
+export default AddQuizQuestion;
