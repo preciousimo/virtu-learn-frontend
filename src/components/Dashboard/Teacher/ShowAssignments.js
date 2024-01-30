@@ -42,12 +42,21 @@ function ShowAssignments() {
                                 <thead>
                                     <tr>
                                         <th>Title</th>
+                                        <th>Student Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {Array.isArray(assignmentData) && assignmentData.map((assignment, index) => (
                                         <tr key={assignment.id}>
                                             <td>{assignment.title}</td>
+                                            <td>
+                                                {assignment.student_status === false &&
+                                                    <span className='badge bg-warning'>Pening</span>
+                                                }
+                                                {assignment.student_status === true &&
+                                                    <span className='badge bg-success'>Completed</span>
+                                                }
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
