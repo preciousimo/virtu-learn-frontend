@@ -28,6 +28,8 @@ import FavCourses from './Dashboard/Student/FavCourses';
 import RecCourses from './Dashboard/Student/RecCourses';
 import ProfileSetting from './Dashboard/Student/ProfileSetting';
 import ChangePassword from './Dashboard/Student/ChangePassword';
+import StudentAssignments from './Dashboard/Student/StudentAssignments';
+
 
 import TeacherDashboard from './Dashboard/Teacher/TeacherDashboard';
 import AddCourses from './Dashboard/Teacher/AddCourses';
@@ -80,6 +82,7 @@ function Main() {
           <Route path='/add-chapter/:course_id' element={<AddChapter />}/> 
           <Route path='/add-assignment/:teacher_id/:student_id' element={<AddAssignment />}/> 
           <Route path='/show-assignment/:teacher_id/:student_id' element={<ShowAssignments />}/> 
+          <Route path='/my-assignments' element={<StudentAssignments />}/> 
           <Route path='/edit-chapter/:chapter_id' element={<EditChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
