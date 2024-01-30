@@ -21,6 +21,7 @@ function EditCourse() {
         techs: '',
     });
 
+    const teacherId = localStorage.getItem('teacherId')
     const { course_id } = useParams();
 
     useEffect(() => {
@@ -67,7 +68,7 @@ function EditCourse() {
     const formSubmit = () => {
         const _formData = new FormData();
         _formData.append('category', courseData.category);
-        _formData.append('teacher', 1);
+        _formData.append('teacher', teacherId);
         _formData.append('title', courseData.title);
         _formData.append('description', courseData.description);
         if(courseData.f_img!=''){

@@ -48,6 +48,7 @@ import TeacherSkillCourses from './Dashboard/Teacher/TeacherSkillCourses';
 
 import AddQuiz from './Dashboard/Teacher/AddQuiz';
 import AllQuiz from './Dashboard/Teacher/AllQuiz';
+import EditQuiz from './Dashboard/Teacher/EditQuiz';
 
 
 function Main() {
@@ -88,6 +89,7 @@ function Main() {
           <Route path='/my-assignments' element={<StudentAssignments />}/> 
           <Route path='/quiz' element={<AllQuiz />}/>
           <Route path='/add-quiz' element={<AddQuiz />}/>
+          <Route path='/edit-quiz/:quiz_id' element={<EditQuiz />}/>
           <Route path='/edit-chapter/:chapter_id' element={<EditChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 

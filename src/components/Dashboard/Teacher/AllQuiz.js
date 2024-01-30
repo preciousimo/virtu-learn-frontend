@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
@@ -11,6 +12,7 @@ function AllQuiz() {
     }, [])
 
     const [quizData, setQuizData]=useState([]);
+    const [totalResult, setTotalResult] = useState(0);
     const teacherId = localStorage.getItem('teacherId');
 
     useEffect(() => {
@@ -23,6 +25,38 @@ function AllQuiz() {
             console.log(err);
         }
     }, []);
+
+    const handleDeleteClick = (quiz_id) => {
+        Swal.fire({
+            title: 'Confirm!',
+            text: 'Are you sure you want to delete?',
+            icon: 'info',
+            confirmButtonText: 'Continue',
+            showCancelButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                try {
+                    axios.delete(baseUrl + '/quiz/' + quiz_id)
+                        .then((res) => {
+                            Swal.fire('success', 'Data has been deleted.');
+                            try{
+                                axios.delete(baseUrl + '/teacher-quiz/' + teacherId)
+                                .then((res) => {
+                                    setTotalResult(res.data.length);
+                                    setQuizData(res.data);
+                                });
+                            }catch (error) {
+                                console.log(error)
+                            }
+                        });
+                } catch (error) {
+                    Swal.fire('error', 'Data has not been deleted!!');
+                }
+            } else {
+                Swal.fire('error', 'Data has not been deleted!!');
+            }
+        });
+    };
 
     return (
         <div className='container mt-4'>
@@ -51,8 +85,8 @@ function AllQuiz() {
                                         <td><Link to='#'>123</Link></td>
                                         <td>
                                             <Link className='btn btn-sm btn-success ms-2' to={`/add-quiz-question/${quiz.id}`}>Add Question</Link>
-                                            <Link className='btn btn-sm btn-warning ms-2' to='#'>Edit</Link>
-                                            <button className='btn btn-sm btn-danger ms-2'>Delete</button>
+                                            <Link className='btn btn-sm btn-warning ms-2' to={`/edit-quiz/${quiz.id}`}>Edit</Link>
+                                            <button onClick={() => handleDeleteClick(quiz.id)} className='btn btn-sm btn-danger ms-2'>Delete</button>
                                         </td>
                                     </tr>
                                     )
