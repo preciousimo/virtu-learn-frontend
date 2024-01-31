@@ -50,6 +50,8 @@ import AddQuiz from './Dashboard/Teacher/AddQuiz';
 import AllQuiz from './Dashboard/Teacher/AllQuiz';
 import EditQuiz from './Dashboard/Teacher/EditQuiz';
 import QuizQuestions from './Dashboard/Teacher/QuizQuestions';
+import AddQuizQuestion from './Dashboard/Teacher/AddQuizQuestion';
+import AssignQuiz from './Dashboard/Teacher/AssignQuiz';
 
 
 function Main() {
@@ -85,6 +87,7 @@ function Main() {
           <Route path='/add-courses' element={<AddCourses />}/> 
           <Route path='/edit-course/:course_id' element={<EditCourse />}/> 
           <Route path='/add-chapter/:course_id' element={<AddChapter />}/> 
+
           <Route path='/add-assignment/:teacher_id/:student_id' element={<AddAssignment />}/> 
           <Route path='/show-assignment/:teacher_id/:student_id' element={<ShowAssignments />}/> 
           <Route path='/my-assignments' element={<StudentAssignments />}/> 
@@ -92,6 +95,9 @@ function Main() {
           <Route path='/add-quiz' element={<AddQuiz />}/>
           <Route path='/edit-quiz/:quiz_id' element={<EditQuiz />}/>
           <Route path='/all-questions/:quiz_id' element={<QuizQuestions />}/>
+          <Route path='/add-questions/:quiz_id' element={<AddQuizQuestion />}/>
+          <Route path='/assign-quiz/:course_id' element={<AssignQuiz />}/>
+
           <Route path='/edit-chapter/:chapter_id' element={<EditChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
