@@ -53,6 +53,9 @@ import QuizQuestions from './Dashboard/Teacher/QuizQuestions';
 import AddQuizQuestion from './Dashboard/Teacher/AddQuizQuestion';
 import AssignQuiz from './Dashboard/Teacher/AssignQuiz';
 
+import CourseQuizList from './Dashboard/Student/CourseQuizList';
+import TakeQuiz from './Dashboard/Student/TakeQuiz';
+
 
 function Main() {
   return ( 
@@ -97,6 +100,9 @@ function Main() {
           <Route path='/all-questions/:quiz_id' element={<QuizQuestions />}/>
           <Route path='/add-questions/:quiz_id' element={<AddQuizQuestion />}/>
           <Route path='/assign-quiz/:course_id' element={<AssignQuiz />}/>
+
+          <Route path='/course-quiz/:course_id' element={<CourseQuizList />}/>
+          <Route path='/take-quiz/:quiz_id' element={<TakeQuiz />}/>
 
           <Route path='/edit-chapter/:chapter_id' element={<EditChapter />}/> 
           <Route path='/teacher-students' element={<StudentList />}/> 

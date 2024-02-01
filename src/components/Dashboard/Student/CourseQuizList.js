@@ -6,15 +6,14 @@ import Swal from 'sweetalert2'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
-function MyCourses() {
-    useEffect(() => {
-        document.title = 'My Courses'
-    }, [])
+function CourseQuizList() {
 
     const [courseData, setCourseData] = useState([]);
     const studentId = localStorage.getItem('studentId');
 
     useEffect(() => {
+        document.title = 'Quiz List'
+
         try {
             axios.get(`${baseUrl}/fetch-enrolled-courses/${studentId}`)
                 .then((res) => {
@@ -33,25 +32,24 @@ function MyCourses() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>My Courses</h5>
+                        <h5 className='card-header'>Quiz List</h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Created By</th>
                                         <th>Quiz</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {courseData.map((row, index) => (
-                                        <tr>
-                                            <td><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></td>
-                                            <td><Link to={`/teacher-detail/${row.course.teacher.id}`}>{row.course.teacher.name}</Link></td>
-                                            <td><Link className='btn btn-sm btn-warning' to={`/course-quiz/${row.course.id}`}>Quiz List</Link></td>
-                                        </tr>
-                                    )
-                                    )}
+                                    <tr>
+                                        <td>Python Quiz</td>
+                                        <td className='text-success'>Attempted</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Django Quiz</td>
+                                        <td><Link className='btn btn-sm btn-warning' to={`/take-quiz/1`}>Take Quiz</Link></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -62,4 +60,4 @@ function MyCourses() {
     )
 }
 
-export default MyCourses
+export default CourseQuizList
