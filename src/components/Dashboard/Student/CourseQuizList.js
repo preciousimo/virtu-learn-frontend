@@ -2,22 +2,22 @@ import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios'
-import Swal from 'sweetalert2'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CourseQuizList() {
 
-    const [courseData, setCourseData] = useState([]);
+    const [quizData, setQuizData] = useState([]);
     const studentId = localStorage.getItem('studentId');
+    const {course_id}=useParams();
 
     useEffect(() => {
         document.title = 'Quiz List'
 
         try {
-            axios.get(`${baseUrl}/fetch-enrolled-courses/${studentId}`)
+            axios.get(`${baseUrl}/fetch-assigned-quiz/${course_id}`)
                 .then((res) => {
-                    setCourseData(res.data);
+                    setQuizData(res.data);
                 });
         } catch (err) {
             console.log(err);
@@ -42,14 +42,12 @@ function CourseQuizList() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Python Quiz</td>
-                                        <td className='text-success'>Attempted</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Django Quiz</td>
-                                        <td><Link className='btn btn-sm btn-warning' to={`/take-quiz/1`}>Take Quiz</Link></td>
-                                    </tr>
+                                    {quizData.map((row, index) =>
+                                        <tr>
+                                            <td>{row.quiz.title}</td>
+                                            <td><Link className='btn btn-sm btn-warning' to={`/take-quiz/${row.quiz.id}`}>Take Quiz</Link></td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>
