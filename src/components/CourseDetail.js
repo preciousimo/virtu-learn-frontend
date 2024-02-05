@@ -236,7 +236,7 @@ function CourseDetail() {
                     <p>{courseData.description}</p>
                     <p className='fw-bold'>Subject By: {courseData.teacher ? <Link to={`/teacher-detail/${courseData.teacher.id}`}>{courseData.teacher.name}</Link> : 'Unknown Teacher'}</p>
                     {/* <p className='fw-bold'>Subject By: <Link to=''>{teacherData.name}</Link></p> */}
-                    <p className='fw-bold'>Techs:&nbsp;
+                    <p className='fw-bold'>Technologies:&nbsp;
                         {Array.isArray(techListData) && techListData.map((tech, index) => (
                             <Link to={`/category/${tech.trim()}`} className='badge badge-pill text-dark bg-warning ml-1'>{tech}</Link>
                         ))}

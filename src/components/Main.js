@@ -55,6 +55,7 @@ import AssignQuiz from './Dashboard/Teacher/AssignQuiz';
 
 import CourseQuizList from './Dashboard/Student/CourseQuizList';
 import TakeQuiz from './Dashboard/Student/TakeQuiz';
+import Search from './Search';
 
 
 function Main() {
@@ -65,6 +66,7 @@ function Main() {
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
           <Route path='/detail/:course_id' element={<CourseDetail />}/>
+          <Route path='/search/:searchstring' element={<Search />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
           <Route path='/all-courses' element={<AllCourses />}/>
           <Route path='/all-chapters/:course_id' element={<AllChapters />}/>
@@ -108,7 +110,6 @@ function Main() {
           <Route path='/teacher-students' element={<StudentList />}/> 
           <Route path='/teacher-profile-setting' element={<TeacherProfileSetting />}/> 
           <Route path='/teacher-change-password' element={<TeacherChangePassword />}/> 
-
 
         </Switch>
         <Footer />

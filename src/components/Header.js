@@ -1,8 +1,27 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const [searchString, setSearchString] = useState({
+    'search':''
+  });
+
   const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
   const studentLoginStatus = localStorage.getItem('studentLoginStatus')
+
+  const handleChange = (e) => {
+    setSearchString({
+        ...searchString,
+        [e.target.name]: e.target.value,
+    });
+};
+
+  const searchCourse = () => {
+    if (searchString.search!=''){
+      window.location.href = '/search/'+searchString.search
+    }
+    
+  }
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
@@ -13,14 +32,18 @@ function Header() {
           aria-label='Toggle navigation'>
           <spam className="navbar-toggler-icon"></spam>
         </button>
+        <form class="d-flex" role="search">
+          <input name='search' onChange={handleChange} class="form-control me-2" type="search" placeholder="Search by course title OR Technology" aria-label="Search" />
+          <button onClick={searchCourse} class="btn btn-warning" type="button">Search</button>
+        </form>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>
             <Link className='nav-link active' aria-current='page' to='/'>Home</Link>
             <Link className='nav-link' to='/all-courses'>Subjects</Link>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" type="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" type="button" to="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Teacher
-              </a>
+              </Link>
               <ul className="dropdown-menu">
                 {teacherLoginStatus != 'true' &&
                   <>
@@ -37,9 +60,9 @@ function Header() {
               </ul>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" type="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" type="button" to="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User
-              </a>
+              </Link>
               <ul className="dropdown-menu">
                 {studentLoginStatus != 'true' &&
                   <>
