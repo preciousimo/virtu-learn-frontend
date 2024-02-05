@@ -7,14 +7,13 @@ import Swal from 'sweetalert2'
 const baseUrl = 'http://127.0.0.1:8000/api';
 
 function RecommendedCourses() {
-    useEffect(() => {
-        document.title = 'My Courses'
-    }, [])
 
     const [courseData, setCourseData] = useState([]);
     const studentId = localStorage.getItem('studentId');
 
     useEffect(() => {
+        document.title = 'Recommended Courses'
+
         try {
             axios.get(`${baseUrl}/fetch-recommended-courses/${studentId}`)
                 .then((res) => {
@@ -45,8 +44,8 @@ function RecommendedCourses() {
                                 <tbody>
                                     {courseData.map((row, index) => (
                                         <tr>
-                                            <td><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></td>
-                                            <td>{row.course.techs}</td>
+                                            {/* <td><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></td> */}
+                                            <td>{row.course}</td>
                                         </tr>
                                     )
                                     )}

@@ -11,7 +11,7 @@ function Sidebar() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/student/fetch-all-notifications/${studentId}/`)
+      axios.get(`${baseUrl}/student/fetch-all-notifications/${studentId}`)
         .then((res) => {
           setNotifData(res.data);
         });

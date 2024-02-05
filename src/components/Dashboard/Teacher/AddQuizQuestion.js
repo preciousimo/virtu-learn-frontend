@@ -81,12 +81,12 @@ function AddQuizQuestion() {
                         <div className='card-body'>
                             <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
-                                    <label htmlFor="title" className="form-label">Title</label>
+                                    <label htmlFor="question" className="form-label">Title</label>
                                     <input
                                         type='text'
                                         className="form-control"
-                                        id="title"
-                                        name="title"
+                                        id="question"
+                                        name="question"
                                         onChange={handleChange}
                                         rows="3"
                                     />

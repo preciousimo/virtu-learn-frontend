@@ -1,6 +1,7 @@
 import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import CheckQuizStatusForStudent from '../Teacher/CheckQuizStatusForStudent';
 import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
@@ -43,9 +44,9 @@ function CourseQuizList() {
                                 </thead>
                                 <tbody>
                                     {quizData.map((row, index) =>
-                                        <tr>
+                                        <tr key={row.id}>
                                             <td>{row.quiz.title}</td>
-                                            <td><Link className='btn btn-sm btn-warning' to={`/take-quiz/${row.quiz.id}`}>Take Quiz</Link></td>
+                                            <CheckQuizStatusForStudent quiz={row.quiz.id} student={studentId} />
                                         </tr>
                                     )}
                                 </tbody>
