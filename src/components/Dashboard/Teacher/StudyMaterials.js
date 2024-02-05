@@ -81,7 +81,7 @@ function StudyMaterials() {
                                         <tr key={row.id}>
                                             <td><Link to={'/edit-study/' + row.id}>{row.title}</Link></td>
                                             <td>
-                                                <Link to={row.upload} >Files</Link>
+                                                <Link to={row.upload} className='btn btn-outline-primary'>Files</Link>
                                             </td>
                                             <td>{row.remarks}</td>
                                             <td style={{ whiteSpace: 'nowrap' }}>

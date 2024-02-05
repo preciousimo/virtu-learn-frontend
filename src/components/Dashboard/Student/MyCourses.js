@@ -34,10 +34,10 @@ function MyCourses() {
                 <section className='col-md-9'>
                     <div className='card'>
                         <h5 className='card-header'>My Courses</h5>
-                        <div className='card-body'>
-                            <table className='table table-bordered'>
+                        <div className='card-body' style={{ overflowX: 'auto' }}>
+                            <table className='table table-bordered' style={{ tableLayout: 'auto' }}>
                                 <thead>
-                                    <tr>
+                                    <tr style={{ whiteSpace: 'nowrap' }}>
                                         <th>Name</th>
                                         <th>Created By</th>
                                         <th>Quiz</th>
@@ -47,8 +47,13 @@ function MyCourses() {
                                     {courseData.map((row, index) => (
                                         <tr>
                                             <td><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></td>
-                                            <td><Link to={`/teacher-detail/${row.course.teacher.id}`}>{row.course.teacher.name}</Link></td>
-                                            <td><Link className='btn btn-sm btn-warning' to={`/course-quiz/${row.course.id}`}>Quiz List</Link></td>
+                                            <td style={{ whiteSpace: 'nowrap' }}><Link to={`/teacher-detail/${row.course.teacher.id}`}>{row.course.teacher.name}</Link></td>
+                                            <td style={{ whiteSpace: 'nowrap' }}>
+                                                <div className="btn-group">
+                                                    <Link className='btn btn-sm btn-warning' to={`/course-quiz/${row.course.id}`}>Quiz List</Link>
+                                                    <Link className='btn btn-sm btn-primary ms-1' to={`/student/study-materials/${row.course.id}`}>Study Material</Link>
+                                                </div>
+                                            </td>
                                         </tr>
                                     )
                                     )}
