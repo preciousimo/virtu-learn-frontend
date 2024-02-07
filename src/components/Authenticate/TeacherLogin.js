@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -11,7 +10,7 @@ function TeacherLogin() {
   });
 
   const [errorMsg, setErrorMsg] = useState('');
-  const [showPassword, setShowPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     document.title = 'Teacher Login'
@@ -64,13 +63,7 @@ function TeacherLogin() {
     } catch (err) {
       console.log(err);
     }
-};
-
-
-  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus');
-  if(teacherLoginStatus === 'true'){
-    window.location.href = '/teacher-dashboard';
-  }
+  };
 
   return (
     <div className="container">

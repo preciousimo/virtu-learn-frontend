@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
+
 function TeacherRegister() {
+  useEffect(() => {
+    document.title = 'Teacher Register'
+  });
+
   const [teacherData, setTeacherData] = useState({
     'name': '',
     'email': '',
@@ -51,12 +55,7 @@ function TeacherRegister() {
         console.log(err);
         setTeacherData({'status': 'error'});
     }
-
   };
-  
-  useEffect(() => {
-    document.title = 'Teacher Register'
-  });
 
   const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
   if(teacherLoginStatus === 'true'){
