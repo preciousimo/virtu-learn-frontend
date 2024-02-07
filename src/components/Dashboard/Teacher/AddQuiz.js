@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import TeacherSidebar from './TeacherSidebar'
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import TeacherSidebar from './TeacherSidebar';
+import axios from 'axios';
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
@@ -14,7 +14,7 @@ function AddQuiz() {
         detail: '',
     });
 
-    const teacherId = localStorage.getItem('teacherId')
+    const teacherId = localStorage.getItem('teacherId');
 
     const handleChange = (e) => {
         setQuizData({
@@ -23,25 +23,20 @@ function AddQuiz() {
         });
     };
 
-    const formSubmit = () => {
+    const formSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
         const _formData = new FormData();
         _formData.append('teacher', teacherId);
         _formData.append('title', quizData.title);
         _formData.append('detail', quizData.detail);
 
-        try {
-            axios.post(`${baseUrl}/quiz/`, _formData, {
-            }).then((res) => {
+        axios.post(`${baseUrl}/quiz/`, _formData)
+            .then((res) => {
                 window.location.href = '/add-quiz';
+            })
+            .catch((err) => {
+                console.error(err); // Handle errors appropriately
             });
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        formSubmit();
     };
 
     return (
@@ -54,7 +49,7 @@ function AddQuiz() {
                     <div className='card'>
                         <h5 className='card-header'>Add Quiz</h5>
                         <div className='card-body'>
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={formSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
                                     <input
@@ -62,8 +57,8 @@ function AddQuiz() {
                                         className="form-control"
                                         id="title"
                                         name="title"
+                                        value={quizData.title}
                                         onChange={handleChange}
-                                        rows="3"
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -72,6 +67,7 @@ function AddQuiz() {
                                         className="form-control"
                                         id="detail"
                                         name="detail"
+                                        value={quizData.detail}
                                         onChange={handleChange}
                                     ></textarea>
                                 </div>

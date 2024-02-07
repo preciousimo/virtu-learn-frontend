@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import TeacherSidebar from './TeacherSidebar'
-import axios from 'axios'
-import Swal from 'sweetalert2'
+import TeacherSidebar from './TeacherSidebar';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
@@ -16,15 +16,17 @@ function QuizQuestions() {
     const { quiz_id } = useParams();
 
     useEffect(() => {
-        try {
-            axios.get(baseUrl + '/quiz-questions/' + quiz_id)
-                .then((res) => {
-                    setTotalResult(res.data.length);
-                    setQuestionData(res.data);
-                });
-        } catch (err) {
-            console.error(err);
-        }
+        const fetchQuizQuestions = async () => {
+            try {
+                const response = await axios.get(baseUrl + '/quiz-questions/' + quiz_id);
+                setTotalResult(response.data.length);
+                setQuestionData(response.data);
+            } catch (error) {
+                console.error('Error fetching quiz questions:', error);
+            }
+        };
+
+        fetchQuizQuestions();
     }, [quiz_id]);
 
     const handleDeleteClick = (question_id) => {
@@ -33,23 +35,19 @@ function QuizQuestions() {
             text: 'Are you sure you want to delete?',
             icon: 'info',
             confirmButtonText: 'Continue',
-            showCancelButton: true
-        }).then((result) => {
+            showCancelButton: true,
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    axios.delete(baseUrl + '/question/' + question_id)
-                        .then((res) => {
-                            Swal.fire('success', 'Data has been deleted.');
-                            try{
-                                axios.delete(baseUrl + '/quiz-questions/' + quiz_id)
-                                .then((res) => {
-                                    setTotalResult(res.data.length);
-                                    setQuestionData(res.data);
-                                });
-                            }catch (error) {
-                                console.log(error)
-                            }
-                        });
+                    await axios.delete(baseUrl + '/question/' + question_id);
+                    Swal.fire('success', 'Data has been deleted.');
+                    try {
+                        const response = await axios.delete(baseUrl + '/quiz-questions/' + quiz_id);
+                        setTotalResult(response.data.length);
+                        setQuestionData(response.data);
+                    } catch (error) {
+                        console.error('Error deleting quiz questions:', error);
+                    }
                 } catch (error) {
                     Swal.fire('error', 'Data has not been deleted!!');
                 }
@@ -67,7 +65,12 @@ function QuizQuestions() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>All Questions ({totalResult}) <Link className='btn btn-success btn-sm float-end' to={`/add-questions/${quiz_id}`}>Add Questions</Link></h5>
+                        <h5 className='card-header'>
+                            All Questions ({totalResult}){' '}
+                            <Link className='btn btn-success btn-sm float-end' to={`/add-questions/${quiz_id}`}>
+                                Add Questions
+                            </Link>
+                        </h5>
                         <div className='card-body'>
                             <table className='table table-bordered'>
                                 <thead>
@@ -77,24 +80,30 @@ function QuizQuestions() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Array.isArray(questionData) && questionData.map((question, index) => (
-                                        <tr key={question.id}>
-                                            <td><Link to={'/edit-question/' + question.id}>{question.question}</Link></td>
-                                            <td>
-                                                <Link to={'/edit-question/' + question.id} className='btn btn-sm btn-info'><i className="bi bi-pencil-square"></i></Link>
-                                                <button onClick={() => handleDeleteClick(question.id)} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {Array.isArray(questionData) &&
+                                        questionData.map((question, index) => (
+                                            <tr key={question.id}>
+                                                <td>
+                                                    <Link to={'/edit-question/' + question.id}>{question.question}</Link>
+                                                </td>
+                                                <td>
+                                                    <Link to={'/edit-question/' + question.id} className='btn btn-sm btn-info'>
+                                                        <i className='bi bi-pencil-square'></i>
+                                                    </Link>
+                                                    <button onClick={() => handleDeleteClick(question.id)} className='btn btn-sm btn-danger ms-1'>
+                                                        <i className='bi bi-trash'></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-    )
+    );
 }
 
-export default QuizQuestions
+export default QuizQuestions;

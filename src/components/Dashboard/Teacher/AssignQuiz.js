@@ -2,23 +2,19 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import CheckQuizInCourse from './CheckQuizInCourse';
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AssignQuiz() {
-    useEffect(() => {
-        document.title = 'Assign Quiz';
-    }, []);
-
     const [quizData, setQuizData] = useState([]);
     const [courseData, setCourseData] = useState({});
     const teacherId = localStorage.getItem('teacherId');
     const { course_id } = useParams();
 
     useEffect(() => {
-        // Fetch quiz data
+        document.title = 'Assign Quiz';
+
         try {
             axios.get(`${baseUrl}/teacher-quiz/${teacherId}`)
                 .then((res) => {
@@ -35,7 +31,7 @@ function AssignQuiz() {
                     setCourseData(res.data);
                 });
         } catch (err) {
-            console.error(err);
+            console.log(err);
         }
 
     }, []);
