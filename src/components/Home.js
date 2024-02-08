@@ -12,6 +12,7 @@ function Home() {
 
   const [courseData, setCourseData] = useState([]);
   const [popularCourseData, setPopularCourseData] = useState([]);
+  const [popularTeacherData, setPopularTeacherData] = useState([]);
 
   useEffect(() => {
     try {
@@ -27,6 +28,15 @@ function Home() {
       axios.get(`${baseUrl}/popular-courses/?popular=1`)
         .then((res) => {
           setPopularCourseData(res.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      axios.get(`${baseUrl}/popular-teachers/?popular=1`)
+        .then((res) => {
+          setPopularTeacherData(res.data);
         });
     } catch (err) {
       console.log(err);
@@ -77,71 +87,28 @@ function Home() {
       </div>
       {/* End popular courses */}
 
-      {/* Featured teachers */}
+      {/* Popular teachers */}
       <h3 className='pb-1 mb-4 mt-5'>Featured Teachers <Link to='/featured-teachers' className='float-end'>See All</Link></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      {popularTeacherData && popularTeacherData.map((teacher, index) =>
         <div class="col">
           <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
+              <Link to={`/teacher-detail/${teacher.id}`}>
+                <img src={teacher.profile_img} height='208' className='card-img-top' alt={teacher.name} />
+              </Link>
             <div class="card-body">
-              <h5 class="card-title"><Link to='/teacher-detail/1'>Mr Precious</Link></h5>
+              <h5 class="card-title"><Link to={`/teacher-detail/${teacher.id}`}>{teacher.name}</Link></h5>
             </div>
             <div className='card-footer'>
               <div className='title'>
-                <span>Rating: 4.5/5</span>
+                <span>Total Courses: {teacher.total_teacher_courses}</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><Link to='/teacher-detail/1'>Mr Ochuko</Link></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><Link to='/teacher-detail/1'>Mr Precious</Link></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href=' '>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </a>
-            <div class="card-body">
-              <h5 class="card-title"><Link to='/teacher-detail/1'>Mr Precious</Link></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
-      {/* Featured teachers */}
+      {/* Popular teachers */}
 
       {/* Student testimonial */}
       <h3 className='pb-1 mb-4 mt-5'>Student Testimonial</h3>
