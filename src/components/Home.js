@@ -19,7 +19,8 @@ function Home() {
     try {
       axios.get(`${baseUrl}/course/?result=4`)
         .then((res) => {
-          setCourseData(res.data);
+          console.log("Course Data:", res.data);
+          setCourseData(res.data.results);
         });
     } catch (err) {
       console.log(err);
@@ -58,7 +59,7 @@ function Home() {
       {/* Latest courses */}
       <h3 className='pb-1 mb-4 mt-5'>Latest Courses <Link to='/all-courses' className='float-end'>See All</Link></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-        {courseData && courseData.map((course, index) =>
+      {courseData && courseData.map((course, index) =>
           <div class="col">
             <div class="card h-100">
               <Link to={`/detail/${course.id}`}>
