@@ -12,6 +12,7 @@ import TeacherDetail from './TeacherDetail';
 
 import AllCourses from './pages/AllCourses';
 import PopularCourses from './pages/PopularCourses';
+import Category from './pages/Category';
 import CategoryCourses from './pages/CategoryCourses';
 import FeaturedTeachers from './pages/FeaturedTeachers';
 
@@ -73,7 +74,8 @@ function Main() {
 
           <Route path='/all-courses' element={<AllCourses />}/>
           <Route path='/popular-courses' element={<PopularCourses />}/>
-          <Route path='/category/:category_slug' element={<CategoryCourses />}/>
+          <Route path='/category' element={<Category />}/>
+          <Route path='/category/:category_id/category_slug' element={<CategoryCourses />}/>
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>
 
           <Route path='/login' element={<Login />}/>
