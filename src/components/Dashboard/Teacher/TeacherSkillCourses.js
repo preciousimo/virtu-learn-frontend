@@ -27,15 +27,15 @@ function TeacherSkillCourses() {
         <div className='container mt-3'>
             {/* Latest subjects */}
             <h3 className='pb-1 mb-4'>{skill_name}</h3>
-            <div class="row mb-4">
+            <div className="row mb-4">
                 {courseData && courseData.map((course, index) =>
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100">
+                    <div className="col-md-3 mb-4">
+                        <div className="card h-100">
                             <Link to={`/detail/${course.id}`}>
                                 <img src={course.featured_img} className='card-img-top' alt={course.title} />
                             </Link>
-                            <div class="card-body">
-                                <h5 class="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
+                            <div className="card-body">
+                                <h5 className="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
                             </div>
                         </div>
                     </div>

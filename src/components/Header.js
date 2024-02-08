@@ -30,11 +30,11 @@ function Header() {
         <button className='navbar-toggler' type='button' data-bs-toggle='collapse'
           data-bs-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false'
           aria-label='Toggle navigation'>
-          <spam className="navbar-toggler-icon"></spam>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <form class="d-flex" role="search">
-          <input name='search' onChange={handleChange} class="form-control me-2" type="search" placeholder="Search by course title OR Technology" aria-label="Search" />
-          <button onClick={searchCourse} class="btn btn-warning" type="button">Search</button>
+        <form className="d-flex" role="search">
+          <input name='search' onChange={handleChange} className="form-control me-2" type="search" placeholder="Search by course title OR Technology" aria-label="Search" />
+          <button onClick={searchCourse} className="btn btn-warning" type="button">Search</button>
         </form>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav ms-auto'>

@@ -268,8 +268,8 @@ function CourseDetail() {
                                             </div>
                                             <div className="modal-body">
                                                 <form onSubmit={handleSubmit}>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputEmail1" class="form-label">Rating</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputEmail1" className="form-label">Rating</label>
                                                         <select onChange={handleChange} className='form-control' name='rating'>
                                                             <option value='1'>1</option>
                                                             <option value='2'>2</option>
@@ -278,11 +278,11 @@ function CourseDetail() {
                                                             <option value='5'>5</option>
                                                         </select>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Review</label>
+                                                    <div className="mb-3">
+                                                        <label for="exampleInputPassword1" className="form-label">Review</label>
                                                         <textarea onChange={handleChange} className='form-control' name='reviews' rows='7'></textarea>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" className="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
                                         </div>

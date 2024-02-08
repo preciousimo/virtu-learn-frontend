@@ -24,15 +24,15 @@ function PopularCourses() {
         <div className='container mt-3'>
             {/* Popular courses */}
             <h3 className='pb-1 mb-4'>Popular Courses </h3>
-            <div class="row mb-4">
+            <div className="row mb-4">
                 {courseData && courseData.map((row, index) =>
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100">
+                    <div className="col-md-3 mb-4">
+                        <div className="card h-100">
                             <Link to={`/detail/${row.course.id}`}>
                                 <img src={row.course.featured_img} className='card-img-top' alt={row.course.title} />
                             </Link>
-                            <div class="card-body">
-                                <h5 class="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
+                            <div className="card-body">
+                                <h5 className="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
                             </div>
                             <div className='card-footer'>
                                 <div className='title'>

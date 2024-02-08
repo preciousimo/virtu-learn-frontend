@@ -37,15 +37,15 @@ function AllCourses() {
         <div className='container mt-3'>
             {/* Latest courses */}
             <h3 className='pb-1 mb-4'>Latest Courses </h3>
-            <div class="row mb-4">
+            <div className="row mb-4">
                 {courseData && courseData.map((course, index) =>
-                    <div class="col-md-3 mb-4">
-                        <div class="card h-100">
+                    <div className="col-md-3 mb-4">
+                        <div className="card h-100">
                             <Link to={`/detail/${course.id}`}>
                                 <img src={course.featured_img} className='card-img-top' alt={course.title} />
                             </Link>
-                            <div class="card-body">
-                                <h5 class="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
+                            <div className="card-body">
+                                <h5 className="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
                             </div>
                         </div>
                     </div>
@@ -56,10 +56,10 @@ function AllCourses() {
             <nav aria-label="Page navigation example mt-5">
                 <ul className="pagination justify-content-center">
                     {previousUrl &&
-                        <li className="page-item"><button className="page-link" onClick={()=>paginationHandler(previousUrl)}><i class="bi bi-arrow-left"></i> Previous</button></li>
+                        <li className="page-item"><button className="page-link" onClick={()=>paginationHandler(previousUrl)}><i className="bi bi-arrow-left"></i> Previous</button></li>
                     }
                     {nextUrl &&
-                        <li className="page-item"><button className="page-link" onClick={()=>paginationHandler(nextUrl)}> <i class="bi bi-arrow-right"></i>Next</button></li>
+                        <li className="page-item"><button className="page-link" onClick={()=>paginationHandler(nextUrl)}> <i className="bi bi-arrow-right"></i>Next</button></li>
                     }
                 </ul>
             </nav>

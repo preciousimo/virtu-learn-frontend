@@ -5,10 +5,11 @@ import { Routes as Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
-import About from './About';
+import About from './pages/About';
+import FAQ from './pages/FAQ';
 import Search from './Search';
-import CourseDetail from './CourseDetail';
-import TeacherDetail from './TeacherDetail';
+import CourseDetail from './pages/CourseDetail';
+import TeacherDetail from './pages/TeacherDetail';
 
 import AllCourses from './pages/AllCourses';
 import PopularCourses from './pages/PopularCourses';
@@ -68,6 +69,7 @@ function Main() {
         <Switch>
           <Route path='/' element={<Home />}/>
           <Route path='/about' element={<About />}/>
+          <Route path='/faq' element={<FAQ />}/>
           <Route path='/detail/:course_id' element={<CourseDetail />}/>
           <Route path='/search/:searchstring' element={<Search />}/>
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>

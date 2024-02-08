@@ -19,7 +19,6 @@ function Home() {
     try {
       axios.get(`${baseUrl}/course/?result=4`)
         .then((res) => {
-          console.log("Course Data:", res.data);
           setCourseData(res.data.results);
         });
     } catch (err) {
@@ -58,15 +57,15 @@ function Home() {
     <div className='container mt-4'>
       {/* Latest courses */}
       <h3 className='pb-1 mb-4 mt-5'>Latest Courses <Link to='/all-courses' className='float-end'>See All</Link></h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       {courseData && courseData.map((course, index) =>
-          <div class="col">
-            <div class="card h-100">
+          <div className="col" key={index}>
+            <div className="card h-100">
               <Link to={`/detail/${course.id}`}>
                 <img src={course.featured_img} height='208' className='card-img-top' alt={course.title} />
               </Link>
-              <div class="card-body">
-                <h5 class="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
+              <div className="card-body">
+                <h5 className="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
               </div>
             </div>
           </div>
@@ -76,15 +75,15 @@ function Home() {
 
       {/* Popular courses */}
       <h3 className='pb-1 mb-4 mt-5'>Popular Courses <Link to='/popular-courses' className='float-end'>See All</Link></h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       {popularCourseData && popularCourseData.map((row, index) =>
-        <div class="col">
-          <div class="card h-100">
+        <div className="col" key={index}>
+          <div className="card h-100">
               <Link to={`/detail/${row.course.id}`}>
                 <img src={row.course.featured_img} height='208' className='card-img-top' alt={row.course.title} />
               </Link>
-            <div class="card-body">
-              <h5 class="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
+            <div className="card-body">
+              <h5 className="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
             </div>
             <div className='card-footer'>
               <div className='title'>
@@ -100,15 +99,15 @@ function Home() {
 
       {/* Popular teachers */}
       <h3 className='pb-1 mb-4 mt-5'>Featured Teachers <Link to='/featured-teachers' className='float-end'>See All</Link></h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
       {popularTeacherData && popularTeacherData.map((teacher, index) =>
-        <div class="col">
-          <div class="card h-100">
+        <div className="col" key={index}>
+          <div className="card h-100">
               <Link to={`/teacher-detail/${teacher.id}`}>
                 <img src={teacher.profile_img} height='208' className='card-img-top' alt={teacher.name} />
               </Link>
-            <div class="card-body">
-              <h5 class="card-title"><Link to={`/teacher-detail/${teacher.id}`}>{teacher.name}</Link></h5>
+            <div className="card-body">
+              <h5 className="card-title"><Link to={`/teacher-detail/${teacher.id}`}>{teacher.name}</Link></h5>
             </div>
             <div className='card-footer'>
               <div className='title'>
@@ -126,17 +125,17 @@ function Home() {
       <div id="carouselExampleIndicators" className="carousel slide bg-dark text-white py-5">
         <div className="carousel-indicators">
         {testimonialData && testimonialData.map((row, index) =>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? "active" : "" } aria-current="true" aria-label="Slide 1"></button>
+          <button key={row.id} type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? "active" : "" } aria-current="true" aria-label="Slide 1"></button>
         )}
         </div>
         <div className="carousel-inner">
         {testimonialData && testimonialData.map((row, i) =>
-          <div className={i === 0 ? "carousel-item active" : "carousel-item"}>
-            <figure class="text-center">
-              <blockquote class="blockquote">
+          <div key={i} className={i === 0 ? "carousel-item active" : "carousel-item"}>
+            <figure className="text-center">
+              <blockquote className="blockquote">
                 <p>{row.reviews}</p>
               </blockquote>
-              <figcaption class="blockquote-footer">
+              <figcaption className="blockquote-footer">
                 {row.course.title} <cite title="Source Title">{row.student.name}</cite>
               </figcaption>
             </figure>
