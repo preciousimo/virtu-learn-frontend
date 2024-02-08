@@ -11,12 +11,22 @@ function Home() {
   }, [])
 
   const [courseData, setCourseData] = useState([]);
+  const [popularCourseData, setPopularCourseData] = useState([]);
 
   useEffect(() => {
     try {
       axios.get(`${baseUrl}/course/?result=4`)
         .then((res) => {
           setCourseData(res.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      axios.get(`${baseUrl}/popular-courses/?popular=1`)
+        .then((res) => {
+          setPopularCourseData(res.data);
         });
     } catch (err) {
       console.log(err);
@@ -41,77 +51,31 @@ function Home() {
           </div>
         )}
       </div>
-      {/* End current subjects */}
+      {/* End latest courses */}
 
-      {/* Top subjects */}
-      <h3 className='pb-1 mb-4 mt-5'>Top Subjects <Link to='/top-subjects' className='float-end'>See All</Link></h3>
+      {/* Popular courses */}
+      <h3 className='pb-1 mb-4 mt-5'>Popular Courses <Link to='/popular-courses' className='float-end'>See All</Link></h3>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      {popularCourseData && popularCourseData.map((row, index) =>
         <div class="col">
           <div class="card h-100">
-            <Link to='/subject-detail/1'>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </Link>
+              <Link to={`/detail/${row.course.id}`}>
+                <img src={row.course.featured_img} height='208' className='card-img-top' alt={row.course.title} />
+              </Link>
             <div class="card-body">
-              <h5 class="card-title"><Link to=' '>Python</Link></h5>
+              <h5 class="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
             </div>
             <div className='card-footer'>
               <div className='title'>
-                <span>Rating: 4.5/5</span>
+                <span>Rating: {row.rating}/5</span>
                 <span className='float-end'>Views: 57</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100">
-            <Link to='/subject-detail/1'>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </Link>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>JavaScript</a></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-                <span className='float-end'>Views: 57</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <Link to='/subject-detail/1'>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </Link>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>PHP</a></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-                <span className='float-end'>Views: 57</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-            <Link to='/subject-detail/1'>
-              <img src='https://images.unsplash.com/photo-1612477954469-c6a60de89802?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80' className='card-img-top' alt='...' />
-            </Link>
-            <div class="card-body">
-              <h5 class="card-title"><a href=' '>Java</a></h5>
-            </div>
-            <div className='card-footer'>
-              <div className='title'>
-                <span>Rating: 4.5/5</span>
-                <span className='float-end'>Views: 57</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
-      {/* End top subjects */}
+      {/* End popular courses */}
 
       {/* Featured teachers */}
       <h3 className='pb-1 mb-4 mt-5'>Featured Teachers <Link to='/featured-teachers' className='float-end'>See All</Link></h3>

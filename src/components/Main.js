@@ -11,7 +11,7 @@ import CourseDetail from './CourseDetail';
 import TeacherDetail from './TeacherDetail';
 
 import AllCourses from './pages/AllCourses';
-import TopCourses from './pages/TopCourses';
+import PopularCourses from './pages/PopularCourses';
 import CategoryCourses from './pages/CategoryCourses';
 import FeaturedTeachers from './pages/FeaturedTeachers';
 
@@ -72,7 +72,7 @@ function Main() {
           <Route path='/teacher-detail/:teacher_id' element={<TeacherDetail />}/>
 
           <Route path='/all-courses' element={<AllCourses />}/>
-          <Route path='/top-courses' element={<TopCourses />}/>
+          <Route path='/popular-courses' element={<PopularCourses />}/>
           <Route path='/category/:category_slug' element={<CategoryCourses />}/>
           <Route path='/featured-teachers' element={<FeaturedTeachers />}/>
 

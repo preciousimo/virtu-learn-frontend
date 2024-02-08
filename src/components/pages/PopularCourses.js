@@ -4,36 +4,41 @@ import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
-
-function AllCourses() {
+function PopularCourses() {
 
     const [courseData, setCourseData] = useState([]);
 
     useEffect(() => {
-        document.title = 'All Courses'
+        document.title = 'Popular Courses'
+
         try {
-            axios.get(`${baseUrl}/course/`)
+            axios.get(`${baseUrl}/popular-courses/?all=1`)
                 .then((res) => {
                     setCourseData(res.data);
                 });
         } catch (err) {
             console.log(err);
         }
-    }, []);
-
+    }, [])
     return (
         <div className='container mt-3'>
-            {/* Latest courses */}
-            <h3 className='pb-1 mb-4'>Latest Courses </h3>
+            {/* Popular courses */}
+            <h3 className='pb-1 mb-4'>Popular Courses </h3>
             <div class="row mb-4">
-                {courseData && courseData.map((course, index) =>
+                {courseData && courseData.map((row, index) =>
                     <div class="col-md-3 mb-4">
                         <div class="card h-100">
-                            <Link to={`/detail/${course.id}`}>
-                                <img src={course.featured_img} className='card-img-top' alt={course.title} />
+                            <Link to={`/detail/${row.course.id}`}>
+                                <img src={row.course.featured_img} className='card-img-top' alt={row.course.title} />
                             </Link>
                             <div class="card-body">
-                                <h5 class="card-title"><Link to={`/detail/${course.id}`}>{course.title}</Link></h5>
+                                <h5 class="card-title"><Link to={`/detail/${row.course.id}`}>{row.course.title}</Link></h5>
+                            </div>
+                            <div className='card-footer'>
+                                <div className='title'>
+                                    <span>Rating: {row.rating}/5</span>
+                                    <span className='float-end'>Views: 57</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,4 +59,4 @@ function AllCourses() {
     )
 }
 
-export default AllCourses
+export default PopularCourses
