@@ -13,6 +13,7 @@ function Home() {
   const [courseData, setCourseData] = useState([]);
   const [popularCourseData, setPopularCourseData] = useState([]);
   const [popularTeacherData, setPopularTeacherData] = useState([]);
+  const [testimonialData, setTestimonialData] = useState([]);
 
   useEffect(() => {
     try {
@@ -37,6 +38,15 @@ function Home() {
       axios.get(`${baseUrl}/popular-teachers/?popular=1`)
         .then((res) => {
           setPopularTeacherData(res.data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      axios.get(`${baseUrl}/student-testimonial/`)
+        .then((res) => {
+          setTestimonialData(res.data);
         });
     } catch (err) {
       console.log(err);
@@ -108,47 +118,29 @@ function Home() {
         </div>
         )}
       </div>
-      {/* Popular teachers */}
+      {/* End popular teachers */}
 
       {/* Student testimonial */}
       <h3 className='pb-1 mb-4 mt-5'>Student Testimonial</h3>
       <div id="carouselExampleIndicators" className="carousel slide bg-dark text-white py-5">
         <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        {testimonialData && testimonialData.map((row, index) =>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? "active" : "" } aria-current="true" aria-label="Slide 1"></button>
+        )}
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item active">
+        {testimonialData && testimonialData.map((row, i) =>
+          <div className={i === 0 ? "carousel-item active" : "carousel-item"}>
             <figure class="text-center">
               <blockquote class="blockquote">
-                <p>A well-known quote, contained in a blockquote element.</p>
+                <p>{row.reviews}</p>
               </blockquote>
               <figcaption class="blockquote-footer">
-                Someone famous in <cite title="Source Title">Source Title</cite>
+                {row.course.title} <cite title="Source Title">{row.student.name}</cite>
               </figcaption>
             </figure>
           </div>
-          <div className="carousel-item">
-            <figure class="text-center">
-              <blockquote class="blockquote">
-                <p>A well-known quote, contained in a blockquote element.</p>
-              </blockquote>
-              <figcaption class="blockquote-footer">
-                Someone famous in <cite title="Source Title">Source Title</cite>
-              </figcaption>
-            </figure>
-          </div>
-          <div className="carousel-item">
-            <figure class="text-center">
-              <blockquote class="blockquote">
-                <p>A well-known quote, contained in a blockquote element.</p>
-              </blockquote>
-              <figcaption class="blockquote-footer">
-                Someone famous in <cite title="Source Title">Source Title</cite>
-              </figcaption>
-            </figure>
-          </div>
+        )}
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -159,7 +151,7 @@ function Home() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      {/* Student testimonial */}
+      {/* End student testimonial */}
     </div>
   )
 }
