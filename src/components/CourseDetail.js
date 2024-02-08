@@ -20,6 +20,7 @@ function CourseDetail() {
     const [studentLoginStatus, setStudentLoginStatus] = useState([]);
     const [enrollStatus, setEnrollStatus] = useState([]);
     const [ratingStatus, setRatingStatus] = useState([]);
+    const [courseViews, setCourseViews] = useState([]);
     const [favouriteStatus, setFavouriteStatus] = useState([]);
     const [avgRating, setAdvRating] = useState(0);
     let { course_id } = useParams();
@@ -38,6 +39,10 @@ function CourseDetail() {
                     if (res.data.course_rating != '' && res.data.course_rating != null) {
                         setAdvRating(res.data.course_rating)
                     }
+                });
+                axios.get(`${baseUrl}/update-view/${course_id}`)
+                .then((res) => {
+                    setCourseViews(res.data.views)
                 });
         } catch (err) {
             console.error(err);
@@ -285,6 +290,9 @@ function CourseDetail() {
                                 </div>
                             </>
                         }
+                    </p>
+                    <p className='fw-bold'>
+                        Views: {courseViews}
                     </p>
                     {
                         enrollStatus === 'success' && studentLoginStatus == 'success' &&
