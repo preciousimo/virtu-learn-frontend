@@ -8,9 +8,8 @@ function Footer() {
         <li className="nav-item"><Link to="/faq" className="nav-link px-2 text-body-secondary">FAQs</Link></li>
         <li className="nav-item"><Link to='/about-us' className="nav-link px-2 text-body-secondary">About Us</Link></li>
         <li className="nav-item"><Link to='/contact-us' className="nav-link px-2 text-body-secondary">Contact Us</Link></li>
-        <li className="nav-item"><Link to="#" className="nav-link px-2 text-body-secondary">Support</Link></li>
       </ul>
-      <p className="text-center text-body-secondary">© 2024 Prochi, Inc</p>
+      <p className="text-center text-body-secondary">&copy; 2024 <a href="http://preciousimo.netlify.app/" class="link-secondary text-decoration-none">SONIPS Technologies</a></p>
     </footer>
   )
 }
