@@ -8,7 +8,7 @@ function FAQ() {
     const [faqData, setFaqData] = useState([]);
 
     useEffect(() => {
-        document.title = 'Category Courses';
+        document.title = 'FAQ';
         try {
             axios.get(`${baseUrl}/faq/`)
                 .then((res) => {
