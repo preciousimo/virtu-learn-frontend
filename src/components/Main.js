@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
 import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 import FAQ from './pages/FAQ';
 import Search from './Search';
 import CourseDetail from './pages/CourseDetail';
@@ -69,6 +70,7 @@ function Main() {
         <Switch>
           <Route path='/' element={<Home />}/>
           <Route path='/about-us' element={<AboutUs />}/>
+          <Route path='/contact-us' element={<ContactUs />}/>
           <Route path='/faq' element={<FAQ />}/>
           <Route path='/detail/:course_id' element={<CourseDetail />}/>
           <Route path='/search/:searchstring' element={<Search />}/>
