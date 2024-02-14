@@ -58,7 +58,7 @@ function TeacherLogin() {
         }
         window.location.href = '/';
       } else {
-        setErrorMsg('Invalid credentials');
+        setErrorMsg(res.data.msg);
       }
     } catch (err) {
       console.log(err);

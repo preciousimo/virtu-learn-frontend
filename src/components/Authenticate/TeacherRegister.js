@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
@@ -8,6 +9,7 @@ function TeacherRegister() {
     document.title = 'Teacher Register'
   });
 
+  const navigate = useNavigate()
   const [teacherData, setTeacherData] = useState({
     'name': '',
     'email': '',
@@ -16,6 +18,7 @@ function TeacherRegister() {
     'mobile_no': '',
     'skills': '',
     'status': '',
+    'otp_digit': '',
   });
 
   // Change handler
@@ -35,32 +38,30 @@ function TeacherRegister() {
     teacherFormData.append('qualification', teacherData.qualification);
     teacherFormData.append('mobile_no', teacherData.mobile_no);
     teacherFormData.append('skills', teacherData.skills);
+    teacherFormData.append('otp_digit', teacherData.otp_digit);
 
     try{
       axios.post(baseUrl, teacherFormData)
       .then((res) => {
-        setTeacherData(
-          {
-            'name': '',
-            'email': '',
-            'password': '',
-            'qualification': '',
-            'mobile_no': '',
-            'skills': '',
-            'status': 'success',
-          }
-        );
+        navigate('/verify-teacher/'+res.data.id);
+        // window.location.href='/verify-teacher/'+res.data.id;
+        // setTeacherData(
+        //   {
+        //     'name': '',
+        //     'email': '',
+        //     'password': '',
+        //     'qualification': '',
+        //     'mobile_no': '',
+        //     'skills': '',
+        //     'status': 'success',
+        //   }
+        // );
       });
     }catch(err){
         console.log(err);
         setTeacherData({'status': 'error'});
     }
   };
-
-  const teacherLoginStatus = localStorage.getItem('teacherLoginStatus')
-  if(teacherLoginStatus === 'true'){
-    window.location.href = '/teacher-dashboard';
-  }
 
   return (
     <div className="container">
@@ -75,27 +76,27 @@ function TeacherRegister() {
             <div className="card-body">
               {/* <form> */}
                 <div className="mb-3">
-                  <label for="exampleInputName" className="form-label">Full Name</label>
+                  <label htmlFor="exampleInputName" className="form-label">Full Name</label>
                   <input value={teacherData.name} onChange={handleChange} name='name' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputEmail" className="form-label">Email</label>
+                  <label htmlFor="exampleInputEmail" className="form-label">Email</label>
                   <input value={teacherData.email} onChange={handleChange} name='email' type="email" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputPassword" className="form-label">Password</label>
+                  <label htmlFor="exampleInputPassword" className="form-label">Password</label>
                   <input value={teacherData.password} onChange={handleChange} name='password' type="password" className="form-control" id="exampleInputPassword" placeholder="Password" />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputQualification" className="form-label">Qualification</label>
+                  <label htmlFor="exampleInputQualification" className="form-label">Qualification</label>
                   <input value={teacherData.qualification} onChange={handleChange} name='qualification' type="text" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputNumber" className="form-label">Mobile Number</label>
-                  <input value={teacherData.mobile_no} onChange={handleChange} name='mobile_no' type="number" className="form-control" />
+                  <label htmlFor="exampleInputNumber" className="form-label">Mobile Number</label>
+                  <input value={teacherData.mobile_no} onChange={handleChange} name='mobile_no' type="tel" className="form-control" />
                 </div>
                 <div className="mb-3">
-                  <label for="exampleInputSkills" className="form-label">Skills</label>
+                  <label htmlFor="exampleInputSkills" className="form-label">Skills</label>
                   <textarea value={teacherData.skills} onChange={handleChange} name='skills' className='form-control'></textarea>
                   <div id='emailHelp' className='form-text'>Python, JavaScript, Mathematics, etc.</div>
                 </div>

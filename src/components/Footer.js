@@ -9,7 +9,7 @@ function Footer() {
         <li className="nav-item"><Link to='/about-us' className="nav-link px-2 text-body-secondary">About Us</Link></li>
         <li className="nav-item"><Link to='/contact-us' className="nav-link px-2 text-body-secondary">Contact Us</Link></li>
       </ul>
-      <p className="text-center text-body-secondary">&copy; 2024 <a href="http://preciousimo.netlify.app/" class="link-secondary text-decoration-none">SONIPS Technologies</a></p>
+      <p className="text-center text-body-secondary">&copy; 2024 <a href="http://preciousimo.netlify.app/" className="link-secondary text-decoration-none">SONIPS Technologies</a></p>
     </footer>
   )
 }
