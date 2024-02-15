@@ -22,6 +22,8 @@ import Register from './Authenticate/Register';
 import Login from './Authenticate/Login';
 import Logout from './Authenticate/Logout';
 import TeacherRegister from './Authenticate/TeacherRegister';
+import ForgotPassword from './Authenticate/ForgotPassword';
+import ChangePasswordF from './Authenticate/ChangePasswordF';
 import TeacherLogin from './Authenticate/TeacherLogin';
 import VerifyTeacher from './Authenticate/VerifyTeacher';
 import TeacherLogout from './Authenticate/TeacherLogout';
@@ -97,6 +99,8 @@ function Main() {
 
           <Route path='/teacher-register' element={<TeacherRegister />}/>
           <Route path='/verify-teacher/:teacher_id' element={<VerifyTeacher />}/>
+          <Route path='/teacher-forgot-password' element={<ForgotPassword />}/>
+          <Route path='/teacher-change-password/:teacher_id' element={<ChangePasswordF/>}/>
           <Route path='/teacher-login' element={<TeacherLogin />}/>
           <Route path='/teacher-logout' element={<TeacherLogout />}/>
 
