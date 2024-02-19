@@ -17,7 +17,7 @@ function CourseChapters() {
 
     useEffect(() => {
         try {
-            axios.get(baseUrl + '/course-chapters/' + course_id)
+            axios.get(`${baseUrl}/course-chapters/${course_id}`)
                 .then((res) => {
                     setTotalResult(res.data.length);
                     setChapterData(res.data);
@@ -61,10 +61,10 @@ function CourseChapters() {
                 <section className='col-md-9'>
                     <div className='card'>
                         <h5 className='card-header'>All Chapters ({totalResult}) <Link className='btn btn-success btn-sm float-end' to={`/add-chapter/${course_id}`}>Add Chapter</Link></h5>
-                        <div className='card-body'>
-                            <table className='table table-bordered'>
+                        <div className='card-body' style={{ overflowX: 'auto' }}>
+                            <table className='table table-bordered' style={{ tableLayout: 'auto' }}>
                                 <thead>
-                                    <tr>
+                                    <tr style={{ whiteSpace: 'nowrap' }}>
                                         <th>Title</th>
                                         <th>Video</th>
                                         <th>Remarks</th>
@@ -78,13 +78,16 @@ function CourseChapters() {
                                             <td>
                                                 <video width="200" height="100" controls>
                                                     <source src={chapter.video} type="video/mp4" />
+                                                    <source src={chapter.video} type="video/webm" />
                                                     <source src={chapter.video} type="video/mov" />
                                                 </video>
                                             </td>
                                             <td><Link to="/">{chapter.remarks}</Link></td>
-                                            <td>
-                                                <Link to={'/edit-chapter/' + chapter.id} className='btn btn-sm btn-info'><i className="bi bi-pencil-square"></i></Link>
-                                                <button onClick={() => handleDeleteClick(chapter.id)} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
+                                            <td style={{ whiteSpace: 'nowrap' }}>
+                                                <div className="btn-group">
+                                                    <Link to={'/edit-chapter/' + chapter.id} className='btn btn-sm btn-info'><i className="bi bi-pencil-square"></i></Link>
+                                                    <button onClick={() => handleDeleteClick(chapter.id)} className='btn btn-sm btn-danger ms-1'><i className="bi bi-trash"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}

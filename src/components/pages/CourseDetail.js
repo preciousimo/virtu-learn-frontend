@@ -14,6 +14,7 @@ function CourseDetail() {
 
     const [courseData, setCourseData] = useState([]);
     const [chapterData, setChapterData] = useState([]);
+    const [videoDurations, setVideoDurations] = useState({});
     const [teacherData, setTeacherData] = useState([]);
     const [relatedCourseData, setRelatedCourseData] = useState([]);
     const [techListData, setTechListData] = useState([]);
@@ -40,13 +41,16 @@ function CourseDetail() {
                         setAdvRating(res.data.course_rating)
                     }
                 });
-                axios.get(`${baseUrl}/update-view/${course_id}`)
+            axios.get(`${baseUrl}/update-view/${course_id}`)
                 .then((res) => {
                     setCourseViews(res.data.views)
                 });
         } catch (err) {
             console.error(err);
         }
+
+        // Fetch video durations
+        fetchVideoDurations();
 
         // Fetch enroll status
         try {
@@ -78,7 +82,7 @@ function CourseDetail() {
                 .then((res) => {
                     if (res.data.bool == true) {
                         setFavouriteStatus('success');
-                    } else{
+                    } else {
                         setFavouriteStatus('');
                     }
                 });
@@ -121,6 +125,23 @@ function CourseDetail() {
             console.log(err);
         }
     }
+
+    // Function to fetch video durations
+    const fetchVideoDurations = () => {
+        const durations = {};
+        // Iterate through chapterData to get the durations of each video
+        chapterData.forEach(chapter => {
+            const video = document.createElement('video');
+            video.src = chapter.video;
+            video.onloadedmetadata = () => {
+                // Calculate duration in seconds or minutes and round it to the nearest whole number
+                const durationInSeconds = Math.round(video.duration);
+                const durationInMinutes = Math.round(video.duration / 60);
+                durations[chapter.id] = durationInSeconds >= 60 ? durationInMinutes : durationInSeconds;
+                setVideoDurations({ ...durations });
+            };
+        });
+    };
 
     // Mark as favourite course
     const markAsFavourite = () => {
@@ -239,8 +260,7 @@ function CourseDetail() {
                 <div className='col-8'>
                     <h3>{courseData.title}</h3>
                     <p>{courseData.description}</p>
-                    <p className='fw-bold'>Subject By: {courseData.teacher ? <Link to={`/teacher-detail/${courseData.teacher.id}`}>{courseData.teacher.name}</Link> : 'Unknown Teacher'}</p>
-                    {/* <p className='fw-bold'>Subject By: <Link to=''>{teacherData.name}</Link></p> */}
+                    <p className='fw-bold'>Course By: {courseData.teacher ? <Link to={`/teacher-detail/${courseData.teacher.id}`}>{courseData.teacher.name}</Link> : 'Unknown Teacher'}</p>
                     <p className='fw-bold'>Technologies:&nbsp;
                         {Array.isArray(techListData) && techListData.map((tech, index) => (
                             <Link to={`/category/${tech.trim()}`} className='badge badge-pill text-dark bg-warning ml-1'>{tech}</Link>
@@ -259,7 +279,7 @@ function CourseDetail() {
                                 {ratingStatus == 'success' &&
                                     <small className='badge bg-info text-dark ms-2'>You already rated this course</small>
                                 }
-                                <div className="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
+                                <div className="modal fade" id="ratingModal" tabIndex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
                                     <div className="modal-dialog modal-lg">
                                         <div className="modal-content">
                                             <div className="modal-header">
@@ -269,7 +289,7 @@ function CourseDetail() {
                                             <div className="modal-body">
                                                 <form onSubmit={handleSubmit}>
                                                     <div className="mb-3">
-                                                        <label for="exampleInputEmail1" className="form-label">Rating</label>
+                                                        <label htmlFor="exampleInputEmail1" className="form-label">Rating</label>
                                                         <select onChange={handleChange} className='form-control' name='rating'>
                                                             <option value='1'>1</option>
                                                             <option value='2'>2</option>
@@ -279,7 +299,7 @@ function CourseDetail() {
                                                         </select>
                                                     </div>
                                                     <div className="mb-3">
-                                                        <label for="exampleInputPassword1" className="form-label">Review</label>
+                                                        <label htmlFor="exampleInputPassword1" className="form-label">Review</label>
                                                         <textarea onChange={handleChange} className='form-control' name='reviews' rows='7'></textarea>
                                                     </div>
                                                     <button type="submit" className="btn btn-primary">Submit</button>
@@ -330,24 +350,33 @@ function CourseDetail() {
                     </div>
                     <ul className='list-group list-group-flush'>
                         {Array.isArray(chapterData) && chapterData.map((chapter, index) => (
-                            <li className='list-group-item'>{chapter.title}
+                            <li className='list-group-item' key={chapter.id}>
+                                {chapter.title}
                                 <span className='float-end'>
-                                    <button className='btn btn-sm'>
-                                        <span className='me-3'>1 Hour 30 Minutes</span>
-                                        <i className="fa-sharp fa-solid fa-circle-play fa-2xl" data-bs-toggle="modal" data-bs-target="#videoModal1" style={{ color: '#d40c0c' }}></i>
+                                    <button className='btn btn-sm' data-bs-toggle="modal" data-bs-target={`#videoModal${chapter.id}`}>
+                                        <span className='me-3'>
+                                            {videoDurations[chapter.id] ? (
+                                                videoDurations[chapter.id] >= 60 ?
+                                                    `${Math.round(videoDurations[chapter.id] / 60)} Minutes`
+                                                    : `${Math.round(videoDurations[chapter.id])} Seconds`
+                                            ) : (
+                                                "Loading..."
+                                            )}
+                                        </span>
+                                        <i className="fa-sharp fa-solid fa-circle-play fa-2xl" style={{ color: '#d40c0c' }}></i>
                                     </button>
                                 </span>
                                 {/* <!-- Video Modal --> */}
-                                <div className="modal fade" id="videoModal1" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal fade" id={`videoModal${chapter.id}`} tabIndex="-1" aria-labelledby={`exampleModalLabel${chapter.id}`} aria-hidden="true">
                                     <div className="modal-dialog modal-lg">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Video 1</h1>
+                                                <h1 className="modal-title fs-5" id={`exampleModalLabel${chapter.id}`}>{chapter.title}</h1>
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
                                                 <div className="ratio ratio-16x9">
-                                                    {/* <iframe src={chapter.video} title={chapter.title} allowfullscreen></iframe> */}
+                                                    <iframe src={chapter.video} title={chapter.title} allowFullScreen></iframe>
                                                 </div>
                                             </div>
                                         </div>
@@ -356,6 +385,7 @@ function CourseDetail() {
                             </li>
                         ))}
                     </ul>
+
                 </div>
             }
 
@@ -363,7 +393,7 @@ function CourseDetail() {
             <h3 className='pb-1 mb-4 mt-5'>Related Courses</h3>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 {Array.isArray(relatedCourseData) && relatedCourseData.map((rcourse, index) => (
-                    <div className="col">
+                    <div className="col" key={rcourse.pk}>
                         <div className="card h-100">
                             <Link target='__blank' to={`/detail/${rcourse.pk}`}>
                                 <img src={`${siteUrl}/${rcourse.fields.featured_img}`} className='card-img-top' alt={rcourse.fields.title} />
