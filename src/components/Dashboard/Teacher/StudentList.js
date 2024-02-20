@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
+import MessageList from './MessageList'
 import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
 function StudentList() {
-    useEffect(() => {
-        document.title = 'Enrolled Students'
-    }, [])
-
     const [studentData, setStudentData] = useState([]);
     const teacherId = localStorage.getItem('teacherId');
 
     useEffect(() => {
+        document.title = 'Enrolled Students'
         try {
             axios.get(`${baseUrl}/fetch-all-enrolled-students/${teacherId}`)
                 .then((res) => {
@@ -23,6 +21,49 @@ function StudentList() {
             console.log(err);
         }
     }, []);
+
+    const [msgData, setMsgData] = useState({
+        msg_text: '',
+    });
+
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const handleChange = (e) => {
+        setMsgData({
+            ...msgData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const formSubmit = (student_id) => {
+        const _formData = new FormData();
+        _formData.append('msg_text', msgData.msg_text);
+        _formData.append('msg_from', 'teacher');
+    
+        try {
+            axios.post(`${baseUrl}/send-message/${teacherId}/${student_id}`, _formData, {})
+                .then((res) => {
+                    if (res.data.bool === true) {
+                        setMsgData({
+                            'msg_text': ''
+                        });
+                        setSuccessMsg(res.data.msg);
+                        setErrorMsg('');
+                    } else {
+                        setErrorMsg(res.data.msg);
+                        setSuccessMsg('');
+                    }
+                });
+        } catch (err) {
+            console.log(err);
+        }
+    };    
+
+    const handleSubmit = (e, studentId) => {
+        e.preventDefault();
+        formSubmit(studentId);
+    };
 
     const msgList = {
         height: '500px',
@@ -51,7 +92,7 @@ function StudentList() {
                                 </thead>
                                 <tbody>
                                     {studentData.map((row, index) => (
-                                        <tr>
+                                        <tr key={index}>
                                             <td>{row.student.name}</td>
                                             <td>{row.student.email}</td>
                                             <td>{row.student.username}</td>
@@ -68,36 +109,22 @@ function StudentList() {
                                                                 <div className="modal-header">
                                                                     <h1 className="modal-title fs-5" id="exampleModalLabel">
                                                                         <span className='text-danger'>{row.student.name}</span>
-                                                                        <span className='ms-5 btn btn-sm btn-secondary' title='Refresh'><i className="bi bi-bootstrap-reboot"></i></span>
                                                                     </h1>
                                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div className="modal-body">
                                                                     <div className='row'>
                                                                         <div className='col-md-8 mb-2 col-12 border-end' style={msgList}>
-                                                                            <div className='row'>
-                                                                                <div className='col-5'>
-                                                                                    <div className="alert alert-primary mb-1">
-                                                                                        <p>A simple primary alert—check it out!</p>
-                                                                                    </div>
-                                                                                    <small className='text-muted'>21-02-2024 10:34</small>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className='row'>
-                                                                                <div className='col-5 offset-7'>
-                                                                                    <div className="alert alert-primary mb-1">
-                                                                                        <p>A simple primary alert—check it out!</p>
-                                                                                    </div>
-                                                                                    <small className='text-muted'>21-02-2024 10:34</small>
-                                                                                </div>
-                                                                            </div>
+                                                                            <MessageList teacher_id={teacherId} student_id={row.student.id} />
                                                                         </div>
                                                                         <div className='col-md-4 col-12'>
-                                                                            <form>
+                                                                            {successMsg && <p className="text-success">{successMsg}</p>}
+                                                                            {errorMsg && <p className="text-danger">{errorMsg}</p>}
+                                                                            <form onSubmit={(e) => handleSubmit(e, row.student.id)}>
                                                                                 <div className="mb-3">
                                                                                     <label for="exampleInputEmail1" className="form-label">Message</label>
-                                                                                    <textarea className='form-control' rows='7'></textarea>
-                                                                                 </div>
+                                                                                    <textarea className='form-control' value={msgData.msg_text} name='msg_text' onChange={handleChange} rows='7'></textarea>
+                                                                                </div>
                                                                                 <button type="submit" className="btn btn-primary">Submit</button>
                                                                             </form>
                                                                         </div>
