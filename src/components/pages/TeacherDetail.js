@@ -27,6 +27,11 @@ function TeacherDetail() {
         }
     }, [teacher_id]);
 
+    const icon_style = {
+        'font-size': '20px',
+        marginRight: '20px',
+    };
+
     return (
         <div className='container mt-3'>
             <div className='row'>
@@ -42,7 +47,23 @@ function TeacherDetail() {
                         ))}
                     </p>
                     <p className='fw-bold'>Recent Subject: <Link to='/category/django'>Django Course</Link></p>
-                    <p className='fw-bold'>Rating: <a href=' '>4.5/5</a></p>
+                    <p>
+                        {teacherData.linkedin_url &&
+                            <a href={teacherData.linkedin_url} style={icon_style}><i class="bi bi-linkedin"></i></a>
+                        }
+                        {teacherData.twitter_url &&
+                            <a href={teacherData.twitter_url} style={icon_style}><i class="bi bi-twitter-x ms-2"></i></a>
+                        }
+                        {teacherData.facebook_url &&
+                            <a href={teacherData.facebook_url} style={icon_style}><i class="bi bi-facebook ms-2"></i></a>
+                        }
+                        {teacherData.instagram_url &&
+                            <a href={teacherData.instagram_url} style={icon_style}><i class="bi bi-instagram ms-2"></i></a>
+                        }
+                        {teacherData.website_url &&
+                            <a href={teacherData.website_url} style={icon_style}><i class="bi bi-globe ms-2"></i></a>
+                        }
+                    </p>
                 </div>
             </div>
             {/* Course Videos */}

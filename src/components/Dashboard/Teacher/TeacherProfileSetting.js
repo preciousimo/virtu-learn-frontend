@@ -20,6 +20,11 @@ function TeacherProfileSetting() {
         'profile_img': '',
         'p_img': '',
         'status': '',
+        'linkedin_url': '',
+        'twitter_url': '',
+        'facebook_url': '',
+        'instagram_url': '',
+        'website_url': '',
     });
 
     const teacherId = localStorage.getItem('teacherId');
@@ -37,6 +42,11 @@ function TeacherProfileSetting() {
                         skills: res.data.skills,
                         profile_img: res.data.profile_img,
                         p_img: '',
+                        linkedin_url: res.data.linkedin_url,
+                        twitter_url: res.data.twitter_url,
+                        facebook_url: res.data.facebook_url,
+                        instagram_url: res.data.instagram_url,
+                        website_url: res.data.website_url,
                     });
                 });
         } catch (err) {
@@ -67,6 +77,11 @@ function TeacherProfileSetting() {
         teacherFormData.append('qualification', teacherData.qualification);
         teacherFormData.append('mobile_no', teacherData.mobile_no);
         teacherFormData.append('skills', teacherData.skills);
+        teacherFormData.append('linkedin_url', teacherData.linkedin_url);
+        teacherFormData.append('twitter_url', teacherData.twitter_url);
+        teacherFormData.append('facebook_url', teacherData.facebook_url);
+        teacherFormData.append('instagram_url', teacherData.instagram_url);
+        teacherFormData.append('website_url', teacherData.website_url);
 
         if (teacherData.p_img != '') {
             teacherFormData.append('profile_img', teacherData.p_img, teacherData.p_img.name);
@@ -169,6 +184,37 @@ function TeacherProfileSetting() {
                                     </div>
                                 </div>
                                 <hr />
+                                <h4 className='my-4'>Social Accounts</h4>
+                                <div className="mb-3 row">
+                                    <label for="inputName" className="col-sm-2 col-form-label">LinkedIn</label>
+                                    <div className="col-sm-10">
+                                        <input value={teacherData.linkedin_url} onChange={handleChange} name='linkedin_url' type="text" className="form-control" id="inputName" />
+                                    </div>
+                                </div>
+                                <div className="mb-3 row">
+                                    <label for="inputName" className="col-sm-2 col-form-label">X(Formerly Twitter)</label>
+                                    <div className="col-sm-10">
+                                        <input value={teacherData.twitter_url} onChange={handleChange} name='twitter_url' type="text" className="form-control" id="inputName" />
+                                    </div>
+                                </div>
+                                <div className="mb-3 row">
+                                    <label for="inputName" className="col-sm-2 col-form-label">Facebook</label>
+                                    <div className="col-sm-10">
+                                        <input value={teacherData.facebook_url} onChange={handleChange} name='facebook_url' type="text" className="form-control" id="inputName" />
+                                    </div>
+                                </div>
+                                <div className="mb-3 row">
+                                    <label for="inputName" className="col-sm-2 col-form-label">Instagram</label>
+                                    <div className="col-sm-10">
+                                        <input value={teacherData.instagram_url} onChange={handleChange} name='instagram_url' type="text" className="form-control" id="inputName" />
+                                    </div>
+                                </div>
+                                <div className="mb-3 row">
+                                    <label for="inputName" className="col-sm-2 col-form-label">Website</label>
+                                    <div className="col-sm-10">
+                                        <input value={teacherData.website_url} onChange={handleChange} name='website_url' type="text" className="form-control" id="inputName" />
+                                    </div>
+                                </div>
                                 <button type='submit' className='btn btn-secondary'>Update</button>
                             </form>
                         </div>
