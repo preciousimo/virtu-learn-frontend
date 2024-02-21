@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function StudyMaterials() {
     const [studyData, setStudyData] = useState([]);
@@ -14,7 +14,7 @@ function StudyMaterials() {
     useEffect(() => {
         document.title = 'Study Materials';
         try {
-            axios.get(baseUrl + '/study-materials/' + course_id)
+            axios.get(`${config.baseUrl}/study-materials/${course_id}`)
                 .then((res) => {
                     setTotalResult(res.data.length);
                     setStudyData(res.data);
@@ -34,11 +34,11 @@ function StudyMaterials() {
         }).then((result) => {
             if (result.isConfirmed) {
                 try {
-                    axios.delete(baseUrl + '/study-material/' + study_id)
+                    axios.delete(`${config.baseUrl}/study-material/${study_id}`)
                         .then((res) => {
                             Swal.fire('success', 'Data has been deleted.');
                             try {
-                                axios.delete(baseUrl + '/study-materials/' + course_id)
+                                axios.delete(`${config.baseUrl}/study-materials/${course_id}`)
                                     .then((res) => {
                                         setTotalResult(res.data.length);
                                         setStudyData(res.data);

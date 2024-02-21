@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AddCourses() {
     useEffect(() => {
@@ -21,7 +20,7 @@ function AddCourses() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/category/`).then((res) => {
+            axios.get(`${config.baseUrl}/category/`).then((res) => {
                 setCats(res.data);
             });
         } catch (err) {
@@ -54,7 +53,7 @@ function AddCourses() {
         _formData.append('techs', courseData.techs);
 
         try {
-            axios.post(`${baseUrl}/course/`, _formData, {
+            axios.post(`${config.baseUrl}/course/`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 function VerifyTeacher() {
   useEffect(() => {
     document.title = 'Verify Account'
@@ -27,7 +27,7 @@ function VerifyTeacher() {
     teacherFormData.append('otp_digit', teacherData.otp_digit);
 
     try {
-      axios.post(`${baseUrl}/verify-teacher/${teacher_id}/`, teacherFormData)
+      axios.post(`${config.baseUrl}/verify-teacher/${teacher_id}/`, teacherFormData)
       .then((res)=>{
         if(res.data.bool===true){
           localStorage.setItem('teacherLoginStatus', true);

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TeacherChangePassword() {
     useEffect(() => {
@@ -30,7 +28,7 @@ function TeacherChangePassword() {
         teacherFormData.append('password', teacherData.password);
 
         try {
-            axios.post(`${baseUrl}/teacher/change-password/${teacherId}/`, teacherFormData)
+            axios.post(`${config.baseUrl}/teacher/change-password/${teacherId}/`, teacherFormData)
             .then((res) => {
                 window.location.href = '/teacher-logout';
             });

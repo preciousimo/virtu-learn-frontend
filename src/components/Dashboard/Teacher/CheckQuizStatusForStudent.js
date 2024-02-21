@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CheckQuizStatusForStudent(props) {
     const [quizData, setQuizData] = useState([]);
@@ -11,7 +11,7 @@ function CheckQuizStatusForStudent(props) {
     useEffect(() => {
         const fetchQuizAttemptStatus = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/fetch-quiz-attempt-status/${props.quiz}/${props.student}`);
+                const response = await axios.get(`${config.baseUrl}/fetch-quiz-attempt-status/${props.quiz}/${props.student}`);
                 setQuizData(response.data);
             } catch (error) {
                 console.error('Error fetching quiz attempt status:', error);

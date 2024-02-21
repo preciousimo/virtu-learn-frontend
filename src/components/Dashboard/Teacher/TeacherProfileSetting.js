@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TeacherProfileSetting() {
     useEffect(() => {
@@ -32,7 +32,7 @@ function TeacherProfileSetting() {
     useEffect(() => {
         // Fetch current teacher data
         try {
-            axios.get(`${baseUrl}/teacher/${teacherId}`)
+            axios.get(`${config.baseUrl}/teacher/${teacherId}`)
                 .then((res) => {
                     setTeacherData({
                         name: res.data.name,
@@ -88,7 +88,7 @@ function TeacherProfileSetting() {
         }
 
         try {
-            axios.put(`${baseUrl}/teacher/${teacherId}/`, teacherFormData, {
+            axios.put(`${config.baseUrl}/teacher/${teacherId}/`, teacherFormData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

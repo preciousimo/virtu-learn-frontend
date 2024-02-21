@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TeacherLogin() {
   const [teacherLogin, setTeacherLogin] = useState({
@@ -44,7 +44,7 @@ function TeacherLogin() {
     teacherLoginData.append('password', teacherLogin.password);
 
     try {
-      const res = await axios.post(`${baseUrl}/teacher-login/`, teacherLoginData);
+      const res = await axios.post(`${config.baseUrl}/teacher-login/`, teacherLoginData);
 
       if (res.data.bool === true) {
         localStorage.setItem('teacherLoginStatus', true);

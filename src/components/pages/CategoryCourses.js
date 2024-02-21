@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CategoryCourses() {
     const [courseData, setCourseData] = useState([]);
@@ -13,7 +13,7 @@ function CategoryCourses() {
     useEffect(() => {
         document.title = 'Category Courses'
 
-        fetchData(`${baseUrl}/course/?category=${category_id}`);
+        fetchData(`${config.baseUrl}/course/?category=${category_id}`);
         
     }, []);
 

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function QuizResult(props) {
     const [resultData, setResultData] = useState([]);
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/fetch-quiz-result/${props.quiz}/${props.student}`)
+            axios.get(`${config.baseUrl}/fetch-quiz-result/${props.quiz}/${props.student}`)
                 .then((res) => {
                     setResultData(res.data);
                 });

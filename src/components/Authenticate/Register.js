@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api/student/';
 
 function Register() {
   useEffect(() => {
@@ -35,7 +35,7 @@ function Register() {
     studentFormData.append('interested_categories', studentData.interested_categories);
 
     try{
-      axios.post(baseUrl, studentFormData)
+      axios.post(config.baseUrl, studentFormData)
       .then((res) => {
         setStudentData(
           {

@@ -1,10 +1,10 @@
 import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function StudentAssignments() {
     useEffect(() => {
@@ -17,7 +17,7 @@ function StudentAssignments() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/my-assignments/${studentId}`)
+            axios.get(`${config.baseUrl}/my-assignments/${studentId}`)
                 .then((res) => {
                     setAssignmentData(res.data);
                 });
@@ -35,7 +35,7 @@ function StudentAssignments() {
         _formData.append('teacher', teacher);
 
         try {
-            axios.put(`${baseUrl}/update-assignment/${assignment_id}`, _formData, {
+            axios.put(`${config.baseUrl}/update-assignment/${assignment_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

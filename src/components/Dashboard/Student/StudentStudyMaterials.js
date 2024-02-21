@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from './Sidebar'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function StudentStudyMaterials() {
     const [studyData, setStudyData] = useState([]);
@@ -14,7 +13,7 @@ function StudentStudyMaterials() {
     useEffect(() => {
         document.title = 'Study Materials';
         try {
-            axios.get(baseUrl + '/student/study-materials/' + course_id)
+            axios.get(`${config.baseUrl}/student/study-materials/${course_id}`)
                 .then((res) => {
                     setTotalResult(res.data.length);
                     setStudyData(res.data);

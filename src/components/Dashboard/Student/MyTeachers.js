@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import MessageList from './MessageList'
 import axios from 'axios'
-
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../../config/config';
 
 function MyTeachers() {
     const [teacherData, setTeacherData] = useState([]);
@@ -12,7 +11,7 @@ function MyTeachers() {
 
     useEffect(() => {
         document.title = 'My Teachers'
-        axios.get(`${baseUrl}/fetch-my-teachers/${studentId}`)
+        axios.get(`${config.baseUrl}/fetch-my-teachers/${studentId}`)
             .then((res) => {
                 setTeacherData(res.data);
             }).catch((err) => {
@@ -40,7 +39,7 @@ function MyTeachers() {
         _formData.append('msg_text', msgData.msg_text);
         _formData.append('msg_from', 'student');
 
-        axios.post(`${baseUrl}/send-message/${teacher_id}/${studentId}`, _formData)
+        axios.post(`${config.baseUrl}/send-message/${teacher_id}/${studentId}`, _formData)
             .then((res) => {
                 if (res.data.bool === true) {
                     setMsgData({ msg_text: '' });

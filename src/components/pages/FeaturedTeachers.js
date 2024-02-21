@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 function FeaturedTeachers() {
     const [teacher, setTeacher] = useState([])
     useEffect(() => {
         document.title = 'Featured Teachers'
-        axios.get(baseUrl+'/teacher/')
+        axios.get(`${config.baseUrl}/teacher/`)
             .then(res => { 
                 setTeacher(res.data)
             })

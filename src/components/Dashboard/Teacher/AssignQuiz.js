@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
 import CheckQuizInCourse from './CheckQuizInCourse';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AssignQuiz() {
     const [quizData, setQuizData] = useState([]);
@@ -16,7 +16,7 @@ function AssignQuiz() {
         document.title = 'Assign Quiz';
 
         try {
-            axios.get(`${baseUrl}/teacher-quiz/${teacherId}`)
+            axios.get(`${config.baseUrl}/teacher-quiz/${teacherId}`)
                 .then((res) => {
                     setQuizData(res.data);
                 });
@@ -26,7 +26,7 @@ function AssignQuiz() {
 
         // Fetch course data
         try {
-            axios.get(`${baseUrl}/course/${course_id}`)
+            axios.get(`${config.baseUrl}/course/${course_id}`)
                 .then((res) => {
                     setCourseData(res.data);
                 });

@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TeacherDashboard() {
   useEffect(() => {
@@ -16,7 +15,7 @@ function TeacherDashboard() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/teacher/dashboard/${teacherId}/`, teacherId)
+      axios.get(`${config.baseUrl}/teacher/dashboard/${teacherId}/`, teacherId)
         .then((res) => {
           setDashboardData(res.data);
         });

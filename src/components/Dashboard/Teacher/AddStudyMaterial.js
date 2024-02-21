@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AddStudyMaterial() {
     useEffect(() => {
@@ -47,7 +47,7 @@ function AddStudyMaterial() {
         _formData.append('remarks', studyData.remarks);
 
         try {
-            axios.post(`${baseUrl}/study-materials/${course_id}`, _formData, {
+            axios.post(`${config.baseUrl}/study-materials/${course_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

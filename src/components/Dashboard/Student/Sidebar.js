@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function Sidebar() {
 
@@ -11,7 +11,7 @@ function Sidebar() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/student/fetch-all-notifications/${studentId}`)
+      axios.get(`${config.baseUrl}/student/fetch-all-notifications/${studentId}`)
         .then((res) => {
           setNotifData(res.data);
         });

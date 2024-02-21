@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function EditCourse() {
     useEffect(() => {
@@ -26,7 +26,7 @@ function EditCourse() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/category/`).then((res) => {
+            axios.get(`${config.baseUrl}/category/`).then((res) => {
                 setCats(res.data);
             });
         } catch (err) {
@@ -35,7 +35,7 @@ function EditCourse() {
 
         // Fetch current data
         try {
-            axios.get(`${baseUrl}/teacher-course-detail/${course_id}`)
+            axios.get(`${config.baseUrl}/teacher-course-detail/${course_id}`)
                 .then((res) => {
                     setCourseData({
                         category: res.data.category,
@@ -77,7 +77,7 @@ function EditCourse() {
         _formData.append('techs', courseData.techs);
 
         try {
-            axios.put(`${baseUrl}/teacher-course-detail/${course_id}`, _formData, {
+            axios.put(`${config.baseUrl}/teacher-course-detail/${course_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

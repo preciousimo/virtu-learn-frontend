@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CheckQuizStatusForStudent from '../Teacher/CheckQuizStatusForStudent';
 import axios from 'axios';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CourseQuizList() {
     const [quizData, setQuizData] = useState([]);
@@ -16,7 +16,7 @@ function CourseQuizList() {
 
         const fetchQuizData = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/fetch-assigned-quiz/${course_id}`);
+                const response = await axios.get(`${config.baseUrl}/fetch-assigned-quiz/${course_id}`);
                 setQuizData(response.data);
             } catch (error) {
                 console.error('Error fetching assigned quiz:', error);

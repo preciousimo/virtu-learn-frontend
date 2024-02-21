@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function TakeQuiz() {
     const [questionData, setQuestionData] = useState([]);
@@ -17,7 +17,7 @@ function TakeQuiz() {
 
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/quiz-questions/${quiz_id}/1`);
+                const response = await axios.get(`${config.baseUrl}/quiz-questions/${quiz_id}/1`);
                 setQuestionData(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -42,14 +42,14 @@ function TakeQuiz() {
         formData.append('right_ans', right_ans);
 
         try {
-            const response = await axios.post(`${baseUrl}/attempt-quiz/`, formData, {
+            const response = await axios.post(`${config.baseUrl}/attempt-quiz/`, formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
             });
 
             if (response.status === 200 || response.status === 201) {
-                const nextQuestionResponse = await axios.get(`${baseUrl}/quiz-questions/${quiz_id}/next-question/${question_id}`);
+                const nextQuestionResponse = await axios.get(`${config.baseUrl}/quiz-questions/${quiz_id}/next-question/${question_id}`);
                 if (nextQuestionResponse.data.length === 0) {
                     setQuestionData([]);
                 } else {

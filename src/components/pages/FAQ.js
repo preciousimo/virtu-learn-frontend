@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../style/FAQ.css';
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../config/config';
 
 function FAQ() {
     const [faqData, setFaqData] = useState([]);
@@ -10,7 +9,7 @@ function FAQ() {
     useEffect(() => {
         document.title = 'FAQ';
         try {
-            axios.get(`${baseUrl}/faq/`)
+            axios.get(`${config.baseUrl}/faq/`)
                 .then((res) => {
                     setFaqData(res.data);
                 });

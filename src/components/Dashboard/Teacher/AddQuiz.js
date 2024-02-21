@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AddQuiz() {
     useEffect(() => {
@@ -24,18 +24,18 @@ function AddQuiz() {
     };
 
     const formSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
         const _formData = new FormData();
         _formData.append('teacher', teacherId);
         _formData.append('title', quizData.title);
         _formData.append('detail', quizData.detail);
 
-        axios.post(`${baseUrl}/quiz/`, _formData)
+        axios.post(`${config.baseUrl}/quiz/`, _formData)
             .then((res) => {
                 window.location.href = '/add-quiz';
             })
             .catch((err) => {
-                console.error(err); // Handle errors appropriately
+                console.error(err);
             });
     };
 

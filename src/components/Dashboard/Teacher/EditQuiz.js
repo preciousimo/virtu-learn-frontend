@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function EditQuiz() {
     useEffect(() => {
@@ -22,7 +22,7 @@ function EditQuiz() {
     useEffect(() => {
         const fetchQuizDetail = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/teacher-quiz-detail/${quiz_id}`);
+                const response = await axios.get(`${config.baseUrl}/teacher-quiz-detail/${quiz_id}`);
                 const { title, detail } = response.data;
                 setQuizData({ title, detail });
             } catch (error) {
@@ -47,7 +47,7 @@ function EditQuiz() {
         formData.append('detail', quizData.detail);
 
         try {
-            const response = await axios.put(`${baseUrl}/teacher-quiz-detail/${quiz_id}`, formData, {
+            const response = await axios.put(`${config.baseUrl}/teacher-quiz-detail/${quiz_id}`, formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AddQuizQuestion() {
     useEffect(() => {
         document.title = 'Add Quiz Question';
-    }, []); // Empty dependency array to run the effect only once
+    }, []);
 
     const [questionData, setQuestionData] = useState({
         quiz: '',
@@ -41,9 +41,9 @@ function AddQuizQuestion() {
         _formData.append('ans4', questionData.ans4);
         _formData.append('right_ans', questionData.right_ans);
 
-        axios.post(`${baseUrl}/quiz-questions/${quiz_id}`, _formData, {
+        axios.post(`${config.baseUrl}/quiz-questions/${quiz_id}`, _formData, {
             headers: {
-                'Content-Type': 'multipart/form-data', // Correct content type header
+                'Content-Type': 'multipart/form-data',
             },
         })
         .then((res) => {
@@ -61,7 +61,7 @@ function AddQuizQuestion() {
             }
         })
         .catch((err) => {
-            console.error(err); // Handle errors appropriately
+            console.error(err);
         });
     };
 

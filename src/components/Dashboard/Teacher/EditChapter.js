@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function EditChapter() {
     useEffect(() => {
@@ -49,7 +49,7 @@ function EditChapter() {
         _formData.append('remarks', chapterData.remarks);
 
         try {
-            axios.put(`${baseUrl}/chapter/${chapter_id}`, _formData, {
+            axios.put(`${config.baseUrl}/chapter/${chapter_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -73,7 +73,7 @@ function EditChapter() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/chapter/${chapter_id}`)
+            axios.get(`${config.baseUrl}/chapter/${chapter_id}`)
                 .then((res) => {
                     setChapterData({
                         course: res.data.course,

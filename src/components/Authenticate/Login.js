@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 function Login() {
   const [studentLogin, setStudentLogin] = useState({
     email: '',
@@ -44,7 +44,7 @@ function Login() {
     studentLoginData.append('password', studentLogin.password);
 
     try {
-      const res = await axios.post(`${baseUrl}/student-login/`, studentLoginData);
+      const res = await axios.post(`${config.baseUrl}/student-login/`, studentLoginData);
 
       if (res.data.bool === true) {
         localStorage.setItem('studentLoginStatus', true);

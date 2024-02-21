@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import config from '../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 
 function Home() {
@@ -17,7 +17,7 @@ function Home() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/course/?result=4`)
+      axios.get(`${config.baseUrl}/course/?result=4`)
         .then((res) => {
           setCourseData(res.data.results);
         });
@@ -26,7 +26,7 @@ function Home() {
     }
 
     try {
-      axios.get(`${baseUrl}/popular-courses/?popular=1`)
+      axios.get(`${config.baseUrl}/popular-courses/?popular=1`)
         .then((res) => {
           setPopularCourseData(res.data);
         });
@@ -35,7 +35,7 @@ function Home() {
     }
 
     try {
-      axios.get(`${baseUrl}/popular-teachers/?popular=1`)
+      axios.get(`${config.baseUrl}/popular-teachers/?popular=1`)
         .then((res) => {
           setPopularTeacherData(res.data);
         });
@@ -44,7 +44,7 @@ function Home() {
     }
 
     try {
-      axios.get(`${baseUrl}/student-testimonial/`)
+      axios.get(`${config.baseUrl}/student-testimonial/`)
         .then((res) => {
           setTestimonialData(res.data);
         });

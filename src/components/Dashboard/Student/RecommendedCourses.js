@@ -1,9 +1,9 @@
 import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function RecommendedCourses() {
     const [courseData, setCourseData] = useState([]);
@@ -15,7 +15,7 @@ function RecommendedCourses() {
         document.title = 'Recommended Courses';
 
         try {
-            axios.get(`${baseUrl}/fetch-recommended-courses/${studentId}`)
+            axios.get(`${config.baseUrl}/fetch-recommended-courses/${studentId}`)
                 .then((res) => {
                     setCourseData(res.data);
                     setLoading(false);

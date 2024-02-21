@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function EnrolledStudents() {
     useEffect(() => {
@@ -15,7 +15,7 @@ function EnrolledStudents() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/fetch-enrolled-students/${course_id}`)
+            axios.get(`${config.baseUrl}/fetch-enrolled-students/${course_id}`)
             .then((res) => {
                 setStudentData(res.data);
             });

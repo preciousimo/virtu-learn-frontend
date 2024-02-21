@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CourseChapters() {
     useEffect(() => {
@@ -17,7 +17,7 @@ function CourseChapters() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/course-chapters/${course_id}`)
+            axios.get(`${config.baseUrl}/course-chapters/${course_id}`)
                 .then((res) => {
                     setTotalResult(res.data.length);
                     setChapterData(res.data);
@@ -37,7 +37,7 @@ function CourseChapters() {
         }).then((result) => {
             if (result.isConfirmed) {
                 try {
-                    axios.delete(baseUrl + '/chapter/' + chapter_id)
+                    axios.delete(`${config.baseUrl}/chapter/${chapter_id}`)
                         .then((res) => {
                             setTotalResult(res.data.length);
                             setChapterData(res.data);

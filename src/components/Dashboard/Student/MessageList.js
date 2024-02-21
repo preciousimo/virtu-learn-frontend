@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../../config/config';
 
 function MessageList(props) {
     const [msgData, setMsgData] = useState([]);
@@ -12,7 +11,7 @@ function MessageList(props) {
 
     const fetchMsgs = () => {
         try {
-            axios.get(`${baseUrl}/get-messages/${props.teacher_id}/${props.student_id}`)
+            axios.get(`${config.baseUrl}/get-messages/${props.teacher_id}/${props.student_id}`)
                 .then((res) => {
                     setMsgData(res.data);
                     const objDiv = document.getElementById("msgList");

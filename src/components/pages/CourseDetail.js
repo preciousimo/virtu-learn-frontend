@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
-
-const siteUrl = 'https://myfundz.s3.amazonaws.com';
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../config/config';
 
 function CourseDetail() {
     useEffect(() => {
@@ -30,7 +27,7 @@ function CourseDetail() {
     useEffect(() => {
         // Fetch Courses
         try {
-            axios.get(`${baseUrl}/course/${course_id}`)
+            axios.get(`${config.baseUrl}/course/${course_id}`)
                 .then((res) => {
                     setCourseData(res.data);
                     setChapterData(res.data.course_chapters);
@@ -41,7 +38,7 @@ function CourseDetail() {
                         setAdvRating(res.data.course_rating)
                     }
                 });
-            axios.get(`${baseUrl}/update-view/${course_id}`)
+            axios.get(`${config.baseUrl}/update-view/${course_id}`)
                 .then((res) => {
                     setCourseViews(res.data.views)
                 });
@@ -54,7 +51,7 @@ function CourseDetail() {
 
         // Fetch enroll status
         try {
-            axios.get(`${baseUrl}/fetch-enroll-status/${studentId}/${course_id}`)
+            axios.get(`${config.baseUrl}/fetch-enroll-status/${studentId}/${course_id}`)
                 .then((res) => {
                     if (res.data.bool == true) {
                         setEnrollStatus('success');
@@ -66,7 +63,7 @@ function CourseDetail() {
 
         // Fetch rating status
         try {
-            axios.get(`${baseUrl}/fetch-rating-status/${studentId}/${course_id}`)
+            axios.get(`${config.baseUrl}/fetch-rating-status/${studentId}/${course_id}`)
                 .then((res) => {
                     if (res.data.bool == true) {
                         setRatingStatus('success');
@@ -78,7 +75,7 @@ function CourseDetail() {
 
         // Fetch favourite status
         try {
-            axios.get(`${baseUrl}/fetch-favourite-status/${studentId}/${course_id}`)
+            axios.get(`${config.baseUrl}/fetch-favourite-status/${studentId}/${course_id}`)
                 .then((res) => {
                     if (res.data.bool == true) {
                         setFavouriteStatus('success');
@@ -103,7 +100,7 @@ function CourseDetail() {
         _formData.append('student', studentId);
 
         try {
-            axios.post(`${baseUrl}/student-enroll-course/`, _formData, {
+            axios.post(`${config.baseUrl}/student-enroll-course/`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -151,7 +148,7 @@ function CourseDetail() {
         _formData.append('status', true);
 
         try {
-            axios.post(`${baseUrl}/student-add-favourite-course/`, _formData, {
+            axios.post(`${config.baseUrl}/student-add-favourite-course/`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -182,7 +179,7 @@ function CourseDetail() {
         _formData.append('status', true);
 
         try {
-            axios.post(`${baseUrl}/student-remove-favourite-course/${course_id}/${studentId}`, {
+            axios.post(`${config.baseUrl}/student-remove-favourite-course/${course_id}/${studentId}`, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -226,7 +223,7 @@ function CourseDetail() {
         _formData.append('reviews', ratingData.reviews);
 
         try {
-            axios.post(`${baseUrl}/course-rating/${course_id}`, _formData,)
+            axios.post(`${config.baseUrl}/course-rating/${course_id}`, _formData,)
                 .then((res) => {
                     if (res.status === 200 || res.status === 201) {
                         Swal.fire({
@@ -396,7 +393,7 @@ function CourseDetail() {
                     <div className="col" key={rcourse.pk}>
                         <div className="card h-100">
                             <Link target='__blank' to={`/detail/${rcourse.pk}`}>
-                                <img src={`${siteUrl}/${rcourse.fields.featured_img}`} className='card-img-top' alt={rcourse.fields.title} />
+                                <img src={`${config.siteUrl}/${rcourse.fields.featured_img}`} className='card-img-top' alt={rcourse.fields.title} />
                             </Link>
                             <div className="card-body">
                                 <h5 className="card-title"><Link to={`/detail/${rcourse.pk}`}>{rcourse.fields.title}</Link></h5>

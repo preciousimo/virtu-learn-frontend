@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
 import QuizResult from './QuizResult';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AttemptedStudents() {
     const [studentData, setStudentData] = useState([]);
@@ -15,7 +15,7 @@ function AttemptedStudents() {
 
         const fetchStudentData = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/attempted-quiz/${quiz_id}`);
+                const response = await axios.get(`${config.baseUrl}/attempted-quiz/${quiz_id}`);
                 setStudentData(response.data);
             } catch (error) {
                 console.error('Error fetching student data:', error);
@@ -27,7 +27,7 @@ function AttemptedStudents() {
 
     const fetchQuizResult = async (studentId) => {
         try {
-            const response = await axios.get(`${baseUrl}/quiz-result/${quiz_id}/${studentId}`);
+            const response = await axios.get(`${config.baseUrl}/quiz-result/${quiz_id}/${studentId}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching quiz result:', error);

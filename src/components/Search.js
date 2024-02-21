@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import config from '../config/config';
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 function Search() {
@@ -10,7 +11,7 @@ function Search() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/search-courses/${searchstring}`)
+      axios.get(`${config.baseUrl}/search-courses/${searchstring}`)
         .then((res) => {
           setCourseData(res.data);
         });

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api/teacher/';
 
 function TeacherRegister() {
   useEffect(() => {
@@ -41,21 +41,9 @@ function TeacherRegister() {
     teacherFormData.append('otp_digit', teacherData.otp_digit);
 
     try{
-      axios.post(baseUrl, teacherFormData)
+      axios.post(config.baseUrl, teacherFormData)
       .then((res) => {
         navigate('/verify-teacher/'+res.data.id);
-        // window.location.href='/verify-teacher/'+res.data.id;
-        // setTeacherData(
-        //   {
-        //     'name': '',
-        //     'email': '',
-        //     'password': '',
-        //     'qualification': '',
-        //     'mobile_no': '',
-        //     'skills': '',
-        //     'status': 'success',
-        //   }
-        // );
       });
     }catch(err){
         console.log(err);

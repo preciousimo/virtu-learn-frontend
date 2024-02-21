@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
 import Sidebar from './Sidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function ProfileSetting() {
     useEffect(() => {
@@ -25,7 +24,7 @@ function ProfileSetting() {
     useEffect(() => {
         // Fetch current teacher data
         try {
-            axios.get(`${baseUrl}/student/${studentId}`)
+            axios.get(`${config.baseUrl}/student/${studentId}`)
                 .then((res) => {
                     setStudentData({
                         name: res.data.name,
@@ -69,7 +68,7 @@ function ProfileSetting() {
         }
 
         try {
-            axios.put(`${baseUrl}/student/${studentId}/`, studentFormData, {
+            axios.put(`${config.baseUrl}/student/${studentId}/`, studentFormData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },

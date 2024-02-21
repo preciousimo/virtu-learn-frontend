@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from './Sidebar'
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function Dashboard() {
   useEffect(() => {
@@ -15,7 +15,7 @@ function Dashboard() {
 
   useEffect(() => {
     try {
-      axios.get(`${baseUrl}/student/dashboard/${studentId}/`)
+      axios.get(`${config.baseUrl}/student/dashboard/${studentId}/`)
         .then((res) => {
           setDashboardData(res.data);
         });

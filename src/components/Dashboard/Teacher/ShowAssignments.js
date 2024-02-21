@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function ShowAssignments() {
     useEffect(() => {
@@ -18,7 +17,7 @@ function ShowAssignments() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/student-assignment/${teacher_id}/${student_id}`)
+            axios.get(`${config.baseUrl}/student-assignment/${teacher_id}/${student_id}`)
                 .then((res) => {
                     setTotalResult(res.data.length);
                     setAssignmentData(res.data);

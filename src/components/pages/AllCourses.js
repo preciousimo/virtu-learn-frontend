@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api/course/';
 
 
 function AllCourses() {
@@ -13,7 +13,7 @@ function AllCourses() {
     useEffect(() => {
         document.title = 'All Courses'
         
-        fetchData(baseUrl);
+        fetchData(config.baseUrl);
     }, []);
 
     const  paginationHandler=(url)=>{

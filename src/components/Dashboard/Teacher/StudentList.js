@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import TeacherSidebar from './TeacherSidebar'
 import MessageList from './MessageList'
 import axios from 'axios'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function StudentList() {
     const [studentData, setStudentData] = useState([]);
@@ -12,7 +12,7 @@ function StudentList() {
 
     useEffect(() => {
         document.title = 'Enrolled Students'
-        axios.get(`${baseUrl}/fetch-all-enrolled-students/${teacherId}`)
+        axios.get(`${config.baseUrl}/fetch-all-enrolled-students/${teacherId}`)
             .then((res) => {
                 setStudentData(res.data);
             }).catch((err) => {
@@ -54,7 +54,7 @@ function StudentList() {
         _formData.append('msg_text', msgData.msg_text);
         _formData.append('msg_from', 'teacher');
 
-        axios.post(`${baseUrl}/send-message/${teacherId}/${student_id}`, _formData)
+        axios.post(`${config.baseUrl}/send-message/${teacherId}/${student_id}`, _formData)
             .then((res) => {
                 if (res.data.bool === true) {
                     setMsgData({ msg_text: '' });
@@ -77,7 +77,7 @@ function StudentList() {
         _formData.append('msg_text', groupMsgData.msg_text);
         _formData.append('msg_from', 'teacher');
 
-        axios.post(`${baseUrl}/send-group-message/${teacherId}`, _formData)
+        axios.post(`${config.baseUrl}/send-group-message/${teacherId}`, _formData)
             .then((res) => {
                 if (res.data.bool === true) {
                     setGroupMsgData({ msg_text: '' });

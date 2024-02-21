@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../config/config';
 
 function ChangePasswordF() {
   useEffect(() => {
@@ -30,7 +29,7 @@ function ChangePasswordF() {
     teacherFormData.append('password', teacherData.password);
 
     try {
-      const res = await axios.post(`${baseUrl}/teacher-change-password/${teacher_id}/`, teacherFormData);
+      const res = await axios.post(`${config.baseUrl}/teacher-change-password/${teacher_id}/`, teacherFormData);
 
       if (res.data.bool === true) {
         setSuccessMsg(res.data.msg);

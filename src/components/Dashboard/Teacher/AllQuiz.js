@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AllQuiz() {
     useEffect(() => {
@@ -17,7 +17,7 @@ function AllQuiz() {
     useEffect(() => {
         const fetchQuizData = async () => {
             try {
-                const response = await axios.get(baseUrl + '/teacher-quiz/' + teacherId);
+                const response = await axios.get(`${config.baseUrl}/teacher-quiz/${teacherId}`);
                 setQuizData(response.data);
             } catch (error) {
                 console.error('Error fetching quiz data:', error);
@@ -37,7 +37,7 @@ function AllQuiz() {
         }).then((result) => {
             if (result.isConfirmed) {
                 try {
-                    axios.delete(baseUrl + '/quiz/' + quiz_id)
+                    axios.delete(`${config.baseUrl}/quiz/${quiz_id}`)
                         .then((res) => {
                             Swal.fire('success', 'Data has been deleted.');
                             const updatedQuizData = quizData.filter(quiz => quiz.id !== quiz_id);

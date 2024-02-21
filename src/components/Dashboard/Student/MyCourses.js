@@ -1,10 +1,8 @@
 import Sidebar from './Sidebar'
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
-import Swal from 'sweetalert2'
-
-const baseUrl = 'http://127.0.0.1:8000/api';
+import config from '../../../config/config';
 
 function MyCourses() {
     useEffect(() => {
@@ -16,7 +14,7 @@ function MyCourses() {
 
     useEffect(() => {
         try {
-            axios.get(`${baseUrl}/fetch-enrolled-courses/${studentId}`)
+            axios.get(`${config.baseUrl}/fetch-enrolled-courses/${studentId}`)
                 .then((res) => {
                     setCourseData(res.data);
                 });

@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function AddAssignment() {
     useEffect(() => {
@@ -34,7 +34,7 @@ function AddAssignment() {
         _formData.append('detail', assignmentData.detail);
 
         try {
-            axios.post(`${baseUrl}/student-assignment/${teacher_id}/${student_id}`, _formData, {
+            axios.post(`${config.baseUrl}/student-assignment/${teacher_id}/${student_id}`, _formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -55,7 +55,7 @@ function AddAssignment() {
                     _notifData.append('notif_subject', 'assignment');
                     _notifData.append('notif_for', 'student');
                     _notifData.append('student', student_id);
-                    axios.post(`${baseUrl}/save-notification/`, _notifData, {
+                    axios.post(`${config.baseUrl}/save-notification/`, _notifData, {
                         headers: {
                             'content-type': 'multipart/form-data',
                         },

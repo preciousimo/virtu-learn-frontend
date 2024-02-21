@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function PopularCourses() {
 
@@ -12,7 +12,7 @@ function PopularCourses() {
         document.title = 'Popular Courses'
 
         try {
-            axios.get(`${baseUrl}/popular-courses/?all=1`)
+            axios.get(`${config.baseUrl}/popular-courses/?all=1`)
                 .then((res) => {
                     setCourseData(res.data);
                 });

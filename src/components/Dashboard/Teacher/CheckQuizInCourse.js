@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import config from '../../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api';
 
 function CheckQuizInCourse(props) {
     const [quizData, setQuizData] = useState([]);
@@ -12,7 +12,7 @@ function CheckQuizInCourse(props) {
     useEffect(() => {
         const fetchQuizAssignStatus = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/fetch-quiz-assign-status/${props.quiz}/${props.course}`);
+                const response = await axios.get(`${config.baseUrl}/fetch-quiz-assign-status/${props.quiz}/${props.course}`);
                 setQuizData(response.data);
             } catch (error) {
                 console.error('Error fetching quiz assignment status:', error);
@@ -29,7 +29,7 @@ function CheckQuizInCourse(props) {
         formData.append('quiz', props.quiz);
 
         try {
-            const response = await axios.post(`${baseUrl}/quiz-assign-course/`, formData, {
+            const response = await axios.post(`${config.baseUrl}/quiz-assign-course/`, formData, {
                 headers: {
                     'content-type': 'multipart/form-data',
                 },
@@ -44,7 +44,7 @@ function CheckQuizInCourse(props) {
                     timerProgressBar: true,
                     showConfirmButton: false
                 }).then(() => {
-                    window.location.reload(); // Reload page after showing success message
+                    window.location.reload();
                 });
             }
         } catch (error) {

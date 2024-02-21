@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import config from '../../config/config';
 
-const baseUrl = 'http://127.0.0.1:8000/api/contact/';
 
 function ContactUs() {
   useEffect(() => {
@@ -33,7 +33,7 @@ function ContactUs() {
     contactFormData.append('message', contactData.message);
 
     try {
-      axios.post(baseUrl, contactFormData)
+      axios.post(config.baseUrl, contactFormData)
         .then((res) => {
           setContactData(
             {
