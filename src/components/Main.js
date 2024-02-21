@@ -65,6 +65,7 @@ import AssignQuiz from './Dashboard/Teacher/AssignQuiz';
 import StudyMaterials from './Dashboard/Teacher/StudyMaterials';
 import AttemptedStudents from './Dashboard/Teacher/AttemptedStudents';
 import AddStudyMaterial from './Dashboard/Teacher/AddStudyMaterial';
+import MyTeachers from './Dashboard/Student/MyTeachers';
 
 function Main() {
   return (
@@ -95,6 +96,7 @@ function Main() {
         <Route path='/logout' element={<Logout />} />
         <Route path='/student-dashboard' element={<Dashboard />} />
         <Route path='/my-courses' element={<MyCourses />} />
+        <Route path='/my-teachers' element={<MyTeachers />} />
         <Route path='/favorite-courses' element={<FavCourses />} />
         <Route path='/recommended-courses' element={<RecommendedCourses />} />
         <Route path='/profile-setting' element={<ProfileSetting />} />
