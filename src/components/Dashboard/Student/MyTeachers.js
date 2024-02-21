@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
+import MessageList from './MessageList'
 import axios from 'axios'
 
 const baseUrl = 'http://127.0.0.1:8000/api';
@@ -34,12 +35,12 @@ function MyTeachers() {
         });
     };
 
-    const formSubmit = (teacherId) => {
+    const formSubmit = (teacher_id) => {
         const _formData = new FormData();
         _formData.append('msg_text', msgData.msg_text);
-        _formData.append('msg_from', 'teacher');
+        _formData.append('msg_from', 'student');
 
-        axios.post(`${baseUrl}/send-message/${studentId}/${teacherId}`, _formData)
+        axios.post(`${baseUrl}/send-message/${teacher_id}/${studentId}`, _formData)
             .then((res) => {
                 if (res.data.bool === true) {
                     setMsgData({ msg_text: '' });
@@ -89,7 +90,39 @@ function MyTeachers() {
                                     {teacherData.map((row, index) => (
                                         <tr>
                                             <td style={{ whiteSpace: 'nowrap' }}><Link to={`/teacher-detail/${row.teacher.id}`}>{row.teacher.name}</Link></td>
-                                            <td><i className='bi bi-chat-fill'></i></td>
+                                            <td>
+                                                <button className='btn btn-sm btn-dark mb-1' data-bs-toggle="modal" data-bs-target={`#msgModal${index}`}><i className="bi bi-chat-fill"></i></button>
+                                                <div className="modal fade" id={`msgModal${index}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog modal-xl modal-dialog-scrollable ">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                                                    <span className='text-danger'>{row.teacher.name}</span>
+                                                                </h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className='row'>
+                                                                    <div className='col-md-8 mb-2 col-12 border-end' style={msgList}>
+                                                                        <MessageList teacher_id={row.teacher.id} student_id={studentId} />
+                                                                    </div>
+                                                                    <div className='col-md-4 col-12'>
+                                                                        {successMsg && <p className="text-success">{successMsg}</p>}
+                                                                        {errorMsg && <p className="text-danger">{errorMsg}</p>}
+                                                                        <form onSubmit={(e) => handleSubmit(e, row.teacher.id)}>
+                                                                            <div className="mb-3">
+                                                                                <label htmlFor="exampleInputEmail1" className="form-label">Message</label>
+                                                                                <textarea className='form-control' value={msgData.msg_text} name='msg_text' onChange={handleChange} rows='7'></textarea>
+                                                                            </div>
+                                                                            <button type="submit" className="btn btn-primary">Submit</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     )
                                     )}
