@@ -12,22 +12,35 @@ function StudentList() {
 
     useEffect(() => {
         document.title = 'Enrolled Students'
-        try {
-            axios.get(`${baseUrl}/fetch-all-enrolled-students/${teacherId}`)
-                .then((res) => {
-                    setStudentData(res.data);
-                });
-        } catch (err) {
-            console.log(err);
-        }
+        axios.get(`${baseUrl}/fetch-all-enrolled-students/${teacherId}`)
+            .then((res) => {
+                setStudentData(res.data);
+            }).catch((err) => {
+                console.log(err);
+            });
+
     }, []);
+
+    const [groupMsgData, setGroupMsgData] = useState({
+        msg_text: '',
+    });
 
     const [msgData, setMsgData] = useState({
         msg_text: '',
     });
 
+    const [groupSuccessMsg, setGroupSuccessMsg] = useState('');
+    const [groupErrorMsg, setGroupErrorMsg] = useState('');
+
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+
+    const groupHandleChange = (e) => {
+        setGroupMsgData({
+            ...groupMsgData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     const handleChange = (e) => {
         setMsgData({
@@ -40,25 +53,45 @@ function StudentList() {
         const _formData = new FormData();
         _formData.append('msg_text', msgData.msg_text);
         _formData.append('msg_from', 'teacher');
-    
-        try {
-            axios.post(`${baseUrl}/send-message/${teacherId}/${student_id}`, _formData, {})
-                .then((res) => {
-                    if (res.data.bool === true) {
-                        setMsgData({
-                            'msg_text': ''
-                        });
-                        setSuccessMsg(res.data.msg);
-                        setErrorMsg('');
-                    } else {
-                        setErrorMsg(res.data.msg);
-                        setSuccessMsg('');
-                    }
-                });
-        } catch (err) {
-            console.log(err);
-        }
-    };    
+
+        axios.post(`${baseUrl}/send-message/${teacherId}/${student_id}`, _formData)
+            .then((res) => {
+                if (res.data.bool === true) {
+                    setMsgData({ msg_text: '' });
+                    setSuccessMsg(res.data.msg);
+                    setErrorMsg('');
+                } else {
+                    setErrorMsg(res.data.msg);
+                    setSuccessMsg('');
+                }
+            }).catch((err) => {
+                console.error(err);
+                setErrorMsg('An error occurred. Please try again.');
+            });
+    };
+
+
+    const groupFormSubmit = (e) => {
+        e.preventDefault();
+        const _formData = new FormData();
+        _formData.append('msg_text', groupMsgData.msg_text);
+        _formData.append('msg_from', 'teacher');
+
+        axios.post(`${baseUrl}/send-group-message/${teacherId}`, _formData)
+            .then((res) => {
+                if (res.data.bool === true) {
+                    setGroupMsgData({ msg_text: '' });
+                    setGroupSuccessMsg(res.data.msg);
+                    setGroupErrorMsg('');
+                } else {
+                    setGroupErrorMsg(res.data.msg);
+                    setGroupSuccessMsg('');
+                }
+            }).catch((err) => {
+                console.error(err);
+                setGroupErrorMsg('An error occurred. Please try again.');
+            });
+    };
 
     const handleSubmit = (e, studentId) => {
         e.preventDefault();
@@ -78,7 +111,33 @@ function StudentList() {
                 </aside>
                 <section className='col-md-9'>
                     <div className='card'>
-                        <h5 className='card-header'>All Student List</h5>
+                        <h5 className='card-header'>
+                            All Student List
+                            <button type='button' className='btn btn-primary float-end btn-sm' data-bs-toggle='modal' data-bs-target='#groupMsgModal'>
+                                Send Message
+                            </button>
+                        </h5>
+                        <div className="modal fade" id="groupMsgModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="staticBackdropLabel">Send Message to All Students</h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        {groupSuccessMsg && <p className="text-success">{groupSuccessMsg}</p>}
+                                        {groupErrorMsg && <p className="text-danger">{groupErrorMsg}</p>}
+                                        <form>
+                                            <div className="mb-3">
+                                                <label htmlFor="exampleInputEmail1" className="form-label">Message</label>
+                                                <textarea className='form-control' value={groupMsgData.msg_text} name='msg_text' onChange={groupHandleChange} rows='7'></textarea>
+                                            </div>
+                                            <button type="button" onClick={groupFormSubmit} className="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className='card-body' style={{ overflowX: 'auto' }}>
                             <table className='table table-bordered' style={{ tableLayout: 'auto' }}>
                                 <thead>
@@ -122,7 +181,7 @@ function StudentList() {
                                                                             {errorMsg && <p className="text-danger">{errorMsg}</p>}
                                                                             <form onSubmit={(e) => handleSubmit(e, row.student.id)}>
                                                                                 <div className="mb-3">
-                                                                                    <label for="exampleInputEmail1" className="form-label">Message</label>
+                                                                                    <label htmlFor="exampleInputEmail1" className="form-label">Message</label>
                                                                                     <textarea className='form-control' value={msgData.msg_text} name='msg_text' onChange={handleChange} rows='7'></textarea>
                                                                                 </div>
                                                                                 <button type="submit" className="btn btn-primary">Submit</button>
