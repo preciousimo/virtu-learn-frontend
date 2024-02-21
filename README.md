@@ -1,1 +1,1 @@
-# LEARN ONLINE (Frontend)
+# VIRTU LEARN (Frontend)
