@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import config from '../../config/config';
 
+const baseUrl = `${config.baseUrl}/teacher/`
 
 function TeacherRegister() {
   useEffect(() => {
@@ -41,7 +42,7 @@ function TeacherRegister() {
     teacherFormData.append('otp_digit', teacherData.otp_digit);
 
     try{
-      axios.post(config.baseUrl, teacherFormData)
+      axios.post(baseUrl, teacherFormData,)
       .then((res) => {
         navigate('/verify-teacher/'+res.data.id);
       });
